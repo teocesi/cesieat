@@ -33,8 +33,6 @@ namespace PageManager
             }
             foreach (int index in selectedJobs)
             {
-                Console.WriteLine(index);
-                Console.WriteLine("Running job: " + jobs[index].Name);
                 jobs[index].Run();
             }
 

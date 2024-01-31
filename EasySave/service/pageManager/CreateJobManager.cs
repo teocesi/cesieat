@@ -43,7 +43,7 @@ namespace PageManager
                 Char type_char = Console.ReadKey().KeyChar;
                 if (type_char == '1')
                 {
-                    type = 1;
+                    type = 0;
                     break;
                 }
                 else if (type_char == '2')

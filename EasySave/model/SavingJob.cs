@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using EasySave.service.utils;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -60,24 +61,10 @@ namespace Model
             return $"{this.Name}|{string.Join(",", this.SourcePaths)}|{this.DestinationPath}|{this.Type}|{this.Priority}|{this.State}";
         }
 
-        public void Run()
-        {
-            switch (this.Type)
-            {
-                case 0:
-                    //this.RunDifferential();
-                    break;
-                case 1:
-                    //this.RunFull();
-                    break;
-                default:
-                    throw new Exception("Invalid job type");
-            }
-        }
         public static void ShowJobs(SavingJob[] jobs)
         {
             Console.WriteLine("List of jobs:");
-            if(jobs.Length == 0)
+            if (jobs.Length == 0)
             {
                 Console.WriteLine("No jobs...");
             }
@@ -87,32 +74,37 @@ namespace Model
             }
         }
 
-        //public void RunDifferential()
-        //{
-        //    Console.WriteLine("Differential job running...");
-        //    foreach (String sourcePath in this.SourcePaths)
-        //    {
-        //        Console.WriteLine("Source path: " + sourcePath);
-        //        Console.WriteLine("Destination path: " + this.DestinationPath);
-        //        Console.WriteLine("Copying files...");
-        //        this.CopyFiles(sourcePath, this.DestinationPath);
-        //        Console.WriteLine("Copying files finished");
-        //    }
-        //    Console.WriteLine("Differential job finished");
-        //}
+        // Running
+        public void Run()
+        {
+            switch (this.Type)
+            {
+                case 0:
+                    this.RunFull();
+                    break;
+                case 1:
+                    //this.RunDifferential();
+                    break;
+                default:
+                    throw new Exception("Invalid job type");
+            }
+        }
 
-        //public void RunFull()
-        //{
-        //    Console.WriteLine("Full job running...");
-        //    foreach (String sourcePath in this.SourcePaths)
-        //    {
-        //        Console.WriteLine("Source path: " + sourcePath);
-        //        Console.WriteLine("Destination path: " + this.DestinationPath);
-        //        Console.WriteLine("Copying files...");
-        //        this.CopyFiles(sourcePath, this.DestinationPath);
-        //        Console.WriteLine("Copying files finished");
-        //    }
-        //    Console.WriteLine("Full job finished");
-        //}
+        public void RunFull()
+        {
+            Console.WriteLine($"----- {this.Name} is running in full mode -----");
+            foreach (String sourcePath in this.SourcePaths)
+            {
+                Console.WriteLine("> Source path: " + sourcePath);
+                Console.WriteLine("> Destination path: " + this.DestinationPath);
+                Console.WriteLine("> Copying files...");
+
+                FileExplorer fileExplorer = new FileExplorer(sourcePath);
+                fileExplorer.CopyAllFiles(this.DestinationPath);
+
+                Console.WriteLine("> Copying files finished");
+            }
+            Console.WriteLine("Full job finished");
+        }
     }
 }
