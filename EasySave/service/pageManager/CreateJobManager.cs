@@ -10,7 +10,7 @@ namespace PageManager
 {
     internal partial class PageManager
     {
-        public static void ShowCreateJob()
+        public static void ShowCreateJobPage()
         {
             Console.Clear();
             string name = "";
@@ -76,18 +76,18 @@ namespace PageManager
 
             Console.WriteLine("\nJob created successfully.");
 
-            Console.WriteLine("\nName: " + savingJob.GetName());
-            Console.WriteLine("Source path: " + String.Join(Environment.NewLine, savingJob.GetSourcePaths()));
-            Console.WriteLine("Target path: " + savingJob.GetDestinationPath());
-            Console.WriteLine("Type: " + savingJob.GetType());
-            Console.WriteLine("Priority: " + savingJob.GetPriority());
-            Console.WriteLine("State: " + savingJob.GetState());
+            Console.WriteLine("\nName: " + savingJob.Name);
+            Console.WriteLine("Source path: " + String.Join(Environment.NewLine, savingJob.SourcePaths));
+            Console.WriteLine("Target path: " + savingJob.DestinationPath);
+            Console.WriteLine("Type: " + savingJob.Type);
+            Console.WriteLine("Priority: " + savingJob.Priority);
+            Console.WriteLine("State: " + savingJob.State);
 
             Console.WriteLine("\nPress any key to continue...");
             Console.ReadKey();
 
             Config.AddJobIntoConfig(savingJob);
-            ShowHomeSelection();
+            ShowHomePage();
         }
     }
 }

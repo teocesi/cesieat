@@ -17,6 +17,9 @@ namespace EasySave
             if (ConfigurationManager.AppSettings.Count == 0)
             {
                 AddUpdateAppSettings("Langue", "FR");
+
+                Console.WriteLine("Choose a log path:");
+                AddUpdateAppSettings("LogPath", Console.ReadLine());
             }
         }
 
@@ -83,6 +86,7 @@ namespace EasySave
             }
         }
 
+        // Job config
         public static void AddJobIntoConfig(SavingJob savingJob)
         {
             String JobListStr = ReadSetting("JobList");
@@ -96,24 +100,45 @@ namespace EasySave
                 AddUpdateAppSettings("JobList", JobListStr + ">" + savingJob.ToString());
             }
         }
-
-        public static List<SavingJob> GetSavingJobs()
+        public static void DeleteJobIntoConfig(SavingJob savingJob)
         {
-            List<SavingJob> savingJobs = new List<SavingJob>();
+            SavingJob[] savingJobs = GetSavingJobs();
+            
+            String JobListStr = "";
+
+            for (int i = 0; i < savingJobs.Length; i++)
+            {
+                if (savingJobs[i].Name != savingJob.Name)
+                {
+                    if (JobListStr.Length == 0)
+                    {
+                        JobListStr = savingJobs[i].ToString();
+                    }
+                    else
+                    {
+                        JobListStr += ">" + savingJobs[i].ToString();
+                    }
+                }
+            }
+
+            AddUpdateAppSettings("JobList", JobListStr);
+        }
+
+        public static SavingJob[] GetSavingJobs()
+        {
             String JobListStr = ReadSetting("JobList");
+            String[] JobListTab = JobListStr.Split('>');
+            SavingJob[] savingJobs = new SavingJob[JobListTab.Length];
 
             if (JobListStr.Length == 0)
             {
-                return savingJobs;
+                return new SavingJob[0];
             }
             else
             {
-                String[] JobList = JobListStr.Split('>');
-
-                foreach (String job in JobList)
+                for (int i = 0; i < JobListTab.Length; i++)
                 {
-                    SavingJob savingJob = new SavingJob(job);
-                    savingJobs.Add(savingJob);
+                    savingJobs[i] = new SavingJob(JobListTab[i]);
                 }
             }
 

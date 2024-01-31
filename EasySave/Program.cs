@@ -16,33 +16,8 @@ namespace EasySave
     {
         static void Main(string[] args)
         {
-            //Config settings = new Config();
-            ////SavingJob savingJob = new SavingJob("test", new List<String> { "test1", "test" }, "C:\\Users\\selya\\Documents\\CESI\\A3", 0, 0, 0);
-
-            //Config.ReadAllSettings();
-
-            //foreach (SavingJob savingJob in Config.GetSavingJobs())
-            //{
-            //    Console.WriteLine(savingJob.GetName());
-            //}
-
-            //Console.ReadKey();
-
-
-            PageManager.PageManager.ShowHomeSelection();
-
-            //Console.ReadKey();
-
-            //// Get rdir
-            //Console.WriteLine("Enter path");
-            //String path = Console.ReadLine(); //@"C:\Users\selya\Documents\CESI\A3";
-
-            //FileExplorer fileExplorer = new FileExplorer(path);
-
-
-            //// End stop
-            //Console.WriteLine("Press key to stop...");
-            //Console.ReadKey();
+            //@"C:\Users\selya\Documents\CESI\A3";
+            PageManager.PageManager.ShowHomePage();
         }
     }
 }

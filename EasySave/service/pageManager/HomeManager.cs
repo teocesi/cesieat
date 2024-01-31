@@ -8,13 +8,13 @@ namespace PageManager
 {
     internal partial class PageManager
     {
-        public static void ShowHomeSelection()
+        public static void ShowHomePage()
         {
             Console.Clear();
             Console.WriteLine("1. Create a new job");
-            Console.WriteLine("2. Modify a job");
-            Console.WriteLine("3. Delete a job");
-            Console.WriteLine("4. Launch a job");
+            Console.WriteLine("2. Delete a job");
+            Console.WriteLine("3. Launch a job");
+            Console.WriteLine("4. Options");
             Console.WriteLine("5. Exit");
 
             Console.WriteLine("\nEnter your choice: ");
@@ -23,26 +23,26 @@ namespace PageManager
             switch (choice)
             {
                 case '1':
-                    ShowCreateJob();
+                    ShowCreateJobPage();
                     break;
                 case '2':
-                    //showModifyJob();
+                    ShowDeleteJobPage();
                     break;
                 case '3':
-                    //showDeleteJob();
+                    ShowRunJobPage();
                     break;
                 case '4':
-                    //showLaunchJob();
+                    ShowOptionsPage();
                     break;
                 case '5':
                     Environment.Exit(0);
                     break;
                 default:
-                    ShowHomeSelection();
+                    ShowHomePage();
                     break;
             }
         }
 
-        
+
     }
 }

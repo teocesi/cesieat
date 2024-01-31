@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -9,21 +10,21 @@ namespace Model
 {
     internal class SavingJob
     {
-        private String name;
-        private List<String> sourcePaths;
-        private String destinationPath;
-        private int type;
-        private int priority;
-        private int state;
+        public string Name { get; internal set; }
+        public List<String> SourcePaths { get; internal set; }
+        public string DestinationPath { get; internal set; }
+        public int Type { get; internal set; }
+        public int Priority { get; internal set; }
+        public int State { get; internal set; }
 
         public SavingJob(String name, List<String> sourcePaths, String destinationPath, int type, int priority, int state)
         {
-            this.name = name;
-            this.sourcePaths = sourcePaths;
-            this.destinationPath = destinationPath;
-            this.type = type;
-            this.priority = priority;
-            this.state = state;
+            this.Name = name;
+            this.SourcePaths = sourcePaths;
+            this.DestinationPath = destinationPath;
+            this.Type = type;
+            this.Priority = priority;
+            this.State = state;
         }
         public SavingJob(String SavingJobStr)
         {
@@ -31,12 +32,12 @@ namespace Model
 
             try
             {
-                this.name = jobConfigTab[0];
-                this.sourcePaths = jobConfigTab[1].Split(',').ToList();
-                this.destinationPath = jobConfigTab[2];
-                this.type = Int32.Parse(jobConfigTab[3]);
-                this.priority = Int32.Parse(jobConfigTab[4]);
-                this.state = Int32.Parse(jobConfigTab[5]);
+                this.Name = jobConfigTab[0];
+                this.SourcePaths = jobConfigTab[1].Split(',').ToList();
+                this.DestinationPath = jobConfigTab[2];
+                this.Type = Int32.Parse(jobConfigTab[3]);
+                this.Priority = Int32.Parse(jobConfigTab[4]);
+                this.State = Int32.Parse(jobConfigTab[5]);
             }
             catch (Exception)
             {
@@ -46,68 +47,72 @@ namespace Model
 
         public void AddSourcePath(String sourcePath)
         {
-            this.sourcePaths.Add(sourcePath);
+            this.SourcePaths.Add(sourcePath);
         }
 
         public void RemoveSourcePath(String sourcePath)
         {
-            this.sourcePaths.Remove(sourcePath);
+            this.SourcePaths.Remove(sourcePath);
         }
 
         public override String ToString()
         {
-            return $"{this.name}|{string.Join(",", this.sourcePaths)}|{this.destinationPath}|{this.type}|{this.priority}|{this.state}";
+            return $"{this.Name}|{string.Join(",", this.SourcePaths)}|{this.DestinationPath}|{this.Type}|{this.Priority}|{this.State}";
         }
 
-        // Getters and setters
-        public String GetName()
+        public void Run()
         {
-            return this.name;
+            switch (this.Type)
+            {
+                case 0:
+                    //this.RunDifferential();
+                    break;
+                case 1:
+                    //this.RunFull();
+                    break;
+                default:
+                    throw new Exception("Invalid job type");
+            }
         }
-        public List<String> GetSourcePaths()
+        public static void ShowJobs(SavingJob[] jobs)
         {
-            return this.sourcePaths;
-        }
-        public String GetDestinationPath()
-        {
-            return this.destinationPath;
-        }
-        public new int GetType()
-        {
-            return this.type;
-        }
-        public int GetPriority()
-        {
-            return this.priority;
-        }
-        public int GetState()
-        {
-            return this.state;
+            Console.WriteLine("List of jobs:");
+            if(jobs.Length == 0)
+            {
+                Console.WriteLine("No jobs...");
+            }
+            for (int i = 0; i < jobs.Length; i++)
+            {
+                Console.WriteLine(i + ") " + jobs[i].Name);
+            }
         }
 
-        public void SetName(String name)
-        {
-            this.name = name;
-        }
-        public void SetSourcePaths(List<String> sourcePaths)
-        {
-            this.sourcePaths = sourcePaths;
-        }
-        public void SetDestinationPath(String destinationPath)
-        {
-            this.destinationPath = destinationPath;
-        }
-        public void SetType(int type)
-        {
-            this.type = type;
-        }
-        public void SetPriority(int priority)
-        {
-            this.priority = priority;
-        }
-        public void SetState(int state)
-        {
-            this.state = state;
-        }
+        //public void RunDifferential()
+        //{
+        //    Console.WriteLine("Differential job running...");
+        //    foreach (String sourcePath in this.SourcePaths)
+        //    {
+        //        Console.WriteLine("Source path: " + sourcePath);
+        //        Console.WriteLine("Destination path: " + this.DestinationPath);
+        //        Console.WriteLine("Copying files...");
+        //        this.CopyFiles(sourcePath, this.DestinationPath);
+        //        Console.WriteLine("Copying files finished");
+        //    }
+        //    Console.WriteLine("Differential job finished");
+        //}
+
+        //public void RunFull()
+        //{
+        //    Console.WriteLine("Full job running...");
+        //    foreach (String sourcePath in this.SourcePaths)
+        //    {
+        //        Console.WriteLine("Source path: " + sourcePath);
+        //        Console.WriteLine("Destination path: " + this.DestinationPath);
+        //        Console.WriteLine("Copying files...");
+        //        this.CopyFiles(sourcePath, this.DestinationPath);
+        //        Console.WriteLine("Copying files finished");
+        //    }
+        //    Console.WriteLine("Full job finished");
+        //}
     }
 }

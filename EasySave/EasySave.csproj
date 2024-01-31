@@ -52,8 +52,14 @@
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,7 +68,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileExplorer.cs" />
+    <Compile Include="service\pageManager\DeleteJobManager.cs" />
+    <Compile Include="service\pageManager\ConfigManager.cs" />
+    <Compile Include="service\pageManager\RunJobManager.cs" />
+    <Compile Include="service\utils\FileExplorer.cs" />
     <Compile Include="service\pageManager\CreateJobManager.cs" />
     <Compile Include="service\pageManager\HomeManager.cs" />
     <Compile Include="Program.cs" />
