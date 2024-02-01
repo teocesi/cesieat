@@ -108,7 +108,7 @@ namespace EasySave
 
             for (int i = 0; i < savingJobs.Length; i++)
             {
-                if (savingJobs[i].Name != savingJob.Name)
+                if (savingJobs[i].GetName() != savingJob.GetName())
                 {
                     if (JobListStr.Length == 0)
                     {

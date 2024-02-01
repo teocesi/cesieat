@@ -4,26 +4,25 @@ using System.Linq;
 using EasySave.service.utils;
 using System.Security.Cryptography;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Model
 {
     internal class SavingJob
     {
-        public string Name { get; internal set; }
-        public List<String> SourcePaths { get; internal set; }
-        public string DestinationPath { get; internal set; }
-        public int Type { get; internal set; }
-        public int Priority { get; internal set; }
-        public int State { get; internal set; }
+        private string Name;
+        private List<String> SourcePaths;
+        private string DestinationPath;
+        private bool IsDifferential;
+        private int Priority;
+        private int State;
 
-        public SavingJob(String name, List<String> sourcePaths, String destinationPath, int type, int priority, int state)
+        public SavingJob(String name, List<String> sourcePaths, String destinationPath, bool IsDifferential, int priority, int state)
         {
             this.Name = name;
             this.SourcePaths = sourcePaths;
             this.DestinationPath = destinationPath;
-            this.Type = type;
+            this.IsDifferential = IsDifferential;
             this.Priority = priority;
             this.State = state;
         }
@@ -36,7 +35,7 @@ namespace Model
                 this.Name = jobConfigTab[0];
                 this.SourcePaths = jobConfigTab[1].Split(',').ToList();
                 this.DestinationPath = jobConfigTab[2];
-                this.Type = Int32.Parse(jobConfigTab[3]);
+                this.IsDifferential = Boolean.Parse(jobConfigTab[3]);
                 this.Priority = Int32.Parse(jobConfigTab[4]);
                 this.State = Int32.Parse(jobConfigTab[5]);
             }
@@ -58,7 +57,7 @@ namespace Model
 
         public override String ToString()
         {
-            return $"{this.Name}|{string.Join(",", this.SourcePaths)}|{this.DestinationPath}|{this.Type}|{this.Priority}|{this.State}";
+            return $"{this.Name}|{string.Join(",", this.SourcePaths)}|{this.DestinationPath}|{this.IsDifferential}|{this.Priority}|{this.State}";
         }
 
         public static void ShowJobs(SavingJob[] jobs)
@@ -77,22 +76,7 @@ namespace Model
         // Running
         public void Run()
         {
-            switch (this.Type)
-            {
-                case 0:
-                    this.RunFull();
-                    break;
-                case 1:
-                    //this.RunDifferential();
-                    break;
-                default:
-                    throw new Exception("Invalid job type");
-            }
-        }
-
-        public void RunFull()
-        {
-            Console.WriteLine($"----- {this.Name} is running in full mode -----");
+            Console.WriteLine($"----- {this.Name} is running -----");
             foreach (String sourcePath in this.SourcePaths)
             {
                 Console.WriteLine("> Source path: " + sourcePath);
@@ -100,11 +84,47 @@ namespace Model
                 Console.WriteLine("> Copying files...");
 
                 FileExplorer fileExplorer = new FileExplorer(sourcePath);
+                if (this.IsDifferential)
+                {
+                    fileExplorer.GetDiffFilesPath(this.DestinationPath);
+                }
+                else
+                {
+                    fileExplorer.GetAllFilesPath();
+                }
                 fileExplorer.CopyAllFiles(this.DestinationPath);
 
                 Console.WriteLine("> Copying files finished");
             }
             Console.WriteLine("Full job finished");
+        }
+
+
+        // Getters
+
+        public string GetName()
+        {
+            return this.Name;
+        }
+        public List<String> GetSourcePaths()
+        {
+            return this.SourcePaths;
+        }
+        public string GetDestinationPath()
+        {
+            return this.DestinationPath;
+        }
+        public bool GetTypeAttribute()
+        {
+            return this.IsDifferential;
+        }
+        public int GetPriority()
+        {
+            return this.Priority;
+        }
+        public int GetState()
+        {
+            return this.State;
         }
     }
 }

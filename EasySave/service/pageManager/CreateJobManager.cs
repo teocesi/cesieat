@@ -1,10 +1,7 @@
 ﻿using EasySave;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace PageManager
 {
@@ -14,7 +11,7 @@ namespace PageManager
         {
             Console.Clear();
             string name = "";
-            while(name.Length < 1)
+            while (name.Length < 1)
             {
                 Console.WriteLine("Job name: ");
                 name = Regex.Replace(Console.ReadLine(), "[|>]", string.Empty);
@@ -33,22 +30,35 @@ namespace PageManager
                 sourcePaths.Add(path);
             }
 
-            Console.WriteLine("\nTarget path: ");
-            String targetPath = Console.ReadLine();
+            String targetPath = "";
+            while (true)
+            {
+                Console.WriteLine("\nTarget path: ");
+                targetPath = Console.ReadLine();
 
-            int type;
+                if (targetPath != "" && !sourcePaths.Exists(sourcePath => targetPath.Contains(sourcePath)))
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("\nTarget path can't be empty or in source path...");
+                }
+            }
+
+            bool isDifferential;
             Console.WriteLine("\nType:\n1) Full 2) Differential");
             while (true)
             {
                 Char type_char = Console.ReadKey().KeyChar;
                 if (type_char == '1')
                 {
-                    type = 0;
+                    isDifferential = false;
                     break;
                 }
                 else if (type_char == '2')
                 {
-                    type = 1;
+                    isDifferential = true;
                     break;
                 }
                 Console.WriteLine("\nUnacceptable answer...");
@@ -72,16 +82,16 @@ namespace PageManager
                 Console.WriteLine("\nUnacceptable answer...");
             }
 
-            Model.SavingJob savingJob = new Model.SavingJob(name, sourcePaths, targetPath, type, priority, 0);
+            Model.SavingJob savingJob = new Model.SavingJob(name, sourcePaths, targetPath, isDifferential, priority, 0);
 
             Console.WriteLine("\nJob created successfully.");
 
-            Console.WriteLine("\nName: " + savingJob.Name);
-            Console.WriteLine("Source path: " + String.Join(Environment.NewLine, savingJob.SourcePaths));
-            Console.WriteLine("Target path: " + savingJob.DestinationPath);
-            Console.WriteLine("Type: " + savingJob.Type);
-            Console.WriteLine("Priority: " + savingJob.Priority);
-            Console.WriteLine("State: " + savingJob.State);
+            Console.WriteLine("\nName: " + savingJob.GetName());
+            Console.WriteLine("Source path: " + String.Join(Environment.NewLine, savingJob.GetSourcePaths()));
+            Console.WriteLine("Target path: " + savingJob.GetDestinationPath());
+            Console.WriteLine("Type: " + savingJob.GetTypeAttribute());
+            Console.WriteLine("Priority: " + savingJob.GetPriority());
+            Console.WriteLine("State: " + savingJob.GetState());
 
             Console.WriteLine("\nPress any key to continue...");
             Console.ReadKey();

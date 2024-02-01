@@ -13,10 +13,29 @@ namespace EasySave.service.utils
         public FileExplorer(string sourcePath)
         {
             this.sourcePath = sourcePath;
-            GetFiles();
         }
 
-        public string[] GetFiles()
+        static bool FileEquals(string SourcePath, string TargetPath)
+        {
+            if (!File.Exists(TargetPath)) { return false; }
+
+            byte[] SourceFile = File.ReadAllBytes(SourcePath);
+            byte[] TargetFile = File.ReadAllBytes(TargetPath);
+            if (SourceFile.Length == TargetFile.Length)
+            {
+                for (int i = 0; i < SourceFile.Length; i++)
+                {
+                    if (SourceFile[i] != TargetFile[i])
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            return false;
+        }
+
+        public IEnumerable<String> GetAllFilesPath()
         {
             files = Directory.EnumerateFiles(this.sourcePath, "*", SearchOption.AllDirectories);
 
@@ -26,9 +45,22 @@ namespace EasySave.service.utils
                 return null;
             }
 
-            //Console.WriteLine(String.Join(Environment.NewLine, files));
+            return files;
+        }
 
-            return null;
+        public IEnumerable<String> GetDiffFilesPath(string targetPath)
+        {
+            IEnumerable<String> targetFiles = GetAllFilesPath();
+            foreach (string file in targetFiles)
+            {
+                if (FileEquals(file, targetPath + file.Substring(Directory.GetParent(sourcePath).FullName.Length)))
+                {
+                    files = files.Where(f => f != file);
+                }
+            }
+
+            //Console.WriteLine(String.Join(Environment.NewLine, files));
+            return files;
         }
 
         public void CopyAllFiles(string destinationPath)
@@ -40,7 +72,7 @@ namespace EasySave.service.utils
             }
         }
 
-        private void CopyFile(string srcPath, string desPath)
+        private static void CopyFile(string srcPath, string desPath)
         {
             Directory.CreateDirectory(Path.GetDirectoryName(desPath));
 

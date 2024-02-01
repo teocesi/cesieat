@@ -23,7 +23,7 @@ namespace PageManager
             {
                 if (index >= 0 && index < jobs.Length)
                 {
-                    Console.WriteLine($"\n{jobs[index].Name} deleted.");
+                    Console.WriteLine($"\n{jobs[index].GetName()} deleted.");
                     Config.DeleteJobIntoConfig(jobs[index]);
                     Console.WriteLine("Press key to continue...");
                     Console.ReadKey();
