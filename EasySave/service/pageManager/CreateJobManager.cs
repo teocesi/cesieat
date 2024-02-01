@@ -89,7 +89,7 @@ namespace PageManager
             Console.WriteLine("\nName: " + savingJob.GetName());
             Console.WriteLine("Source path: " + String.Join(Environment.NewLine, savingJob.GetSourcePaths()));
             Console.WriteLine("Target path: " + savingJob.GetDestinationPath());
-            Console.WriteLine("Type: " + savingJob.GetTypeAttribute());
+            Console.WriteLine("Type: " + savingJob.GetIsDifferential());
             Console.WriteLine("Priority: " + savingJob.GetPriority());
             Console.WriteLine("State: " + savingJob.GetState());
 

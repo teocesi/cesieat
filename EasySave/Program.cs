@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Globalization;
+using System.Resources;
 
 namespace EasySave
 {
@@ -16,8 +18,18 @@ namespace EasySave
     {
         static void Main(string[] args)
         {
-            //@"C:\Users\selya\Documents\CESI\A3";
+            Config config = Config.GetInstance();
             PageManager.PageManager.ShowHomePage();
+
+            //Config.SetLangue("fr");
+            //string text = Config.GetText("test");
+            //Console.WriteLine(text);
+
+            //Config.SetLangue("en");
+            //text = Config.GetText("test");
+            //Console.WriteLine(text);
+
+            //Console.ReadLine();
         }
     }
 }

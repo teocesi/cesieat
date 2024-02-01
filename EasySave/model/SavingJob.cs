@@ -77,6 +77,7 @@ namespace Model
         public void Run()
         {
             Console.WriteLine($"----- {this.Name} is running -----");
+            Console.WriteLine($"> Differential mode: {this.IsDifferential}");
             foreach (String sourcePath in this.SourcePaths)
             {
                 Console.WriteLine("> Source path: " + sourcePath);
@@ -114,7 +115,7 @@ namespace Model
         {
             return this.DestinationPath;
         }
-        public bool GetTypeAttribute()
+        public bool GetIsDifferential()
         {
             return this.IsDifferential;
         }

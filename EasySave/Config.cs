@@ -6,21 +6,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model;
+using System.Globalization;
+using System.Resources;
 
 namespace EasySave
 {
-    internal class Config
+    internal class Config // Singleton
     {
-        public Config()
+        private static Config config;
+        private static CultureInfo cul;
+        public static ResourceManager resourceManager = new ResourceManager("EasySave.Resource.Res", typeof(Program).Assembly);
+
+        private Config()
         {
             // Test settings is empty
             if (ConfigurationManager.AppSettings.Count == 0)
             {
-                AddUpdateAppSettings("Langue", "FR");
-
+                AddUpdateAppSettings("Langue", "en");
                 Console.WriteLine("Choose a log path:");
                 AddUpdateAppSettings("LogPath", Console.ReadLine());
             }
+            else
+            {
+                SetLangue(ReadSetting("Langue"));
+            }
+        }
+
+        public static Config GetInstance()
+        {
+            if (config == null)
+            {
+                config = new Config();
+            }
+            return config;
         }
 
         public static void ReadAllSettings()
@@ -53,7 +71,6 @@ namespace EasySave
             {
                 var appSettings = ConfigurationManager.AppSettings;
                 string result = appSettings[key] ?? "Not Found";
-                Console.WriteLine(result); //TODO: Remove
                 return result;
             }
             catch (ConfigurationErrorsException)
@@ -91,7 +108,7 @@ namespace EasySave
         {
             String JobListStr = ReadSetting("JobList");
 
-            if(JobListStr.Length == 0)
+            if (JobListStr.Length == 0)
             {
                 AddUpdateAppSettings("JobList", savingJob.ToString());
             }
@@ -103,7 +120,7 @@ namespace EasySave
         public static void DeleteJobIntoConfig(SavingJob savingJob)
         {
             SavingJob[] savingJobs = GetSavingJobs();
-            
+
             String JobListStr = "";
 
             for (int i = 0; i < savingJobs.Length; i++)
@@ -123,7 +140,6 @@ namespace EasySave
 
             AddUpdateAppSettings("JobList", JobListStr);
         }
-
         public static SavingJob[] GetSavingJobs()
         {
             String JobListStr = ReadSetting("JobList");
@@ -143,6 +159,17 @@ namespace EasySave
             }
 
             return savingJobs;
+        }
+
+        // Langue config
+        public static void SetLangue(string langue)
+        {
+            AddUpdateAppSettings("Langue", langue);
+            cul = CultureInfo.CreateSpecificCulture(langue);
+        }
+        public static string GetText(string key)
+        {
+            return resourceManager.GetString(key, cul);
         }
     }
 }

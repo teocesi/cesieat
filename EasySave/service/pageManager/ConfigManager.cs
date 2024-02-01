@@ -54,10 +54,10 @@ namespace PageManager
             switch (choice)
             {
                 case '1':
-                    Config.AddUpdateAppSettings("language", "EN");
+                    Config.AddUpdateAppSettings("language", "en");
                     break;
                 case '2':
-                    Config.AddUpdateAppSettings("language", "FR");
+                    Config.AddUpdateAppSettings("language", "fr");
                     break;
             }
             ShowOptionsPage();
