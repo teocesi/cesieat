@@ -25,10 +25,7 @@ namespace EasySave
                 Console.WriteLine("Choose a log path:");
                 AddUpdateAppSettings("LogPath", Console.ReadLine());
             }
-            else
-            {
-                Language.SetLangue(ReadSetting("Language"));
-            }
+            Language.SetLangue(ReadSetting("Language"));
         }
 
         public static Config GetInstance()
