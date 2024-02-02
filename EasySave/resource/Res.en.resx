@@ -133,7 +133,7 @@
     <value>Copying files finished</value>
   </data>
   <data name="copy_type" xml:space="preserve">
-    <value>\nType:\n1) Full 2) Differential</value>
+    <value>Type: 1) Full 2) Differential</value>
   </data>
   <data name="create_job" xml:space="preserve">
     <value>1. Create a new job</value>
@@ -151,7 +151,7 @@
     <value>1. English</value>
   </data>
   <data name="enter_choice" xml:space="preserve">
-    <value>\nEnter your choice:</value>
+    <value>Enter your choice:</value>
   </data>
   <data name="enter_log_path" xml:space="preserve">
     <value>Enter a new log path:</value>
@@ -169,7 +169,7 @@
     <value>is running</value>
   </data>
   <data name="job_created" xml:space="preserve">
-    <value>\nJob created successfully.</value>
+    <value>Job created successfully.</value>
   </data>
   <data name="job_list" xml:space="preserve">
     <value>List of jobs:</value>
@@ -178,10 +178,10 @@
     <value>Job name:</value>
   </data>
   <data name="job_reseted" xml:space="preserve">
-    <value>\nJobs config reseted. Press any key to continue...</value>
+    <value>Jobs config reseted. Press any key to continue...</value>
   </data>
   <data name="key_continue" xml:space="preserve">
-    <value>\nPress any key to continue...</value>
+    <value>Press any key to continue...</value>
   </data>
   <data name="lunch_job" xml:space="preserve">
     <value>3. Launch a job</value>
@@ -193,16 +193,16 @@
     <value>No jobs...</value>
   </data>
   <data name="priority_ask" xml:space="preserve">
-    <value>\nPriority: (y/n)</value>
+    <value>Priority: (y/n)</value>
   </data>
   <data name="reset_job_config" xml:space="preserve">
     <value>3. Reset jobs config</value>
   </data>
   <data name="select_delete_job" xml:space="preserve">
-    <value>\nSelect a job to delete or space to exit:</value>
+    <value>Select a job to delete or space to exit:</value>
   </data>
   <data name="select_job_to_run" xml:space="preserve">
-    <value>\nSelect jobs to run then press space:</value>
+    <value>Select jobs to run then press space:</value>
   </data>
   <data name="show_options" xml:space="preserve">
     <value>4. Options</value>
@@ -214,12 +214,12 @@
     <value>(Enter for each path | enter empty to valide)</value>
   </data>
   <data name="target_not_empty" xml:space="preserve">
-    <value>\nTarget path can't be empty or in source path...</value>
+    <value>Target path can't be empty or in source path...</value>
   </data>
   <data name="target_path" xml:space="preserve">
     <value>Destination path:</value>
   </data>
   <data name="unacceptable_ans" xml:space="preserve">
-    <value>\nUnacceptable answer...</value>
+    <value>Unacceptable answer...</value>
   </data>
 </root>

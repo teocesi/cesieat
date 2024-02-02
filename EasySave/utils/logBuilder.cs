@@ -2,16 +2,48 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace EasySave.utils
 {
-    internal class logBuilder
+    internal class LogBuilder
     {
-        public static string BuildLog(string logType, string logMessage)
+        private static string BuildPathLog()
         {
-            string log = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss") + " - [" + logType + "] " + logMessage + "\n";
-            return log;
+            return Config.ReadSetting("LogPath") + "/" + DateTime.Now.ToString("yyyy-MM-dd") + ".json";
+        }
+        private static void WriteLog(string log)
+        {
+            System.IO.File.AppendAllText(BuildPathLog(), log);
+        }
+        private static bool LogExists()
+        {
+            return System.IO.File.Exists(BuildPathLog());
+        }
+
+        public static void DailyLog(string jobName, string sourcePath, string targetPath, string size, string time)
+        {
+            string Horodatage = DateTime.Now.ToString("HH:mm:ss");
+            string log = LogExists() ? ",\n" : "";
+
+            log += "{\n" +
+                "   \"Horodatage\": \"" + Horodatage + "\",\n" +
+                "   \"JobName\": \"" + jobName + "\",\n" +
+                "   \"SourcePath\": \"" + Regex.Replace(sourcePath, @"\\", "\\\\") + "\",\n" +
+                "   \"TargetPath\": \"" + Regex.Replace(targetPath, @"\\", "\\\\") + "\",\n" +
+                "   \"Size\": \"" + size + "\",\n" +
+                "   \"Time\": \"" + time + "\"\n" +
+                "}";
+
+            try
+            {
+                WriteLog(log);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }

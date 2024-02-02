@@ -9,10 +9,12 @@ namespace EasySave.utils
     {
         private IEnumerable<String> files;
         private string sourcePath;
+        private string jobName;
 
-        public FileExplorer(string sourcePath)
+        public FileExplorer(string sourcePath, string jobName)
         {
             this.sourcePath = sourcePath;
+            this.jobName = jobName;
         }
 
         static bool FileEquals(string SourcePath, string TargetPath)
@@ -68,12 +70,14 @@ namespace EasySave.utils
             foreach (string file in files)
             {
                 string desFile = destinationPath + file.Substring(Directory.GetParent(sourcePath).FullName.Length);
+                Console.WriteLine("Copying " + file);
                 CopyFile(file, desFile);
             }
         }
 
-        private static void CopyFile(string srcPath, string desPath)
+        private void CopyFile(string srcPath, string desPath)
         {
+            TimeWatcher timeWatcher = new TimeWatcher();
             Directory.CreateDirectory(Path.GetDirectoryName(desPath));
 
             var buffer = new byte[1024 * 1024];
@@ -92,6 +96,12 @@ namespace EasySave.utils
                 }
                 swb.Flush();
             }
+
+            // Get size of file
+            FileInfo fileInfo = new FileInfo(desPath);
+            string size = fileInfo.Length.ToString() + " bytes";
+
+            LogBuilder.DailyLog(this.jobName, srcPath, desPath, size, timeWatcher.Stop());
         }
     }
 }

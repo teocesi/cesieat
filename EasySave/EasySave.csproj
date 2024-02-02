@@ -94,7 +94,8 @@
     <Compile Include="model\SavingJob.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="utils\Language.cs" />
-    <Compile Include="utils\logBuilder.cs" />
+    <Compile Include="utils\LogBuilder.cs" />
+    <Compile Include="utils\TimeWatcher.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

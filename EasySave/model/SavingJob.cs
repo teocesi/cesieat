@@ -84,7 +84,7 @@ namespace Model
                 Console.WriteLine($"> {Language.GetText("target_path")} {this.DestinationPath}");
                 Console.WriteLine($"> {Language.GetText("copying_files")}");
 
-                FileExplorer fileExplorer = new FileExplorer(sourcePath);
+                FileExplorer fileExplorer = new FileExplorer(sourcePath, this.Name);
                 if (this.IsDifferential)
                 {
                     fileExplorer.GetDiffFilesPath(this.DestinationPath);
