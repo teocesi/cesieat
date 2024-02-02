@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EasySave.utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,13 +12,13 @@ namespace PageManager
         public static void ShowHomePage()
         {
             Console.Clear();
-            Console.WriteLine("1. Create a new job");
-            Console.WriteLine("2. Delete a job");
-            Console.WriteLine("3. Launch a job");
-            Console.WriteLine("4. Options");
-            Console.WriteLine("5. Exit");
+            Console.WriteLine(Language.GetText("create_job"));
+            Console.WriteLine(Language.GetText("delete_job"));
+            Console.WriteLine(Language.GetText("lunch_job"));
+            Console.WriteLine(Language.GetText("show_options"));
+            Console.WriteLine($"5. {Language.GetText("exit")}");
 
-            Console.WriteLine("\nEnter your choice: ");
+            Console.WriteLine(Language.GetText("enter_choice"));
             Char choice = Console.ReadKey().KeyChar;
 
             switch (choice)

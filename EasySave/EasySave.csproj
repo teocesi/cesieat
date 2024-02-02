@@ -81,7 +81,7 @@
     <Compile Include="service\pageManager\DeleteJobManager.cs" />
     <Compile Include="service\pageManager\ConfigManager.cs" />
     <Compile Include="service\pageManager\RunJobManager.cs" />
-    <Compile Include="service\utils\FileExplorer.cs" />
+    <Compile Include="utils\FileExplorer.cs" />
     <Compile Include="service\pageManager\CreateJobManager.cs" />
     <Compile Include="service\pageManager\HomeManager.cs" />
     <Compile Include="Program.cs" />
@@ -93,7 +93,8 @@
     </Compile>
     <Compile Include="model\SavingJob.cs" />
     <Compile Include="Config.cs" />
-    <Compile Include="service\utils\logBuilder.cs" />
+    <Compile Include="utils\Language.cs" />
+    <Compile Include="utils\logBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

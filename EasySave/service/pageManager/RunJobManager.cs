@@ -1,4 +1,5 @@
 ﻿using EasySave;
+using EasySave.utils;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,10 @@ namespace PageManager
         public static void ShowRunJobPage()
         {
             SavingJob[] jobs = Config.GetSavingJobs();
+            Console.Clear();
             SavingJob.ShowJobs(jobs);
 
-            Console.WriteLine("\nSelect jobs to run then press space:");
+            Console.WriteLine(Language.GetText("select_job_to_run"));
             string input = Console.ReadLine().ToString();
 
             List<int> selectedJobs = new List<int>();
@@ -36,7 +38,7 @@ namespace PageManager
                 jobs[index].Run();
             }
 
-            Console.WriteLine("\nPress any key to return to the home page...");
+            Console.WriteLine(Language.GetText("key_continue"));
             Console.ReadKey();
             ShowHomePage();
         }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using EasySave.service.utils;
+using EasySave.utils;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -62,10 +62,10 @@ namespace Model
 
         public static void ShowJobs(SavingJob[] jobs)
         {
-            Console.WriteLine("List of jobs:");
+            Console.WriteLine(Language.GetText("job_list"));
             if (jobs.Length == 0)
             {
-                Console.WriteLine("No jobs...");
+                Console.WriteLine(Language.GetText("no_job"));
             }
             for (int i = 0; i < jobs.Length; i++)
             {
@@ -76,13 +76,13 @@ namespace Model
         // Running
         public void Run()
         {
-            Console.WriteLine($"----- {this.Name} is running -----");
-            Console.WriteLine($"> Differential mode: {this.IsDifferential}");
+            Console.WriteLine($"----- {this.Name} {Language.GetText("is_running")} -----");
+            Console.WriteLine($"> {Language.GetText("differential_mode")} {this.IsDifferential}");
             foreach (String sourcePath in this.SourcePaths)
             {
-                Console.WriteLine("> Source path: " + sourcePath);
-                Console.WriteLine("> Destination path: " + this.DestinationPath);
-                Console.WriteLine("> Copying files...");
+                Console.WriteLine($"> {Language.GetText("source_path")} {sourcePath}");
+                Console.WriteLine($"> {Language.GetText("target_path")} {this.DestinationPath}");
+                Console.WriteLine($"> {Language.GetText("copying_files")}");
 
                 FileExplorer fileExplorer = new FileExplorer(sourcePath);
                 if (this.IsDifferential)
@@ -95,9 +95,9 @@ namespace Model
                 }
                 fileExplorer.CopyAllFiles(this.DestinationPath);
 
-                Console.WriteLine("> Copying files finished");
+                Console.WriteLine($"> {Language.GetText("copying_finished")}");
             }
-            Console.WriteLine("Full job finished");
+            Console.WriteLine(Language.GetText("full_job_finished"));
         }
 
 

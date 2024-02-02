@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace EasySave.service.utils
+namespace EasySave.utils
 {
     internal class FileExplorer
     {
@@ -41,7 +41,7 @@ namespace EasySave.service.utils
 
             if (files.Count() == 0)
             {
-                Console.WriteLine("No files found.");
+                Console.WriteLine(Language.GetText("no_file"));
                 return null;
             }
 

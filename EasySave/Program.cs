@@ -20,16 +20,6 @@ namespace EasySave
         {
             Config config = Config.GetInstance();
             PageManager.PageManager.ShowHomePage();
-
-            //Config.SetLangue("fr");
-            //string text = Config.GetText("test");
-            //Console.WriteLine(text);
-
-            //Config.SetLangue("en");
-            //text = Config.GetText("test");
-            //Console.WriteLine(text);
-
-            //Console.ReadLine();
         }
     }
 }

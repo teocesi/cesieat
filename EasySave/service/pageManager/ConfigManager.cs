@@ -1,5 +1,5 @@
 ﻿using EasySave;
-using Model;
+using EasySave.utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +14,11 @@ namespace PageManager
         public static void ShowOptionsPage()
         {
             Console.Clear();
-            Console.WriteLine("1. Change language");
-            Console.WriteLine("2. Change log path");
-            Console.WriteLine("3. Reset jobs config");
-            Console.WriteLine("4. Exit");
-            Console.WriteLine("\nEnter your choice: ");
+            Console.WriteLine(Language.GetText("change_language"));
+            Console.WriteLine(Language.GetText("change_log_path"));
+            Console.WriteLine(Language.GetText("reset_job_config"));
+            Console.WriteLine($"4. {Language.GetText("exit")}");
+            Console.WriteLine(Language.GetText("enter_choice"));
 
             Char choice = Console.ReadKey().KeyChar;
 
@@ -45,9 +45,9 @@ namespace PageManager
         private static void ShowChangeLanguagePage()
         {
             Console.Clear();
-            Console.WriteLine("1. English");
-            Console.WriteLine("2. French");
-            Console.WriteLine("\nEnter your choice: ");
+            Console.WriteLine(Language.GetText("english"));
+            Console.WriteLine(Language.GetText("french"));
+            Console.WriteLine(Language.GetText("enter_choice"));
 
             Char choice = Console.ReadKey().KeyChar;
 
@@ -66,7 +66,7 @@ namespace PageManager
         private static void ShowChangeLogPathPage()
         {
             Console.Clear();
-            Console.WriteLine("Enter a new log path: ");
+            Console.WriteLine(Language.GetText("enter_log_path"));
             string path = Console.ReadLine();
             Config.AddUpdateAppSettings("logPath", path);
             ShowOptionsPage();
@@ -75,13 +75,13 @@ namespace PageManager
         private static void ShowResetJobsConfigPage()
         {
             Console.Clear();
-            Console.WriteLine("Are you sure you want to reset jobs config? (y/n)");
+            Console.WriteLine(Language.GetText("confirm_reset_job"));
             Char choice = Console.ReadKey().KeyChar;
 
             if (choice == 'y')
             {
                 Config.AddUpdateAppSettings("JobList", "");
-                Console.WriteLine("\nJobs config reseted. Press any key to return continue...");
+                Console.WriteLine(Language.GetText("job_reseted"));
                 Console.ReadKey();
             }
             ShowOptionsPage();

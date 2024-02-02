@@ -8,27 +8,26 @@ using System.Threading.Tasks;
 using Model;
 using System.Globalization;
 using System.Resources;
+using EasySave.utils;
 
 namespace EasySave
 {
     internal class Config // Singleton
     {
         private static Config config;
-        private static CultureInfo cul;
-        public static ResourceManager resourceManager = new ResourceManager("EasySave.Resource.Res", typeof(Program).Assembly);
 
         private Config()
         {
             // Test settings is empty
             if (ConfigurationManager.AppSettings.Count == 0)
             {
-                AddUpdateAppSettings("Langue", "en");
+                AddUpdateAppSettings("Language", "en");
                 Console.WriteLine("Choose a log path:");
                 AddUpdateAppSettings("LogPath", Console.ReadLine());
             }
             else
             {
-                SetLangue(ReadSetting("Langue"));
+                Language.SetLangue(ReadSetting("Language"));
             }
         }
 
@@ -159,17 +158,6 @@ namespace EasySave
             }
 
             return savingJobs;
-        }
-
-        // Langue config
-        public static void SetLangue(string langue)
-        {
-            AddUpdateAppSettings("Langue", langue);
-            cul = CultureInfo.CreateSpecificCulture(langue);
-        }
-        public static string GetText(string key)
-        {
-            return resourceManager.GetString(key, cul);
         }
     }
 }
