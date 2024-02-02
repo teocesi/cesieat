@@ -117,7 +117,61 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="test" xml:space="preserve">
-    <value>tkt2</value>
+  <data name="is_running" xml:space="preserve">
+    <value>est en cours d'exécution </value>
+  </data>
+  <data name="job_created" xml:space="preserve">
+    <value>emploi crée avec succès.</value>
+  </data>
+  <data name="job_list" xml:space="preserve">
+    <value>liste des emplois :</value>
+  </data>
+  <data name="job_name" xml:space="preserve">
+    <value>nom du poste : </value>
+  </data>
+  <data name="job_reseted" xml:space="preserve">
+    <value>La configuration des emplois a été réinitialisée. Appuyez sur n'importe quelle touche pour continuer...</value>
+  </data>
+  <data name="key_continue" xml:space="preserve">
+    <value>Appuyez sur n'importe quelle touche pour continuer...</value>
+  </data>
+  <data name="lunch_job" xml:space="preserve">
+    <value>3. Lancer un emploi</value>
+  </data>
+  <data name="no_file" xml:space="preserve">
+    <value>aucun fichier trouvé </value>
+  </data>
+  <data name="no_job" xml:space="preserve">
+    <value>pas d'emplois...</value>
+  </data>
+  <data name="priority_ask" xml:space="preserve">
+    <value>Priorités : </value>
+  </data>
+  <data name="reset_job_config" xml:space="preserve">
+    <value>réinitialiser les configurations des emplois</value>
+  </data>
+  <data name="select_delete_job" xml:space="preserve">
+    <value>Sélectionner un emploi à supprimer ou espace pour quitter </value>
+  </data>
+  <data name="select_job_to_run" xml:space="preserve">
+    <value>Sélectionner une tâche à exécuter, puis appuyer sur espace:</value>
+  </data>
+  <data name="show_options" xml:space="preserve">
+    <value>4. options : </value>
+  </data>
+  <data name="source_path" xml:space="preserve">
+    <value>Chemin soource:</value>
+  </data>
+  <data name="source_path_info" xml:space="preserve">
+    <value>(Entrer pour chaque chemin | entrer vide pour valider)</value>
+  </data>
+  <data name="target_not_empty" xml:space="preserve">
+    <value>le chemin cible ne peut pas être vide ou dans le chemin source</value>
+  </data>
+  <data name="target_path" xml:space="preserve">
+    <value>chemin de destination</value>
+  </data>
+  <data name="unacceptable_ans" xml:space="preserve">
+    <value>reponse inacceptable</value>
   </data>
 </root>
