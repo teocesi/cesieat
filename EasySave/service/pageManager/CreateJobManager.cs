@@ -1,7 +1,10 @@
 ﻿using EasySave;
+using EasySave.model;
 using EasySave.utils;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace PageManager
@@ -15,7 +18,7 @@ namespace PageManager
             while (name.Length < 1)
             {
                 Console.WriteLine(Language.GetText("job_name"));
-                name = Regex.Replace(Console.ReadLine(), "[|>]", string.Empty);
+                name = Console.ReadLine(); // Add un sécu pour qu'il n'en existe pas deux
             }
 
             List<String> sourcePaths = new List<String>();
@@ -83,21 +86,12 @@ namespace PageManager
                 Console.WriteLine(Language.GetText("unacceptable_ans"));
             }
 
-            Model.SavingJob savingJob = new Model.SavingJob(name, sourcePaths, targetPath, isDifferential, priority, 0);
+            Job savingJob = new Job(name, sourcePaths, targetPath, isDifferential, priority, 0);
+            JobList.AddJob(savingJob);
 
             Console.WriteLine(Language.GetText("job_created"));
-
-            //Console.WriteLine("\nName: " + savingJob.GetName());
-            //Console.WriteLine("Source path: " + String.Join(Environment.NewLine, savingJob.GetSourcePaths()));
-            //Console.WriteLine("Target path: " + savingJob.GetDestinationPath());
-            //Console.WriteLine("Type: " + savingJob.GetIsDifferential());
-            //Console.WriteLine("Priority: " + savingJob.GetPriority());
-            //Console.WriteLine("State: " + savingJob.GetState());
-
             Console.WriteLine(Language.GetText("key_continue"));
             Console.ReadKey();
-
-            Config.AddJobIntoConfig(savingJob);
             ShowHomePage();
         }
     }

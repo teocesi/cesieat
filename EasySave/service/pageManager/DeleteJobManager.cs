@@ -1,6 +1,6 @@
 ﻿using EasySave;
+using EasySave.model;
 using EasySave.utils;
-using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,19 +14,19 @@ namespace PageManager
     {
         public static void ShowDeleteJobPage()
         {
-            SavingJob[] jobs = Config.GetSavingJobs();
             Console.Clear();
-            SavingJob.ShowJobs(jobs);
+            JobList.ShowJobList();
 
             Console.WriteLine(Language.GetText("select_delete_job"));
             string input = Console.ReadKey().KeyChar.ToString();
             int index = -1;
             if (int.TryParse(input, out index))
             {
-                if (index >= 0 && index < jobs.Length)
+                if (index >= 0 && index < JobList.GetJobList().Count)
                 {
-                    Console.WriteLine($"\n{jobs[index].GetName()} {Language.GetText("deleted")}");
-                    Config.DeleteJobIntoConfig(jobs[index]);
+                    Console.WriteLine($"\n{JobList.GetJobList()[index].GetName()} {Language.GetText("deleted")}");
+                    JobList.RemoveJob(JobList.GetJobList()[index]);
+
                     Console.WriteLine(Language.GetText("key_continue"));
                     Console.ReadKey();
                 }

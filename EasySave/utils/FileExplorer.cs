@@ -123,7 +123,7 @@ namespace EasySave.utils
             FileInfo fileInfo = new FileInfo(desPath);
             string size = fileInfo.Length.ToString() + " bytes";
 
-            LogBuilder.DailyLog(this.jobName, srcPath, desPath, size, timeWatcher.Stop());
+            LogBuilder.UpdateHistoryLog(this.jobName, srcPath, desPath, size, timeWatcher.Stop());
         }
     }
 }

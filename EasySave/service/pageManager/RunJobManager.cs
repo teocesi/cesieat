@@ -1,6 +1,6 @@
 ﻿using EasySave;
+using EasySave.model;
 using EasySave.utils;
-using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +14,8 @@ namespace PageManager
     {
         public static void ShowRunJobPage()
         {
-            SavingJob[] jobs = Config.GetSavingJobs();
             Console.Clear();
-            SavingJob.ShowJobs(jobs);
+            JobList.ShowJobList();
 
             Console.WriteLine(Language.GetText("select_job_to_run"));
             string input = Console.ReadLine().ToString();
@@ -24,7 +23,7 @@ namespace PageManager
             List<int> selectedJobs = new List<int>();
             for (int i = 0; i < input.Length; i++)
             {
-                if (checkValidity(input[i], jobs.Length))
+                if (checkValidity(input[i], JobList.GetJobList().Count))
                 {
                     int index = int.Parse(input[i].ToString());
                     if (!selectedJobs.Contains(index))
@@ -35,7 +34,7 @@ namespace PageManager
             }
             foreach (int index in selectedJobs)
             {
-                jobs[index].Run();
+                JobList.GetJobList()[index].Run();
             }
 
             Console.WriteLine(Language.GetText("key_continue"));

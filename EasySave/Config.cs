@@ -5,7 +5,6 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Model;
 using System.Globalization;
 using System.Resources;
 using EasySave.utils;
@@ -22,10 +21,29 @@ namespace EasySave
             if (ConfigurationManager.AppSettings.Count == 0)
             {
                 AddUpdateAppSettings("Language", "en");
+                AddUpdateAppSettings("JobList", "");
                 Console.WriteLine("Choose a log path:");
                 AddUpdateAppSettings("LogPath", Console.ReadLine());
             }
             Language.SetLangue(ReadSetting("Language"));
+
+            // Create log file
+            try
+            {
+                if (!Directory.Exists(ReadSetting("LogPath")))
+                {
+                    Directory.CreateDirectory(ReadSetting("LogPath"));
+                }
+                if (!File.Exists(ReadSetting("LogPath") + "/status.log"))
+                {
+                    File.Create(ReadSetting("LogPath") + "/status.log");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Console.ReadKey();
+            }
         }
 
         public static Config GetInstance()
@@ -97,64 +115,6 @@ namespace EasySave
             {
                 Console.WriteLine("Error writing app settings");
             }
-        }
-
-        // Job config
-        public static void AddJobIntoConfig(SavingJob savingJob)
-        {
-            String JobListStr = ReadSetting("JobList");
-
-            if (JobListStr.Length == 0)
-            {
-                AddUpdateAppSettings("JobList", savingJob.ToString());
-            }
-            else
-            {
-                AddUpdateAppSettings("JobList", JobListStr + ">" + savingJob.ToString());
-            }
-        }
-        public static void DeleteJobIntoConfig(SavingJob savingJob)
-        {
-            SavingJob[] savingJobs = GetSavingJobs();
-
-            String JobListStr = "";
-
-            for (int i = 0; i < savingJobs.Length; i++)
-            {
-                if (savingJobs[i].GetName() != savingJob.GetName())
-                {
-                    if (JobListStr.Length == 0)
-                    {
-                        JobListStr = savingJobs[i].ToString();
-                    }
-                    else
-                    {
-                        JobListStr += ">" + savingJobs[i].ToString();
-                    }
-                }
-            }
-
-            AddUpdateAppSettings("JobList", JobListStr);
-        }
-        public static SavingJob[] GetSavingJobs()
-        {
-            String JobListStr = ReadSetting("JobList");
-            String[] JobListTab = JobListStr.Split('>');
-            SavingJob[] savingJobs = new SavingJob[JobListTab.Length];
-
-            if (JobListStr.Length == 0)
-            {
-                return new SavingJob[0];
-            }
-            else
-            {
-                for (int i = 0; i < JobListTab.Length; i++)
-                {
-                    savingJobs[i] = new SavingJob(JobListTab[i]);
-                }
-            }
-
-            return savingJobs;
         }
     }
 }
