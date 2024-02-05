@@ -39,12 +39,20 @@ namespace EasySave.utils
 
         public IEnumerable<String> GetAllFilesPath()
         {
-            files = Directory.EnumerateFiles(this.sourcePath, "*", SearchOption.AllDirectories);
+            try
+            {
+                files = Directory.EnumerateFiles(this.sourcePath, "*", SearchOption.AllDirectories);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return Enumerable.Empty<String>();
+            }
 
             if (files.Count() == 0)
             {
                 Console.WriteLine(Language.GetText("no_file"));
-                return null;
+                return Enumerable.Empty<String>();
             }
 
             return files;
@@ -67,7 +75,7 @@ namespace EasySave.utils
 
         public void CopyAllFiles(string destinationPath)
         {
-            foreach (string file in files)
+            foreach (string file in files ?? Enumerable.Empty<String>())
             {
                 string desFile = destinationPath + file.Substring(Directory.GetParent(sourcePath).FullName.Length);
                 Console.WriteLine("Copying " + file);
@@ -78,23 +86,37 @@ namespace EasySave.utils
         private void CopyFile(string srcPath, string desPath)
         {
             TimeWatcher timeWatcher = new TimeWatcher();
-            Directory.CreateDirectory(Path.GetDirectoryName(desPath));
+            try
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(desPath));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unreachable path: " + e.Message);
+            }
 
             var buffer = new byte[1024 * 1024];
             var bytesRead = 0;
 
-            using (FileStream sr = new FileStream(srcPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
-            using (BufferedStream srb = new BufferedStream(sr))
-            using (FileStream sw = new FileStream(desPath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
-            using (BufferedStream swb = new BufferedStream(sw))
+            try
             {
-                while (true)
+                using (FileStream sr = new FileStream(srcPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                using (BufferedStream srb = new BufferedStream(sr))
+                using (FileStream sw = new FileStream(desPath, FileMode.Create, FileAccess.Write, FileShare.ReadWrite))
+                using (BufferedStream swb = new BufferedStream(sw))
                 {
-                    bytesRead = srb.Read(buffer, 0, buffer.Length);
-                    if (bytesRead == 0) break;
-                    swb.Write(buffer, 0, bytesRead);
+                    while (true)
+                    {
+                        bytesRead = srb.Read(buffer, 0, buffer.Length);
+                        if (bytesRead == 0) break;
+                        swb.Write(buffer, 0, bytesRead);
+                    }
+                    swb.Flush();
                 }
-                swb.Flush();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Unreachable File path: " + e.Message);
             }
 
             // Get size of file

@@ -15,7 +15,14 @@ namespace EasySave.utils
         }
         private static void WriteLog(string log)
         {
-            System.IO.File.AppendAllText(BuildPathLog(), log);
+            try
+            {
+                System.IO.File.AppendAllText(BuildPathLog(), log);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
         private static bool LogExists()
         {
@@ -36,14 +43,7 @@ namespace EasySave.utils
                 "   \"Time\": \"" + time + "\"\n" +
                 "}";
 
-            try
-            {
-                WriteLog(log);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            WriteLog(log);
         }
     }
 }
