@@ -17,10 +17,10 @@ namespace EasySave.model
         public List<string> SourcePaths;
         public string DestinationPath;
         public bool IsDifferential;
-        public int Priority;
-        public int State;
+        public byte Priority;
+        public byte State;
         Job() { }
-        public Job(String name, List<String> sourcePaths, String destinationPath, bool IsDifferential, int priority, int state)
+        public Job(String name, List<String> sourcePaths, String destinationPath, bool IsDifferential, byte priority, byte state)
         {
             this.Name = name;
             this.SourcePaths = sourcePaths;

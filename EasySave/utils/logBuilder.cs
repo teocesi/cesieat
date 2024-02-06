@@ -88,12 +88,10 @@ namespace EasySave.utils
                 {
                     DirectoryInfo sourceDirInfo = new DirectoryInfo(sourcePathTemp);
                     totalFileSource = totalFileSource.Concat(sourceDirInfo.EnumerateFiles("*", SearchOption.AllDirectories));
-                    //totalFilesSize += sourceDirInfo.EnumerateFiles("*", SearchOption.AllDirectories).Sum(file => file.Length);
 
                     var targetPath = job.DestinationPath + "\\" + new DirectoryInfo(sourcePathTemp).Name;
                     DirectoryInfo targetDirInfo = new DirectoryInfo(targetPath);
                     totalFileTarget = totalFileTarget.Concat(targetDirInfo.EnumerateFiles("*", SearchOption.AllDirectories));
-                    //targetFileSize += targetDirInfo.EnumerateFiles("*", SearchOption.AllDirectories).Sum(file => file.Length);
                 }
 
                 // Set other var

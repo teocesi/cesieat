@@ -132,19 +132,19 @@
   <data name="copying_finished" xml:space="preserve">
     <value>La copie des fichiers est terminée</value>
   </data>
-  <data name="copy_time" xml:space="preserve">
+  <data name="copy_type" xml:space="preserve">
     <value>Type: 1) Full 2) Differential</value>
   </data>
   <data name="create_job" xml:space="preserve">
-    <value>1. Créer un nouvel emploi</value>
+    <value>1. Créer une nouvelle routine</value>
   </data>
   <data name="delete" xml:space="preserve">
     <value>supprimé</value>
   </data>
   <data name="delete_job" xml:space="preserve">
-    <value>2. Supprimer un emploi</value>
+    <value>2. Supprimer une routine</value>
   </data>
-  <data name="differetial_mode" xml:space="preserve">
+  <data name="differential_mode" xml:space="preserve">
     <value>Mode différentiel :</value>
   </data>
   <data name="english" xml:space="preserve">
