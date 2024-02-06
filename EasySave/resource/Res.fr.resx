@@ -136,13 +136,13 @@
     <value>Type: 1) Full 2) Differential</value>
   </data>
   <data name="create_job" xml:space="preserve">
-    <value>1. Créer un nouvel emploi</value>
+    <value>1. Créer une nouvelle routine</value>
   </data>
   <data name="delete" xml:space="preserve">
     <value>supprimé</value>
   </data>
   <data name="delete_job" xml:space="preserve">
-    <value>2. Supprimer un emploi</value>
+    <value>2. Supprimer une routine</value>
   </data>
   <data name="differetial_mode" xml:space="preserve">
     <value>Mode différentiel :</value>
