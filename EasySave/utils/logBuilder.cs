@@ -98,9 +98,12 @@ namespace EasySave.utils
                 string stateStr = state == 0 ? "Inactive" : state == 1 ? "Active" : "Stopped";
                 long totalFileSize = totalFileSource.Sum(file => file.Length);
                 long totalFilesSizeCopied = totalFileTarget.Sum(file => file.Length);
+                long totalFilesSizeRemains = totalFileSize - totalFilesSizeCopied;
+
                 long totalFilesToCopy = totalFileSource.Count();
-                long totalFilesRemains = totalFileSize - totalFilesSizeCopied;
-                int percentDone = (int)((totalFilesSizeCopied / totalFileSize)*100);
+                long FilesCopied = totalFileTarget.Count();
+                long FilesRemains = totalFilesToCopy - FilesCopied;
+                int percentDone = (int)((totalFilesSizeCopied*100) / totalFileSize);
 
                 StatusLog statusLogModel = new StatusLog
                 {
@@ -109,7 +112,7 @@ namespace EasySave.utils
                     State = stateStr,
                     TotalFilesToCopy = totalFilesToCopy,
                     TotalSizeToCopy = totalFileSize,
-                    Progression = new Progression(percentDone, totalFilesRemains, currentSourcePath, currentTargetPath)
+                    Progression = new Progression(percentDone, totalFilesSizeRemains, FilesRemains, currentSourcePath, currentTargetPath)
                 };
 
 

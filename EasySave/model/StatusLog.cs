@@ -20,15 +20,17 @@ namespace EasySave.model
     {
         public int PercentDone { get; set; }
         public long SizeLeft { get; set; }
+        public long FileLeft { get; set; }
         public string SourcePath { get; set; }
         public string TargetPath { get; set; }
 
-        public Progression(int percentDone, long SizeLeft, string SourcePath, string TargetPath)
+        public Progression(int percentDone, long sizeLeft, long fileLeft, string sourcePath, string targetPath)
         {
             this.PercentDone = percentDone;
-            this.SizeLeft = SizeLeft;
-            this.SourcePath = SourcePath;
-            this.TargetPath = TargetPath;
+            this.SizeLeft = sizeLeft;
+            this.FileLeft = fileLeft;
+            this.SourcePath = sourcePath;
+            this.TargetPath = targetPath;
         }
     }
 }

@@ -59,6 +59,7 @@ namespace EasySave.model
                 fileExplorer.CopyAllFiles(this.DestinationPath);
 
                 Console.WriteLine($"> {Language.GetText("copying_finished")}");
+                LogBuilder.UpdateStatusLog(this, 0, "null", "null");
             }
             Console.WriteLine(Language.GetText("full_job_finished"));
         }
