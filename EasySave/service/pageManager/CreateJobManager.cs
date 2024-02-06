@@ -59,7 +59,7 @@ namespace PageManager
             }
 
             bool isDifferential;
-            Console.WriteLine(Language.GetText("copy_type"));
+            Console.WriteLine("\n" + Language.GetText("copy_type"));
             while (true)
             {
                 Char type_char = Console.ReadKey().KeyChar;
@@ -76,8 +76,8 @@ namespace PageManager
                 Console.WriteLine(Language.GetText("unacceptable_ans"));
             }
 
-            int priority;
-            Console.WriteLine(Language.GetText("priority_ask"));
+            byte priority;
+            Console.WriteLine("\n" + Language.GetText("priority_ask"));
             while (true)
             {
                 Char priority_input = Console.ReadKey().KeyChar;
