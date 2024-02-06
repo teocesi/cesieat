@@ -18,6 +18,7 @@ namespace EasySave
     {
         static void Main(string[] args)
         {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Config config = Config.GetInstance();
             PageManager.PageManager.ShowHomePage();
         }
