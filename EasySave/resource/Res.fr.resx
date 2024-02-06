@@ -117,6 +117,54 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="change_language" xml:space="preserve">
+    <value>1. Changer de langues </value>
+  </data>
+  <data name="change_log_path" xml:space="preserve">
+    <value>2. Modifier le chemin du journal </value>
+  </data>
+  <data name="confirm_reset_job" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir réinitialiser la configuration des emplois ? (y/n)</value>
+  </data>
+  <data name="copying_files" xml:space="preserve">
+    <value>Copier des fichiers...</value>
+  </data>
+  <data name="copying_finished" xml:space="preserve">
+    <value>La copie des fichiers est terminée</value>
+  </data>
+  <data name="copy_time" xml:space="preserve">
+    <value>Type:\n1) Full 2) Differential</value>
+  </data>
+  <data name="create_job" xml:space="preserve">
+    <value>1. créer un nouvel emploi</value>
+  </data>
+  <data name="delete" xml:space="preserve">
+    <value>supprimé</value>
+  </data>
+  <data name="delete_job" xml:space="preserve">
+    <value>2. Supprimer un emploi</value>
+  </data>
+  <data name="differetial_mode" xml:space="preserve">
+    <value>Mode différentiel :</value>
+  </data>
+  <data name="english" xml:space="preserve">
+    <value>1.English</value>
+  </data>
+  <data name="enter_choice" xml:space="preserve">
+    <value>\nEntrez votre choix : </value>
+  </data>
+  <data name="enter_log_path" xml:space="preserve">
+    <value>Saisissez un nouveau chemin d'accès au journal :</value>
+  </data>
+  <data name="exit" xml:space="preserve">
+    <value>Sortir</value>
+  </data>
+  <data name="french" xml:space="preserve">
+    <value>2. Français </value>
+  </data>
+  <data name="full_job_finished" xml:space="preserve">
+    <value>Travail complet terminé</value>
+  </data>
   <data name="is_running" xml:space="preserve">
     <value>est en cours d'exécution </value>
   </data>
@@ -160,7 +208,7 @@
     <value>4. options : </value>
   </data>
   <data name="source_path" xml:space="preserve">
-    <value>Chemin soource:</value>
+    <value>Chemin source:</value>
   </data>
   <data name="source_path_info" xml:space="preserve">
     <value>(Entrer pour chaque chemin | entrer vide pour valider)</value>
