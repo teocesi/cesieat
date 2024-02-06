@@ -9,9 +9,12 @@ namespace PageManager
 {
     internal partial class PageManager
     {
+        public static string intro = "\n / $$$$$$$$                                / $$$$$$\n | $$_____/                               /$$__  $$                              \n | $$        /$$$$$$   /$$$$$$$ /$$   /$$| $$  \\__/  /$$$$$$  /$$    /$$ /$$$$$$ \n | $$$$$    |____  $$ /$$_____/| $$  | $$|  $$$$$$  |____  $$|  $$  /$$//$$__  $$\n | $$__/     /$$$$$$$|  $$$$$$ | $$  | $$ \\____  $$  /$$$$$$$ \\  $$/$$/| $$$$$$$$\n | $$       /$$__  $$ \\____  $$| $$  | $$ /$$  \\ $$ /$$__  $$  \\  $$$/ | $$_____/\n | $$$$$$$$|  $$$$$$$ /$$$$$$$/|  $$$$$$$|  $$$$$$/|  $$$$$$$   \\  $/  |  $$$$$$$\n |________/ \\_______/|_______/  \\____  $$ \\______/  \\_______/    \\_/    \\_______/\n                                /$$  | $$                                        \n                               |  $$$$$$/                                        \n                                \\______/                                         \n";
+
         public static void ShowHomePage()
         {
             Console.Clear();
+            Console.WriteLine(intro);
             Console.WriteLine(Language.GetText("create_job"));
             Console.WriteLine(Language.GetText("delete_job"));
             Console.WriteLine(Language.GetText("lunch_job"));

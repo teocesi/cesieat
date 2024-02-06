@@ -11,8 +11,24 @@ namespace EasySave.model
         public string JobName { get; set; }
         public string Horodatage { get; set; }
         public string State { get; set; }
-        public int TotalFilesToCopy { get; set; }
-        public int TotalSizeToCopy { get; set; }
-        public string[] Progression { get; set; } // Nb left, Size left, Path source, Path target
+        public long TotalFilesToCopy { get; set; }
+        public long TotalSizeToCopy { get; set; }
+        public Progression Progression { get; set; }
+    }
+
+    internal class Progression
+    {
+        public int PercentDone { get; set; }
+        public long SizeLeft { get; set; }
+        public string SourcePath { get; set; }
+        public string TargetPath { get; set; }
+
+        public Progression(int percentDone, long SizeLeft, string SourcePath, string TargetPath)
+        {
+            this.PercentDone = percentDone;
+            this.SizeLeft = SizeLeft;
+            this.SourcePath = SourcePath;
+            this.TargetPath = TargetPath;
+        }
     }
 }

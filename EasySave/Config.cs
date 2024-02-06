@@ -26,24 +26,6 @@ namespace EasySave
                 AddUpdateAppSettings("LogPath", Console.ReadLine());
             }
             Language.SetLangue(ReadSetting("Language"));
-
-            // Create log file
-            try
-            {
-                if (!Directory.Exists(ReadSetting("LogPath")))
-                {
-                    Directory.CreateDirectory(ReadSetting("LogPath"));
-                }
-                if (!File.Exists(ReadSetting("LogPath") + "/status.log"))
-                {
-                    File.Create(ReadSetting("LogPath") + "/status.log");
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                Console.ReadKey();
-            }
         }
 
         public static Config GetInstance()

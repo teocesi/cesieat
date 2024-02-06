@@ -2,7 +2,9 @@
 using EasySave.utils;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -55,9 +57,11 @@ namespace PageManager
             {
                 case '1':
                     Config.AddUpdateAppSettings("language", "en");
+                    Language.SetLangue("en");
                     break;
                 case '2':
                     Config.AddUpdateAppSettings("language", "fr");
+                    Language.SetLangue("fr");
                     break;
             }
             ShowOptionsPage();

@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="change_language" xml:space="preserve">
-    <value>1. Changer de langues </value>
+    <value>1. Changer la langue</value>
   </data>
   <data name="change_log_path" xml:space="preserve">
-    <value>2. Modifier le chemin du journal </value>
+    <value>2. Modifier le chemin des logs</value>
   </data>
   <data name="confirm_reset_job" xml:space="preserve">
-    <value>Êtes-vous sûr de vouloir réinitialiser la configuration des emplois ? (y/n)</value>
+    <value>Êtes-vous sûr de vouloir réinitialiser la configuration des routines ? (y/n)</value>
   </data>
   <data name="copying_files" xml:space="preserve">
     <value>Copier des fichiers...</value>
@@ -133,10 +133,10 @@
     <value>La copie des fichiers est terminée</value>
   </data>
   <data name="copy_time" xml:space="preserve">
-    <value>Type:\n1) Full 2) Differential</value>
+    <value>Type: 1) Full 2) Differential</value>
   </data>
   <data name="create_job" xml:space="preserve">
-    <value>1. créer un nouvel emploi</value>
+    <value>1. Créer un nouvel emploi</value>
   </data>
   <data name="delete" xml:space="preserve">
     <value>supprimé</value>
@@ -148,10 +148,10 @@
     <value>Mode différentiel :</value>
   </data>
   <data name="english" xml:space="preserve">
-    <value>1.English</value>
+    <value>1. English</value>
   </data>
   <data name="enter_choice" xml:space="preserve">
-    <value>\nEntrez votre choix : </value>
+    <value>Entrez votre choix : </value>
   </data>
   <data name="enter_log_path" xml:space="preserve">
     <value>Saisissez un nouveau chemin d'accès au journal :</value>
@@ -169,57 +169,60 @@
     <value>est en cours d'exécution </value>
   </data>
   <data name="job_created" xml:space="preserve">
-    <value>emploi crée avec succès.</value>
+    <value>Routine crée avec succès.</value>
   </data>
   <data name="job_list" xml:space="preserve">
-    <value>liste des emplois :</value>
+    <value>Liste des routines :</value>
   </data>
   <data name="job_name" xml:space="preserve">
-    <value>nom du poste : </value>
+    <value>Nom de la routine : </value>
+  </data>
+  <data name="job_name_exist" xml:space="preserve">
+    <value>Le nom existe déjà</value>
   </data>
   <data name="job_reseted" xml:space="preserve">
-    <value>La configuration des emplois a été réinitialisée. Appuyez sur n'importe quelle touche pour continuer...</value>
+    <value>La configuration des routines a été réinitialisée. Appuyez sur n'importe quelle touche pour continuer...</value>
   </data>
   <data name="key_continue" xml:space="preserve">
     <value>Appuyez sur n'importe quelle touche pour continuer...</value>
   </data>
   <data name="lunch_job" xml:space="preserve">
-    <value>3. Lancer un emploi</value>
+    <value>3. Lancer une routine</value>
   </data>
   <data name="no_file" xml:space="preserve">
-    <value>aucun fichier trouvé </value>
+    <value>Aucun fichier trouvé </value>
   </data>
   <data name="no_job" xml:space="preserve">
-    <value>pas d'emplois...</value>
+    <value>Aucune routine trouvé...</value>
   </data>
   <data name="priority_ask" xml:space="preserve">
-    <value>Priorités : </value>
+    <value>Priorités : (y/n)</value>
   </data>
   <data name="reset_job_config" xml:space="preserve">
-    <value>réinitialiser les configurations des emplois</value>
+    <value>3. Réinitialiser les configurations des Jobs</value>
   </data>
   <data name="select_delete_job" xml:space="preserve">
-    <value>Sélectionner un emploi à supprimer ou espace pour quitter </value>
+    <value>Sélectionner une routine à supprimer ou espace pour quitter :</value>
   </data>
   <data name="select_job_to_run" xml:space="preserve">
-    <value>Sélectionner une tâche à exécuter, puis appuyer sur espace:</value>
+    <value>Sélectionner une routine à exécuter, puis appuyer sur espace :</value>
   </data>
   <data name="show_options" xml:space="preserve">
-    <value>4. options : </value>
+    <value>4. Options</value>
   </data>
   <data name="source_path" xml:space="preserve">
-    <value>Chemin source:</value>
+    <value>Chemin source :</value>
   </data>
   <data name="source_path_info" xml:space="preserve">
     <value>(Entrer pour chaque chemin | entrer vide pour valider)</value>
   </data>
   <data name="target_not_empty" xml:space="preserve">
-    <value>le chemin cible ne peut pas être vide ou dans le chemin source</value>
+    <value>Le chemin cible ne peut pas être vide ou dans le chemin source</value>
   </data>
   <data name="target_path" xml:space="preserve">
-    <value>chemin de destination</value>
+    <value>Chemin de destination :</value>
   </data>
   <data name="unacceptable_ans" xml:space="preserve">
-    <value>reponse inacceptable</value>
+    <value>Reponse inacceptable...</value>
   </data>
 </root>

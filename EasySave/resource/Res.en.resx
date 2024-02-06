@@ -177,6 +177,9 @@
   <data name="job_name" xml:space="preserve">
     <value>Job name:</value>
   </data>
+  <data name="job_name_exist" xml:space="preserve">
+    <value>This job name already exist</value>
+  </data>
   <data name="job_reseted" xml:space="preserve">
     <value>Jobs config reseted. Press any key to continue...</value>
   </data>

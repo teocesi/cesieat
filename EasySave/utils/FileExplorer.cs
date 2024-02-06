@@ -1,7 +1,9 @@
-﻿using System;
+﻿using EasySave.model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace EasySave.utils
 {
@@ -9,32 +11,21 @@ namespace EasySave.utils
     {
         private IEnumerable<String> files;
         private string sourcePath;
-        private string jobName;
+        private Job job;
 
-        public FileExplorer(string sourcePath, string jobName)
+        public FileExplorer(string sourcePath, Job job)
         {
             this.sourcePath = sourcePath;
-            this.jobName = jobName;
+            this.job = job;
         }
 
         static bool FileEquals(string SourcePath, string TargetPath)
         {
             if (!File.Exists(TargetPath)) { return false; }
 
-            byte[] SourceFile = File.ReadAllBytes(SourcePath);
-            byte[] TargetFile = File.ReadAllBytes(TargetPath);
-            if (SourceFile.Length == TargetFile.Length)
-            {
-                for (int i = 0; i < SourceFile.Length; i++)
-                {
-                    if (SourceFile[i] != TargetFile[i])
-                    {
-                        return false;
-                    }
-                }
-                return true;
-            }
-            return false;
+            if (File.GetLastWriteTime(SourcePath) > File.GetLastWriteTime(TargetPath)) { return false; }
+
+            return true;
         }
 
         public IEnumerable<String> GetAllFilesPath()
@@ -95,8 +86,8 @@ namespace EasySave.utils
                 Console.WriteLine("Unreachable path: " + e.Message);
             }
 
-            var buffer = new byte[1024 * 1024];
-            var bytesRead = 0;
+            byte[] buffer = new byte[2048 * 2048];
+            int bytesRead = 0;
 
             try
             {
@@ -112,6 +103,7 @@ namespace EasySave.utils
                         swb.Write(buffer, 0, bytesRead);
                     }
                     swb.Flush();
+                    LogBuilder.UpdateStatusLog(job, 1, srcPath, desPath);
                 }
             }
             catch (Exception e)
@@ -123,7 +115,18 @@ namespace EasySave.utils
             FileInfo fileInfo = new FileInfo(desPath);
             string size = fileInfo.Length.ToString() + " bytes";
 
-            LogBuilder.UpdateHistoryLog(this.jobName, srcPath, desPath, size, timeWatcher.Stop());
+            LogBuilder.UpdateHistoryLog(this.job.Name, srcPath, desPath, size, timeWatcher.Stop());
+        }
+
+        public static void EmptyDirectory(string directoryPath)
+        {
+            try
+            {
+                DirectoryInfo directory = new DirectoryInfo(directoryPath);
+                foreach (System.IO.FileInfo file in directory.GetFiles()) file.Delete();
+                foreach (System.IO.DirectoryInfo subDirectory in directory.GetDirectories()) subDirectory.Delete(true);
+            }
+            catch { }
         }
     }
 }

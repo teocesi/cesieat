@@ -14,7 +14,6 @@ namespace EasySave.model
         public static void UpdateJobListConfig()
         {
             Config.AddUpdateAppSettings("JobList", JobList.ToJson());
-            Console.ReadKey();
         }
 
         // Serialization

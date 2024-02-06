@@ -4,6 +4,7 @@ using EasySave.utils;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
@@ -18,7 +19,14 @@ namespace PageManager
             while (name.Length < 1)
             {
                 Console.WriteLine(Language.GetText("job_name"));
-                name = Console.ReadLine(); // Add un sécu pour qu'il n'en existe pas deux
+                name = Console.ReadLine();
+
+                List<string> names = JobList.jobList.Select(job => job.Name).ToList();
+                if (names.Contains(name))
+                {
+                    Console.WriteLine(Language.GetText("job_name_exist"));
+                    name = "";
+                }
             }
 
             List<String> sourcePaths = new List<String>();

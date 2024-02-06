@@ -6,6 +6,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.Security.AccessControl;
+using System.IO;
 
 namespace EasySave.model
 {
@@ -40,18 +42,18 @@ namespace EasySave.model
             Console.WriteLine($"> {Language.GetText("differential_mode")} {this.IsDifferential}");
             foreach (String sourcePath in this.SourcePaths)
             {
-                //LogBuilder.UpdateStatusLog(); TODO
                 Console.WriteLine($"> {Language.GetText("source_path")} {sourcePath}");
                 Console.WriteLine($"> {Language.GetText("target_path")} {this.DestinationPath}");
                 Console.WriteLine($"> {Language.GetText("copying_files")}");
 
-                FileExplorer fileExplorer = new FileExplorer(sourcePath, this.Name);
+                FileExplorer fileExplorer = new FileExplorer(sourcePath, this);
                 if (this.IsDifferential)
                 {
                     fileExplorer.GetDiffFilesPath(this.DestinationPath);
                 }
                 else
                 {
+                    FileExplorer.EmptyDirectory(this.DestinationPath + "\\" + new DirectoryInfo(this.SourcePaths[0]).Name);
                     fileExplorer.GetAllFilesPath();
                 }
                 fileExplorer.CopyAllFiles(this.DestinationPath);

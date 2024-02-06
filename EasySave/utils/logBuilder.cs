@@ -9,6 +9,7 @@ using System.IO;
 using EasySave.model;
 using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
+using System.Collections;
 
 namespace EasySave.utils
 {
@@ -16,7 +17,7 @@ namespace EasySave.utils
     {
         private static string BuildPathLog()
         {
-            return Config.ReadSetting("LogPath") + "/" + DateTime.Now.ToString("yyyy-MM-dd") + ".json";
+            return Config.ReadSetting("LogPath") + "/logs/" + DateTime.Now.ToString("yyyy-MM-dd") + ".json";
         }
         private static void WriteLog(string log)
         {
@@ -41,7 +42,7 @@ namespace EasySave.utils
                 SourcePath = sourcePath,
                 TargetPath = targetPath,
                 Size = size,
-                Time = time,
+                TimeTransfer = time,
                 Horodatage = DateTime.Now.ToString("dd/mm/yyyy HH:mm:ss")
             };
 
@@ -67,32 +68,60 @@ namespace EasySave.utils
                 WriteLog("[" + JsonSerializer.Serialize(executeLog) + "]");
             }
         }
-        public static void UpdateStatusLog(string jobName, string state, int totalFilesToCopy, int totalFilesSize, int nbFilesLeftToDo, int sizeFileLeft, string currentSourcePath, string currentTargetPath)
+        public static void UpdateStatusLog(Job job, int state, string currentSourcePath, string currentTargetPath)
         {
-            string logPath = Config.ReadSetting("LogPath") + "/status.log";
-
             try
             {
-                // Get string in file to convert it to a list
-                string fileContent = File.ReadAllText(logPath);
+                // Set log path file
+                string logPath = Config.ReadSetting("LogPath") + "/logs/status.json";
+                if (!File.Exists(logPath))
+                {
+                    Directory.CreateDirectory(Config.ReadSetting("LogPath") + "/logs");
+                    File.Create(logPath);
+                }
 
-                List<StatusLog> statutList = JsonConvert.DeserializeObject<List<StatusLog>>(fileContent)
-                    ?? new List<StatusLog>();
+
+                // Get directories size
+                IEnumerable<FileInfo> totalFileSource = new List<FileInfo>();
+                IEnumerable<FileInfo> totalFileTarget = new List<FileInfo>();
+                foreach (var sourcePathTemp in job.SourcePaths)
+                {
+                    DirectoryInfo sourceDirInfo = new DirectoryInfo(sourcePathTemp);
+                    totalFileSource = totalFileSource.Concat(sourceDirInfo.EnumerateFiles("*", SearchOption.AllDirectories));
+                    //totalFilesSize += sourceDirInfo.EnumerateFiles("*", SearchOption.AllDirectories).Sum(file => file.Length);
+
+                    var targetPath = job.DestinationPath + "\\" + new DirectoryInfo(sourcePathTemp).Name;
+                    DirectoryInfo targetDirInfo = new DirectoryInfo(targetPath);
+                    totalFileTarget = totalFileTarget.Concat(targetDirInfo.EnumerateFiles("*", SearchOption.AllDirectories));
+                    //targetFileSize += targetDirInfo.EnumerateFiles("*", SearchOption.AllDirectories).Sum(file => file.Length);
+                }
+
+                // Set other var
+                string stateStr = state == 0 ? "Inactive" : state == 1 ? "Active" : "Stopped";
+                long totalFileSize = totalFileSource.Sum(file => file.Length);
+                long totalFilesSizeCopied = totalFileTarget.Sum(file => file.Length);
+                long totalFilesToCopy = totalFileSource.Count();
+                long totalFilesRemains = totalFileSize - totalFilesSizeCopied;
+                int percentDone = (int)((totalFilesSizeCopied / totalFileSize)*100);
 
                 StatusLog statusLogModel = new StatusLog
                 {
-                    JobName = jobName,
+                    JobName = job.Name,
                     Horodatage = DateTime.Now.ToString("dd/mm/yyyy HH:mm:ss"),
-                    State = state,
+                    State = stateStr,
                     TotalFilesToCopy = totalFilesToCopy,
-                    TotalSizeToCopy = totalFilesSize,
-                    Progression = new string[] { nbFilesLeftToDo.ToString(), sizeFileLeft.ToString(), currentSourcePath, currentTargetPath }
+                    TotalSizeToCopy = totalFileSize,
+                    Progression = new Progression(percentDone, totalFilesRemains, currentSourcePath, currentTargetPath)
                 };
 
+
                 // Add or update the status of the job
-                if (statutList.Exists(x => x.JobName == jobName))
+                List<StatusLog> statutList = JsonConvert.DeserializeObject<List<StatusLog>>(File.ReadAllText(logPath))
+                    ?? new List<StatusLog>();
+
+                if (statutList.Exists(x => x.JobName == job.Name))
                 {
-                    int index = statutList.FindIndex(x => x.JobName == jobName);
+                    int index = statutList.FindIndex(x => x.JobName == job.Name);
                     statutList[index] = statusLogModel;
                 }
                 else
@@ -100,7 +129,6 @@ namespace EasySave.utils
                     statutList.Add(statusLogModel);
                 }
 
-                // Write the new list in the file
                 File.WriteAllText(logPath, JsonSerializer.Serialize(statutList));
             }
             catch (Exception e)

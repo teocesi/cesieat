@@ -12,7 +12,7 @@ namespace EasySave.model
         public string SourcePath { get; set; }
         public string TargetPath { get; set; }
         public string Size { get; set; }
-        public string Time { get; set; }
+        public string TimeTransfer { get; set; }
         public string Horodatage { get; set; }
     }
 }
