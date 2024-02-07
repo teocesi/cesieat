@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Globalization;
-using System.Resources;
 using EasySave.utils;
 
 namespace EasySave

@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Text.Json;
 using System.IO;
 using EasySave.model;
 using Newtonsoft.Json;
-using JsonSerializer = System.Text.Json.JsonSerializer;
-using System.Collections;
 
 namespace EasySave.utils
 {
@@ -56,17 +50,15 @@ namespace EasySave.utils
                         fileStream.Position = fileStream.Seek(-1, SeekOrigin.End);
                         if (fileStream.ReadByte() == ']') { fileStream.SetLength(fileStream.Length - 1); }
                     }
-                    WriteLog(",\n" + JsonSerializer.Serialize(executeLog) + "]");
+                    WriteLog(",\n" + JsonConvert.SerializeObject(executeLog, Formatting.Indented) + "]");
+                    return;
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }
             }
-            else
-            {
-                WriteLog("[" + JsonSerializer.Serialize(executeLog) + "]");
-            }
+            WriteLog("[" + JsonConvert.SerializeObject(executeLog, Formatting.Indented) + "]");
         }
         public static void UpdateStatusLog(Job job, int state, string currentSourcePath, string currentTargetPath)
         {
@@ -103,7 +95,7 @@ namespace EasySave.utils
                 long totalFilesToCopy = totalFileSource.Count();
                 long FilesCopied = totalFileTarget.Count();
                 long FilesRemains = totalFilesToCopy - FilesCopied;
-                int percentDone = (int)((totalFilesSizeCopied*100) / totalFileSize);
+                int percentDone = (int)((totalFilesSizeCopied * 100) / totalFileSize);
 
                 StatusLog statusLogModel = new StatusLog
                 {
@@ -130,7 +122,7 @@ namespace EasySave.utils
                     statutList.Add(statusLogModel);
                 }
 
-                File.WriteAllText(logPath, JsonSerializer.Serialize(statutList));
+                File.WriteAllText(logPath, JsonConvert.SerializeObject(statutList, Formatting.Indented));
             }
             catch (Exception e)
             {
