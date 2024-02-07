@@ -1,23 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Model;
+using EasySave.utils;
 
 namespace EasySave
 {
-    internal class Config
+    internal class Config // Singleton
     {
-        public Config()
+        private static Config config;
+
+        private Config()
         {
             // Test settings is empty
             if (ConfigurationManager.AppSettings.Count == 0)
             {
-                AddUpdateAppSettings("Langue", "FR");
+                AddUpdateAppSettings("Language", "en");
+                AddUpdateAppSettings("JobList", "");
+                Console.WriteLine("Choose a log path:");
+                AddUpdateAppSettings("LogPath", Console.ReadLine());
             }
+            Language.SetLangue(ReadSetting("Language"));
+        }
+
+        public static Config GetInstance()
+        {
+            if (config == null)
+            {
+                config = new Config();
+            }
+            return config;
         }
 
         public static void ReadAllSettings()
@@ -50,7 +60,6 @@ namespace EasySave
             {
                 var appSettings = ConfigurationManager.AppSettings;
                 string result = appSettings[key] ?? "Not Found";
-                Console.WriteLine(result); //TODO: Remove
                 return result;
             }
             catch (ConfigurationErrorsException)
@@ -81,43 +90,6 @@ namespace EasySave
             {
                 Console.WriteLine("Error writing app settings");
             }
-        }
-
-        public static void AddJobIntoConfig(SavingJob savingJob)
-        {
-            String JobListStr = ReadSetting("JobList");
-
-            if(JobListStr.Length == 0)
-            {
-                AddUpdateAppSettings("JobList", savingJob.ToString());
-            }
-            else
-            {
-                AddUpdateAppSettings("JobList", JobListStr + ">" + savingJob.ToString());
-            }
-        }
-
-        public static List<SavingJob> GetSavingJobs()
-        {
-            List<SavingJob> savingJobs = new List<SavingJob>();
-            String JobListStr = ReadSetting("JobList");
-
-            if (JobListStr.Length == 0)
-            {
-                return savingJobs;
-            }
-            else
-            {
-                String[] JobList = JobListStr.Split('>');
-
-                foreach (String job in JobList)
-                {
-                    SavingJob savingJob = new SavingJob(job);
-                    savingJobs.Add(savingJob);
-                }
-            }
-
-            return savingJobs;
         }
     }
 }

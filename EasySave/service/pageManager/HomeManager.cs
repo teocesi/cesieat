@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EasySave.utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,41 +9,44 @@ namespace PageManager
 {
     internal partial class PageManager
     {
-        public static void ShowHomeSelection()
+        public static string intro = "\n / $$$$$$$$                                / $$$$$$\n | $$_____/                               /$$__  $$                              \n | $$        /$$$$$$   /$$$$$$$ /$$   /$$| $$  \\__/  /$$$$$$  /$$    /$$ /$$$$$$ \n | $$$$$    |____  $$ /$$_____/| $$  | $$|  $$$$$$  |____  $$|  $$  /$$//$$__  $$\n | $$__/     /$$$$$$$|  $$$$$$ | $$  | $$ \\____  $$  /$$$$$$$ \\  $$/$$/| $$$$$$$$\n | $$       /$$__  $$ \\____  $$| $$  | $$ /$$  \\ $$ /$$__  $$  \\  $$$/ | $$_____/\n | $$$$$$$$|  $$$$$$$ /$$$$$$$/|  $$$$$$$|  $$$$$$/|  $$$$$$$   \\  $/  |  $$$$$$$\n |________/ \\_______/|_______/  \\____  $$ \\______/  \\_______/    \\_/    \\_______/\n                                /$$  | $$                                        \n                               |  $$$$$$/                                        \n                                \\______/                                         \n";
+
+        public static void ShowHomePage()
         {
             Console.Clear();
-            Console.WriteLine("1. Create a new job");
-            Console.WriteLine("2. Modify a job");
-            Console.WriteLine("3. Delete a job");
-            Console.WriteLine("4. Launch a job");
-            Console.WriteLine("5. Exit");
+            Console.WriteLine(intro);
+            Console.WriteLine(Language.GetText("create_job"));
+            Console.WriteLine(Language.GetText("delete_job"));
+            Console.WriteLine(Language.GetText("lunch_job"));
+            Console.WriteLine(Language.GetText("show_options"));
+            Console.WriteLine($"5. {Language.GetText("exit")}");
 
-            Console.WriteLine("\nEnter your choice: ");
+            Console.WriteLine(Language.GetText("enter_choice"));
             Char choice = Console.ReadKey().KeyChar;
 
             switch (choice)
             {
                 case '1':
-                    ShowCreateJob();
+                    ShowCreateJobPage();
                     break;
                 case '2':
-                    //showModifyJob();
+                    ShowDeleteJobPage();
                     break;
                 case '3':
-                    //showDeleteJob();
+                    ShowRunJobPage();
                     break;
                 case '4':
-                    //showLaunchJob();
+                    ShowOptionsPage();
                     break;
                 case '5':
                     Environment.Exit(0);
                     break;
                 default:
-                    ShowHomeSelection();
+                    ShowHomePage();
                     break;
             }
         }
 
-        
+
     }
 }

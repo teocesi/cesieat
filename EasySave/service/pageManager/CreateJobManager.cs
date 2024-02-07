@@ -1,27 +1,32 @@
-﻿using EasySave;
+﻿using EasySave.model;
+using EasySave.utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace PageManager
 {
     internal partial class PageManager
     {
-        public static void ShowCreateJob()
+        public static void ShowCreateJobPage()
         {
             Console.Clear();
             string name = "";
-            while(name.Length < 1)
+            while (name.Length < 1)
             {
-                Console.WriteLine("Job name: ");
-                name = Regex.Replace(Console.ReadLine(), "[|>]", string.Empty);
+                Console.WriteLine(Language.GetText("job_name"));
+                name = Console.ReadLine();
+
+                List<string> names = JobList.jobList.Select(job => job.Name).ToList();
+                if (names.Contains(name))
+                {
+                    Console.WriteLine(Language.GetText("job_name_exist"));
+                    name = "";
+                }
             }
 
             List<String> sourcePaths = new List<String>();
-            Console.WriteLine("\nSource path: (Enter for each path | enter empty to valide)");
+            Console.WriteLine($"\n{Language.GetText("source_path")} {Language.GetText("source_path_info")}");
 
             while (true)
             {
@@ -33,29 +38,42 @@ namespace PageManager
                 sourcePaths.Add(path);
             }
 
-            Console.WriteLine("\nTarget path: ");
-            String targetPath = Console.ReadLine();
+            String targetPath = "";
+            while (true)
+            {
+                Console.WriteLine($"\n{Language.GetText("target_path")} ");
+                targetPath = Console.ReadLine();
 
-            int type;
-            Console.WriteLine("\nType:\n1) Full 2) Differential");
+                if (targetPath != "" && !sourcePaths.Exists(sourcePath => targetPath.Contains(sourcePath)))
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine(Language.GetText("target_not_empty"));
+                }
+            }
+
+            bool isDifferential;
+            Console.WriteLine("\n" + Language.GetText("copy_type"));
             while (true)
             {
                 Char type_char = Console.ReadKey().KeyChar;
                 if (type_char == '1')
                 {
-                    type = 1;
+                    isDifferential = false;
                     break;
                 }
                 else if (type_char == '2')
                 {
-                    type = 1;
+                    isDifferential = true;
                     break;
                 }
-                Console.WriteLine("\nUnacceptable answer...");
+                Console.WriteLine(Language.GetText("unacceptable_ans"));
             }
 
-            int priority;
-            Console.WriteLine("\nPriority: y/n");
+            byte priority;
+            Console.WriteLine("\n" + Language.GetText("priority_ask"));
             while (true)
             {
                 Char priority_input = Console.ReadKey().KeyChar;
@@ -69,25 +87,16 @@ namespace PageManager
                     priority = 1;
                     break;
                 }
-                Console.WriteLine("\nUnacceptable answer...");
+                Console.WriteLine(Language.GetText("unacceptable_ans"));
             }
 
-            Model.SavingJob savingJob = new Model.SavingJob(name, sourcePaths, targetPath, type, priority, 0);
+            Job savingJob = new Job(name, sourcePaths, targetPath, isDifferential, priority, 0);
+            JobList.AddJob(savingJob);
 
-            Console.WriteLine("\nJob created successfully.");
-
-            Console.WriteLine("\nName: " + savingJob.GetName());
-            Console.WriteLine("Source path: " + String.Join(Environment.NewLine, savingJob.GetSourcePaths()));
-            Console.WriteLine("Target path: " + savingJob.GetDestinationPath());
-            Console.WriteLine("Type: " + savingJob.GetType());
-            Console.WriteLine("Priority: " + savingJob.GetPriority());
-            Console.WriteLine("State: " + savingJob.GetState());
-
-            Console.WriteLine("\nPress any key to continue...");
+            Console.WriteLine(Language.GetText("job_created"));
+            Console.WriteLine(Language.GetText("key_continue"));
             Console.ReadKey();
-
-            Config.AddJobIntoConfig(savingJob);
-            ShowHomeSelection();
+            ShowHomePage();
         }
     }
 }
