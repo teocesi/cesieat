@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EasySave.utils
 {
-    internal static class Language // Full static class
+    internal static class Language // Full static class to manage the language of the program
     {
         private static CultureInfo cul;
         public static ResourceManager resourceManager = new ResourceManager("EasySave.Resource.Res", typeof(Program).Assembly);

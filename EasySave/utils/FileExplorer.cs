@@ -19,6 +19,7 @@ namespace EasySave.utils
             this.job = job;
         }
 
+        // Check if the file exists in the target directory and if it is up to date
         static bool FileEquals(string SourcePath, string TargetPath)
         {
             if (!File.Exists(TargetPath)) { return false; }
@@ -28,6 +29,7 @@ namespace EasySave.utils
             return true;
         }
 
+        // Return all the files path (string) in the source directory
         public IEnumerable<String> GetAllFilesPath()
         {
             try
@@ -49,6 +51,7 @@ namespace EasySave.utils
             return files;
         }
 
+        // Return the files path (string) that are different in the target directory
         public IEnumerable<String> GetDiffFilesPath(string targetPath)
         {
             IEnumerable<String> targetFiles = GetAllFilesPath();
@@ -64,6 +67,7 @@ namespace EasySave.utils
             return files;
         }
 
+        // Copy all the files in the source directory to the target directory
         public void CopyAllFiles(string destinationPath)
         {
             foreach (string file in files ?? Enumerable.Empty<String>())
@@ -74,6 +78,7 @@ namespace EasySave.utils
             }
         }
 
+        // Copy a file from the source path to the target path
         private void CopyFile(string srcPath, string desPath)
         {
             TimeWatcher timeWatcher = new TimeWatcher();

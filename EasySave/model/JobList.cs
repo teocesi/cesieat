@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace EasySave.model
 {
-    internal static class JobList
+    internal static class JobList // Static class to manage the job list
     {
         public static List<Job> jobList = LoadJobList(Config.ReadSetting("JobList"));
 

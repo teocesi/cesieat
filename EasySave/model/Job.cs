@@ -11,7 +11,7 @@ using System.IO;
 
 namespace EasySave.model
 {
-    internal class Job
+    internal class Job // Model to store the job, run it or convert it to JSON
     {
         public string Name;
         public List<string> SourcePaths;

@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace PageManager
 {
-    internal partial class PageManager
+    internal partial class PageManager // Partial class to manage console page
     {
         public static string intro = "\n / $$$$$$$$                                / $$$$$$\n | $$_____/                               /$$__  $$                              \n | $$        /$$$$$$   /$$$$$$$ /$$   /$$| $$  \\__/  /$$$$$$  /$$    /$$ /$$$$$$ \n | $$$$$    |____  $$ /$$_____/| $$  | $$|  $$$$$$  |____  $$|  $$  /$$//$$__  $$\n | $$__/     /$$$$$$$|  $$$$$$ | $$  | $$ \\____  $$  /$$$$$$$ \\  $$/$$/| $$$$$$$$\n | $$       /$$__  $$ \\____  $$| $$  | $$ /$$  \\ $$ /$$__  $$  \\  $$$/ | $$_____/\n | $$$$$$$$|  $$$$$$$ /$$$$$$$/|  $$$$$$$|  $$$$$$/|  $$$$$$$   \\  $/  |  $$$$$$$\n |________/ \\_______/|_______/  \\____  $$ \\______/  \\_______/    \\_/    \\_______/\n                                /$$  | $$                                        \n                               |  $$$$$$/                                        \n                                \\______/                                         \n";
 
+        // Show in console the home page
         public static void ShowHomePage()
         {
             Console.Clear();

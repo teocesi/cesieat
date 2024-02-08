@@ -21,6 +21,7 @@ namespace EasySave
             Language.SetLangue(ReadSetting("Language"));
         }
 
+        // Allow to get the instance of the class (Singleton)
         public static Config GetInstance()
         {
             if (config == null)
@@ -69,6 +70,7 @@ namespace EasySave
             return string.Empty;
         }
 
+        // Allow to add or update a setting by key
         public static void AddUpdateAppSettings(string key, string value)
         {
             try

@@ -16,6 +16,7 @@ namespace EasySave
 {
     internal class Program
     {
+        // Entry point of the program
         static void Main(string[] args)
         {
             Console.ForegroundColor = ConsoleColor.DarkGreen;

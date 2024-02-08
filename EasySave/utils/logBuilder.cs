@@ -9,10 +9,12 @@ namespace EasySave.utils
 {
     internal class LogBuilder
     {
+        // Build the path of the log file with the current date
         private static string BuildPathLog()
         {
             return Config.ReadSetting("LogPath") + "/logs/" + DateTime.Now.ToString("yyyy-MM-dd") + ".json";
         }
+        // Write the log in the history file (Append or create the file if it doesn't exist)
         private static void WriteLog(string log)
         {
             try
@@ -24,6 +26,7 @@ namespace EasySave.utils
                 Console.WriteLine(e.Message);
             }
         }
+        // Check if the log file exists
         private static bool IsLogFileExiste()
         {
             return File.Exists(BuildPathLog());
@@ -60,6 +63,7 @@ namespace EasySave.utils
             }
             WriteLog("[" + JsonConvert.SerializeObject(executeLog, Formatting.Indented) + "]");
         }
+        // Update the real time status of the job in the status log file
         public static void UpdateStatusLog(Job job, int state, string currentSourcePath, string currentTargetPath)
         {
             try

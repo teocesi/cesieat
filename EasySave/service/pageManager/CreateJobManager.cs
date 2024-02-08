@@ -6,8 +6,9 @@ using System.Linq;
 
 namespace PageManager
 {
-    internal partial class PageManager
+    internal partial class PageManager // Partial class to manage console page
     {
+        // Show in console the create job page
         public static void ShowCreateJobPage()
         {
             Console.Clear();

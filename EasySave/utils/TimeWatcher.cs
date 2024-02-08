@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace EasySave.utils
 {
+    // Class to measure the time of a process, used to display the time of a backup
+    // Instantiate the class at the beginning of the process and call the Stop method at the end
     internal class TimeWatcher
     {
         Stopwatch stopWatch = new Stopwatch();

@@ -10,8 +10,9 @@ using System.Threading.Tasks;
 
 namespace PageManager
 {
-    internal partial class PageManager
+    internal partial class PageManager // Partial class to manage console page
     {
+        // Show in console the delete job page
         public static void ShowDeleteJobPage()
         {
             Console.Clear();

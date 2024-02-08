@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EasySave.model
 {
-    internal class StatusLog
+    internal class StatusLog // Model to store the status of a job
     {
         public string JobName { get; set; }
         public string Horodatage { get; set; }
@@ -16,7 +16,7 @@ namespace EasySave.model
         public Progression Progression { get; set; }
     }
 
-    internal class Progression
+    internal class Progression // Model to store the progression of a job
     {
         public int PercentDone { get; set; }
         public long SizeLeft { get; set; }
