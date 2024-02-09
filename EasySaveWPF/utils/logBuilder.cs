@@ -4,6 +4,9 @@ using System.Linq;
 using System.IO;
 using EasySave.model;
 using Newtonsoft.Json;
+using System.Xml.Serialization;
+using System.Xml;
+using Newtonsoft.Json.Linq;
 
 namespace EasySave.utils
 {
@@ -12,7 +15,8 @@ namespace EasySave.utils
         // Build the path of the log file with the current date
         private static string BuildPathLog()
         {
-            return Config.ReadSetting("LogPath") + "/logs/" + DateTime.Now.ToString("yyyy-MM-dd") + ".json";
+            return Config.ReadSetting("LogPath") + "/logs/" + DateTime.Now.ToString("yyyy-MM-dd") +
+                (Config.ReadSetting("LogType") == "json" ? ".json" : ".xml");
         }
         // Write the log in the history file (Append or create the file if it doesn't exist)
         private static void WriteLog(string log)
@@ -43,6 +47,18 @@ namespace EasySave.utils
                 Horodatage = DateTime.Now.ToString("dd/mm/yyyy HH:mm:ss")
             };
 
+            if (Config.ReadSetting("LogType") == "json")
+            {
+                logJson(executeLog);
+            }
+            else
+            {
+                logXML(executeLog);
+            }
+        }
+
+        private static void logJson(HistoryLog executeLog)
+        {
             if (IsLogFileExiste())
             {
                 // Remove the last character of the file if it is a ']'
@@ -53,23 +69,44 @@ namespace EasySave.utils
                         fileStream.Position = fileStream.Seek(-1, SeekOrigin.End);
                         if (fileStream.ReadByte() == ']') { fileStream.SetLength(fileStream.Length - 1); }
                     }
-                    WriteLog(",\n" + JsonConvert.SerializeObject(executeLog, Formatting.Indented) + "]");
-                    return;
+
+                    WriteLog(",\n" + JsonConvert.SerializeObject(executeLog, Newtonsoft.Json.Formatting.Indented) + "]");
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }
             }
-            WriteLog("[" + JsonConvert.SerializeObject(executeLog, Formatting.Indented) + "]");
+            else
+            {
+                WriteLog("[" + JsonConvert.SerializeObject(executeLog, Newtonsoft.Json.Formatting.Indented) + "]");
+            }
         }
+
+        private static void logXML(HistoryLog executeLog)
+        {
+            var emptyNamespaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
+            var serializer = new XmlSerializer(executeLog.GetType());
+            var settings = new XmlWriterSettings();
+            settings.Indent = true;
+            settings.OmitXmlDeclaration = IsLogFileExiste()
+            ;
+
+            using (var stream = new StringWriter())
+            using (var writer = XmlWriter.Create(stream, settings))
+            {
+                serializer.Serialize(writer, executeLog, emptyNamespaces);
+                WriteLog(stream.ToString());
+            }
+        }
+
         // Update the real time status of the job in the status log file
         public static void UpdateStatusLog(Job job, int state, string currentSourcePath, string currentTargetPath)
         {
             try
             {
                 // Set log path file
-                string logPath = Config.ReadSetting("LogPath") + "/logs/status.json";
+                string logPath = Config.ReadSetting("LogPath") + "/logs/status." + Config.ReadSetting("LogType");
                 if (!File.Exists(logPath))
                 {
                     Directory.CreateDirectory(Config.ReadSetting("LogPath") + "/logs");
@@ -112,10 +149,23 @@ namespace EasySave.utils
                 };
 
 
-                // Add or update the status of the job
-                List<StatusLog> statutList = JsonConvert.DeserializeObject<List<StatusLog>>(File.ReadAllText(logPath))
-                    ?? new List<StatusLog>();
+                //// Add or update the status of the job
 
+                // Get the status log list
+                List<StatusLog> statutList = new List<StatusLog>();
+                if (Config.ReadSetting("LogType") == "json")
+                {
+                    statutList = JsonConvert.DeserializeObject<List<StatusLog>>(File.ReadAllText(logPath))
+                    ?? new List<StatusLog>();
+                }
+                else
+                {
+                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<StatusLog>));
+                    StringReader stringReader = new StringReader(File.ReadAllText(logPath));
+                    statutList = (List<StatusLog>)xmlSerializer.Deserialize(stringReader);
+                }
+
+                // Add or update the status of the job
                 if (statutList.Exists(x => x.JobName == job.Name))
                 {
                     int index = statutList.FindIndex(x => x.JobName == job.Name);
@@ -126,7 +176,26 @@ namespace EasySave.utils
                     statutList.Add(statusLogModel);
                 }
 
-                File.WriteAllText(logPath, JsonConvert.SerializeObject(statutList, Formatting.Indented));
+                // Write the status log list in the file
+                if (Config.ReadSetting("LogType") == "json")
+                {
+                    File.WriteAllText(logPath, JsonConvert.SerializeObject(statutList, Newtonsoft.Json.Formatting.Indented));
+                }
+                else
+                {
+                    var emptyNamespaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
+                    var serializer = new XmlSerializer(statutList.GetType());
+                    var settings = new XmlWriterSettings();
+                    settings.Indent = true;
+                    settings.OmitXmlDeclaration = IsLogFileExiste();
+
+                    using (var stream = new StringWriter())
+                    using (var writer = XmlWriter.Create(stream, settings))
+                    {
+                        serializer.Serialize(writer, statutList, emptyNamespaces);
+                        File.WriteAllText(logPath, stream.ToString().ToString());
+                    }
+                }
             }
             catch (Exception e)
             {

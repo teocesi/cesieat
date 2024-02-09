@@ -15,6 +15,7 @@ namespace EasySave
             {
                 AddUpdateAppSettings("Language", "en");
                 AddUpdateAppSettings("JobList", "");
+                AddUpdateAppSettings("LogType", "json");
                 Console.WriteLine("Choose a log path:");
                 AddUpdateAppSettings("LogPath", Console.ReadLine());
             }

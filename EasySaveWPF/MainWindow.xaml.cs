@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using EasySave.utils;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -8,8 +9,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System;
 
-namespace EasySaveWPF
+namespace EasySave
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -18,7 +20,11 @@ namespace EasySaveWPF
     {
         public MainWindow()
         {
+            utils.Language.SetLangue(Config.ReadSetting("Language"));
             InitializeComponent();
+
+            //tkt.Text = FindResource("Two").ToString();
+            //tkt.SetResourceReference(TextBlock.TextProperty, "Two");
         }
     }
 }
