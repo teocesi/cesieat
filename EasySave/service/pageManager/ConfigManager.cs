@@ -20,7 +20,8 @@ namespace PageManager
             Console.WriteLine(Language.GetText("change_language"));
             Console.WriteLine(Language.GetText("change_log_path"));
             Console.WriteLine(Language.GetText("reset_job_config"));
-            Console.WriteLine($"4. {Language.GetText("exit")}");
+            Console.WriteLine(Language.GetText("log_type"));
+            Console.WriteLine($"5. {Language.GetText("exit")}");
             Console.WriteLine(Language.GetText("enter_choice"));
 
             Char choice = Console.ReadKey().KeyChar;
@@ -37,6 +38,9 @@ namespace PageManager
                     ShowResetJobsConfigPage();
                     break;
                 case '4':
+                    ChangeLogFormatPage();
+                    break;
+                case '5':
                     ShowHomePage();
                     break;
                 default:
@@ -88,6 +92,27 @@ namespace PageManager
                 Config.AddUpdateAppSettings("JobList", "");
                 Console.WriteLine(Language.GetText("job_reseted"));
                 Console.ReadKey();
+            }
+            ShowOptionsPage();
+        }
+
+        private static void ChangeLogFormatPage()
+        {
+            Console.Clear();
+            Console.WriteLine("1. Json");
+            Console.WriteLine("2. XML");
+            Console.WriteLine(Language.GetText("enter_choice"));
+
+            Char choice = Console.ReadKey().KeyChar;
+
+            switch (choice)
+            {
+                case '1':
+                    Config.AddUpdateAppSettings("LogType", "json");
+                    break;
+                case '2':
+                    Config.AddUpdateAppSettings("LogType", "xml");
+                    break;
             }
             ShowOptionsPage();
         }

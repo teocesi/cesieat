@@ -154,7 +154,7 @@
     <value>Entrez votre choix : </value>
   </data>
   <data name="enter_log_path" xml:space="preserve">
-    <value>Saisissez un nouveau chemin d'accès au journal :</value>
+    <value>Saisissez un nouveau chemin d'accès aux logs:</value>
   </data>
   <data name="exit" xml:space="preserve">
     <value>Sortir</value>
@@ -178,13 +178,16 @@
     <value>Nom de la routine : </value>
   </data>
   <data name="job_name_exist" xml:space="preserve">
-    <value>Le nom existe déjà</value>
+    <value>Deux routines ne peuvent pas avoir le même nom.</value>
   </data>
   <data name="job_reseted" xml:space="preserve">
     <value>La configuration des routines a été réinitialisée. Appuyez sur n'importe quelle touche pour continuer...</value>
   </data>
   <data name="key_continue" xml:space="preserve">
     <value>Appuyez sur n'importe quelle touche pour continuer...</value>
+  </data>
+  <data name="log_type" xml:space="preserve">
+    <value>4. Changer le format de log</value>
   </data>
   <data name="lunch_job" xml:space="preserve">
     <value>3. Lancer une routine</value>

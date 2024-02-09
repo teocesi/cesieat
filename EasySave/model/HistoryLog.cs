@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EasySave.model
 {
-    internal class HistoryLog // Model to store the history of a job
+    public class HistoryLog // Model to store the history of a job
     {
         public string JobName { get; set; }
         public string SourcePath { get; set; }

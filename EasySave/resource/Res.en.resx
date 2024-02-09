@@ -186,6 +186,9 @@
   <data name="key_continue" xml:space="preserve">
     <value>Press any key to continue...</value>
   </data>
+  <data name="log_type" xml:space="preserve">
+    <value>4. Change log format</value>
+  </data>
   <data name="lunch_job" xml:space="preserve">
     <value>3. Launch a job</value>
   </data>
