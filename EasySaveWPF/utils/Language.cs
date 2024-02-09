@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EasySaveWPF;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace EasySave.utils
     internal static class Language // Full static class to manage the language of the program
     {
         private static CultureInfo cul;
-        public static ResourceManager resourceManager = new ResourceManager("EasySave.Resource.Res", typeof(Program).Assembly);
+        public static ResourceManager resourceManager = new ResourceManager("EasySave.Resource.Res", typeof(MainWindow).Assembly);
 
         public static void SetLangue(string language)
         {
