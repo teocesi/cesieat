@@ -25,7 +25,7 @@ namespace PageManager
             {
                 if (index >= 0 && index < JobList.GetJobList().Count)
                 {
-                    Console.WriteLine($"\n{JobList.GetJobList()[index].GetName()} {Language.GetText("deleted")}");
+                    Console.WriteLine($"\n{JobList.GetJobList()[index].Name} {Language.GetText("deleted")}");
                     JobList.RemoveJob(JobList.GetJobList()[index]);
 
                     Console.WriteLine(Language.GetText("key_continue"));

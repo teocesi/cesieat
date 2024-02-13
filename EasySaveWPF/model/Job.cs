@@ -30,11 +30,6 @@ namespace EasySave.model
             this.State = state;
         }
 
-        public string ToJson()
-        {
-            return JsonConvert.SerializeObject(this).ToString();
-        }
-
         // Running
         public void Run()
         {
@@ -49,45 +44,19 @@ namespace EasySave.model
                 FileExplorer fileExplorer = new FileExplorer(sourcePath, this);
                 if (this.IsDifferential)
                 {
-                    fileExplorer.GetDiffFilesPath(this.DestinationPath);
+                    fileExplorer.GetDiffFilesPath();
                 }
                 else
                 {
                     FileExplorer.EmptyDirectory(this.DestinationPath + "\\" + new DirectoryInfo(this.SourcePaths[0]).Name);
                     fileExplorer.GetAllFilesPath();
                 }
-                fileExplorer.CopyAllFiles(this.DestinationPath);
+                fileExplorer.CopyAllFiles();
 
                 Console.WriteLine($"> {Language.GetText("copying_finished")}");
-                LogBuilder.UpdateStatusLog(this, 0, "null", "null");
             }
             Console.WriteLine(Language.GetText("full_job_finished"));
-        }
-
-        // Getters
-        public string GetName()
-        {
-            return this.Name;
-        }
-        public List<String> GetSourcePaths()
-        {
-            return this.SourcePaths;
-        }
-        public string GetDestinationPath()
-        {
-            return this.DestinationPath;
-        }
-        public bool GetIsDifferential()
-        {
-            return this.IsDifferential;
-        }
-        public int GetPriority()
-        {
-            return this.Priority;
-        }
-        public int GetState()
-        {
-            return this.State;
+            LogBuilder.UpdateStatusLog(this, 0, "null", "null");
         }
     }
 }

@@ -59,7 +59,7 @@ namespace EasySave.model
             }
             for (int i = 0; i < jobList.Count; i++)
             {
-                Console.WriteLine(i + ") " + jobList[i].GetName());
+                Console.WriteLine(i + ") " + jobList[i].Name);
             }
         }
     }

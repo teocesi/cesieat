@@ -1,6 +1,7 @@
 ﻿using EasySave.model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -52,27 +53,26 @@ namespace EasySave.utils
         }
 
         // Return the files path (string) that are different in the target directory
-        public IEnumerable<String> GetDiffFilesPath(string targetPath)
+        public IEnumerable<String> GetDiffFilesPath()
         {
             IEnumerable<String> targetFiles = GetAllFilesPath();
             foreach (string file in targetFiles)
             {
-                if (FileEquals(file, targetPath + file.Substring(Directory.GetParent(sourcePath).FullName.Length)))
+                if (FileEquals(file, job.DestinationPath + file.Substring(Directory.GetParent(sourcePath).FullName.Length)))
                 {
                     files = files.Where(f => f != file);
                 }
             }
 
-            //Console.WriteLine(String.Join(Environment.NewLine, files));
             return files;
         }
 
         // Copy all the files in the source directory to the target directory
-        public void CopyAllFiles(string destinationPath)
+        public void CopyAllFiles()
         {
             foreach (string file in files ?? Enumerable.Empty<String>())
             {
-                string desFile = destinationPath + file.Substring(Directory.GetParent(sourcePath).FullName.Length);
+                string desFile = job.DestinationPath + file.Substring(Directory.GetParent(sourcePath).FullName.Length);
                 Console.WriteLine("Copying " + file);
                 CopyFile(file, desFile);
             }
@@ -132,6 +132,13 @@ namespace EasySave.utils
                 foreach (System.IO.DirectoryInfo subDirectory in directory.GetDirectories()) subDirectory.Delete(true);
             }
             catch { }
+        }
+
+        private static bool BusinessSoftLunched()
+        {
+            string softList = Config.ReadSetting("businessSoft");
+            bool v = Process.GetProcesses().Any(p => p.ProcessName.Contains(softList));
+            return true;
         }
     }
 }

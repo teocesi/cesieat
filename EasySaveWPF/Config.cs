@@ -14,6 +14,7 @@ namespace EasySave
             if (ConfigurationManager.AppSettings.Count == 0)
             {
                 AddUpdateAppSettings("Language", "en");
+                AddUpdateAppSettings("businessSoft", "calc.exe");
                 AddUpdateAppSettings("JobList", "");
                 AddUpdateAppSettings("LogType", "json");
                 Console.WriteLine("Choose a log path:");
