@@ -10,7 +10,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="gear.png" />
+    <None Remove="plus.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="data\img\gear.png" />
+    <Resource Include="data\img\plus.png" />
   </ItemGroup>
 
 </Project>
