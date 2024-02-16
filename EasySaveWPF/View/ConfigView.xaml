@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:EasySave.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="red">
+    <Grid>
         <RadioButton x:Name="option_fr_radio" Content="fr" HorizontalAlignment="Left" Margin="373,124,0,0" VerticalAlignment="Top" GroupName="lang" />
         <RadioButton x:Name="option_en_radio" Content="en" HorizontalAlignment="Left" Margin="373,144,0,0" VerticalAlignment="Top" GroupName="lang" />
         <TextBox x:Name="option_logPath_textBox" HorizontalAlignment="Left" Margin="361,170,0,0" TextWrapping="Wrap" Text="logpath" VerticalAlignment="Top" Width="120" />

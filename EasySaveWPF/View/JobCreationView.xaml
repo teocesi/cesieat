@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:EasySave.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Khaki">
+    <Grid>
         <Button x:Name="jobCreation_create_button" Content="Valider" HorizontalAlignment="Left" Margin="272,275,0,0" VerticalAlignment="Top" Click="jobCreation_create_button_Click" Grid.Column="1"/>
         <TextBox x:Name="jobCreation_sourcePath_textBox" HorizontalAlignment="Left" Margin="232,154,0,0" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Text="TextBox" VerticalAlignment="Top" Width="120" Height="42" Grid.Column="1"/>
         <TextBox x:Name="jobCreation_targetPath_textBox" HorizontalAlignment="Left" Margin="232,201,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
