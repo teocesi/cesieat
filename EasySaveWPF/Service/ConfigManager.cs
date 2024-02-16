@@ -1,5 +1,4 @@
-﻿using EasySave.model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,13 +6,13 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace EasySave
+namespace EasySave.View
 {
-    public partial class MainWindow : Window
+    public partial class ConfigView : UserControl
     {
-        private void ShowOptionValue()
+        public void ShowOptionValue()
         {
-            if(Config.ReadSetting("Language") == "fr")
+            if (Config.ReadSetting("Language") == "fr")
             {
                 option_fr_radio.IsChecked = true;
             }
@@ -22,7 +21,7 @@ namespace EasySave
                 option_en_radio.IsChecked = true;
             }
 
-            if(Config.ReadSetting("LogType") == "xml")
+            if (Config.ReadSetting("LogType") == "xml")
             {
                 option_formatXML_radio.IsChecked = true;
             }
@@ -41,7 +40,7 @@ namespace EasySave
 
         private void option_save_button_Click(object sender, RoutedEventArgs e)
         {
-            if(option_fr_radio.IsChecked == true)
+            if (option_fr_radio.IsChecked == true)
             {
                 Config.AddUpdateAppSettings("Language", "fr");
             }
@@ -50,7 +49,7 @@ namespace EasySave
                 Config.AddUpdateAppSettings("Language", "en");
             }
 
-            if(option_formatJson_radio.IsChecked == true)
+            if (option_formatJson_radio.IsChecked == true)
             {
                 Config.AddUpdateAppSettings("LogType", "json");
             }

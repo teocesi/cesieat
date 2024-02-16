@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
-namespace EasySave
+namespace EasySave.View
 {
-    public partial class MainWindow : Window
+    public partial class JobManagerView : UserControl
     {
         private void jobManager_start_button_Click(object sender, RoutedEventArgs e)
         {
@@ -27,7 +28,7 @@ namespace EasySave
         private void jobManager_delete_button_Click(object sender, RoutedEventArgs e)
         {
             JobList.RemoveJob(jobManager_jobName_textblock.Text);
-            UpdateViewJobList();
+            //UpdateViewJobList();
         }
     }
 }

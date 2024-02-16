@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="EasySave.View.JobManagerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EasySave.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="Blue">
+        <Button x:Name="jobManager_start_button" Content="Button" HorizontalAlignment="Left" Margin="500,148,0,0" VerticalAlignment="Top" Click="jobManager_start_button_Click"/>
+        <TextBlock x:Name="jobManager_jobName_textblock" HorizontalAlignment="Left" Margin="495,101,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <Button x:Name="jobManager_delete_button" Content="delete" HorizontalAlignment="Left" Margin="500,173,0,0" VerticalAlignment="Top" Click="jobManager_delete_button_Click"/>
+    </Grid>
+</UserControl>

@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace EasySave
+namespace EasySave.View
 {
-    public partial class MainWindow : Window
+    public partial class JobCreationView : UserControl
     {
         private void jobCreation_create_button_Click(object sender, RoutedEventArgs e)
         {
@@ -36,7 +37,7 @@ namespace EasySave
 
             // Add job to the list
             JobList.AddJob(new Job(jobName, source, destination, IsDifferential, priority, state));
-            UpdateViewJobList();
+            //UpdateViewJobList();
 
             jobCreation_message_textBlock.Text = FindResource("jobCreated").ToString();
             jobCreation_message_textBlock.Foreground = Brushes.Green;

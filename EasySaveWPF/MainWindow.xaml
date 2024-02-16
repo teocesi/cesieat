@@ -4,41 +4,52 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EasySave"
+        xmlns:viewmodels="clr-namespace:EasySave"
+        xmlns:view="clr-namespace:EasySave.View"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
+    <Window.Resources>
+        <DataTemplate x:Name="configViewTemplate" DataType="{x:Type view:ConfigView}">
+            <view:ConfigView DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="jobViewTemplate" DataType="{x:Type view:JobManagerView}">
+            <view:JobManagerView DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="jobCreationViewTemplate" DataType="{x:Type view:JobCreationView}">
+            <view:JobCreationView DataContext="{Binding}"/>
+        </DataTemplate>
+    </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="397*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="jobManager_start_button" Content="Button" HorizontalAlignment="Left" Margin="716,212,0,0" VerticalAlignment="Top" Click="jobManager_start_button_Click" Grid.Column="1"/>
-        <TextBlock x:Name="jobManager_jobName_textblock" HorizontalAlignment="Left" Margin="711,165,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Grid.Column="1"/>
-        <ListView x:Name="home_jobList_listView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,27,647,62" SelectionChanged="home_jobList_listViewChanged" Grid.Column="1">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Button x:Name="jobCreation_create_button" Content="Valider" HorizontalAlignment="Left" Margin="272,275,0,0" VerticalAlignment="Top" Click="jobCreation_create_button_Click" Grid.Column="1"/>
-        <TextBox x:Name="jobCreation_sourcePath_textBox" HorizontalAlignment="Left" Margin="232,154,0,0" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Text="TextBox" VerticalAlignment="Top" Width="120" Height="42" Grid.Column="1"/>
-        <TextBox x:Name="jobCreation_targetPath_textBox" HorizontalAlignment="Left" Margin="232,201,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
-        <TextBox x:Name="jobCreation_jobName_textBox" HorizontalAlignment="Left" Margin="232,119,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
-        <CheckBox x:Name="jobCreation_diff_checkBox" Content="CheckBox" HorizontalAlignment="Left" Margin="256,224,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <CheckBox x:Name="jobCreation_priority_checkBox" Content="CheckBox" HorizontalAlignment="Left" Margin="256,244,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <TextBlock x:Name="jobCreation_message_textBlock" HorizontalAlignment="Left" Margin="267,300,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Grid.Column="1"/>
-        <Button x:Name="jobManager_delete_button" Content="delete" HorizontalAlignment="Left" Margin="716,237,0,0" VerticalAlignment="Top" Click="jobManager_delete_button_Click" Grid.Column="1"/>
-        <Button x:Name="home_option_button" Content="Button" HorizontalAlignment="Left" Margin="58,377,0,0" Height="24" VerticalAlignment="Top" Click="home_option_button_Click" Width="42" Grid.Column="1"/>
-        <RadioButton x:Name="option_fr_radio" Content="fr" HorizontalAlignment="Left" Margin="503,99,0,0" VerticalAlignment="Top" GroupName="lang" Grid.Column="1" />
-        <RadioButton x:Name="option_en_radio" Content="en" HorizontalAlignment="Left" Margin="503,119,0,0" VerticalAlignment="Top" GroupName="lang" Grid.Column="1" />
-        <TextBox x:Name="option_logPath_textBox" HorizontalAlignment="Left" Margin="491,145,0,0" TextWrapping="Wrap" Text="logpath" VerticalAlignment="Top" Width="120" Grid.Column="1" />
-        <RadioButton x:Name="option_formatXML_radio" Content="XML" HorizontalAlignment="Left" Margin="503,187,0,0" VerticalAlignment="Top" GroupName="logFormat" Grid.Column="1" />
-        <RadioButton x:Name="option_formatJson_radio" Content="Json" HorizontalAlignment="Left" Margin="503,212,0,0" VerticalAlignment="Top" GroupName="logFormat" Grid.Column="1" />
-        <TextBox x:Name="option_crypExt_textBox" HorizontalAlignment="Left" Margin="491,240,0,0" TextWrapping="Wrap" Text="ext" VerticalAlignment="Top" Width="120" Grid.Column="1" />
-        <TextBox x:Name="option_businessSoft_textBox" HorizontalAlignment="Left" Margin="491,263,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Grid.Column="1" />
-        <Button x:Name="option_save_button" Content="save" HorizontalAlignment="Left" Margin="524,302,0,0" VerticalAlignment="Top" Click="option_save_button_Click" Grid.Column="1" />
-        <TextBlock x:Name="option_saveConfirm_textBlock" HorizontalAlignment="Left" Margin="513,327,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Grid.Column="1"/>
-        <TextBox x:Name="option_cryptoPath_textBox" Grid.Column="1" HorizontalAlignment="Left" Margin="491,36,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
+        <DockPanel Background="Gray" Grid.Row="0" Grid.Column="0" Grid.RowSpan="5">
+            <Button x:Name="home_option_button" Content="Button" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Click="home_option_button_Click" Width="42" Grid.Column="1"/>
+            <Button x:Name="home_createJob_button" Content="Button" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Click="home_create_button_Click" Width="42" Grid.Column="1"/>
+            
+            <ListView x:Name="home_jobList_listView" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="home_jobList_listViewChanged" Grid.Column="1" Width="149" Height="381">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </DockPanel>
+
+        <ContentControl Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="5" Content="{Binding}"/>
     </Grid>
 </Window>
