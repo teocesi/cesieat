@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EasySave.model
 {
-    internal class StatusLog // Model to store the status of a job
+    public class StatusLog // Model to store the status of a job
     {
         public string JobName { get; set; }
         public string Horodatage { get; set; }
@@ -14,9 +14,11 @@ namespace EasySave.model
         public long TotalFilesToCopy { get; set; }
         public long TotalSizeToCopy { get; set; }
         public Progression Progression { get; set; }
+
+        public StatusLog() { }
     }
 
-    internal class Progression // Model to store the progression of a job
+    public class Progression // Model to store the progression of a job
     {
         public int PercentDone { get; set; }
         public long SizeLeft { get; set; }
@@ -32,5 +34,7 @@ namespace EasySave.model
             this.SourcePath = sourcePath;
             this.TargetPath = targetPath;
         }
+
+        public Progression() { }
     }
 }

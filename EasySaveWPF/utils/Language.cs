@@ -26,9 +26,5 @@ namespace EasySave.utils
                     Source = new Uri("/Resources/Dictionary-" + language + ".xaml", UriKind.Relative)
                 });
         }
-        public static string GetText(string key)
-        {
-            return "";
-        }
     }
 }

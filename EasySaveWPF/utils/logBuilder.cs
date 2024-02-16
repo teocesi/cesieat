@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System.Xml.Serialization;
 using System.Xml;
 using Newtonsoft.Json.Linq;
+using System.Windows;
 
 namespace EasySave.utils
 {
@@ -27,7 +28,7 @@ namespace EasySave.utils
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                MessageBox.Show(e.Message);
             }
         }
         // Check if the log file exists
@@ -35,7 +36,7 @@ namespace EasySave.utils
         {
             return File.Exists(BuildPathLog());
         }
-        public static void UpdateHistoryLog(string jobName, string sourcePath, string targetPath, string size, string time)
+        public static void UpdateHistoryLog(string jobName, string sourcePath, string targetPath, string size, string time, string crypTime)
         {
             HistoryLog executeLog = new HistoryLog
             {
@@ -44,6 +45,7 @@ namespace EasySave.utils
                 TargetPath = targetPath,
                 Size = size,
                 TimeTransfer = time,
+                TimeCrypto = crypTime,
                 Horodatage = DateTime.Now.ToString("dd/mm/yyyy HH:mm:ss")
             };
 
@@ -74,7 +76,7 @@ namespace EasySave.utils
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.Message);
+                    MessageBox.Show(e.Message);
                 }
             }
             else
@@ -138,6 +140,7 @@ namespace EasySave.utils
                 long FilesRemains = totalFilesToCopy - FilesCopied;
                 int percentDone = (int)((totalFilesSizeCopied * 100) / totalFileSize);
 
+
                 StatusLog statusLogModel = new StatusLog
                 {
                     JobName = job.Name,
@@ -160,10 +163,18 @@ namespace EasySave.utils
                 }
                 else
                 {
-                    XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<StatusLog>));
-                    StringReader stringReader = new StringReader(File.ReadAllText(logPath));
-                    statutList = (List<StatusLog>)xmlSerializer.Deserialize(stringReader);
+                    if(File.ReadAllText(logPath) == "")
+                    {
+                        statutList = new List<StatusLog>();
+                    }
+                    else
+                    {
+                        XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<StatusLog>));
+                        StringReader stringReader = new StringReader(File.ReadAllText(logPath));
+                        statutList = (List<StatusLog>)xmlSerializer.Deserialize(stringReader);
+                    }
                 }
+
 
                 // Add or update the status of the job
                 if (statutList.Exists(x => x.JobName == job.Name))
@@ -176,6 +187,7 @@ namespace EasySave.utils
                     statutList.Add(statusLogModel);
                 }
 
+
                 // Write the status log list in the file
                 if (Config.ReadSetting("LogType") == "json")
                 {
@@ -184,7 +196,7 @@ namespace EasySave.utils
                 else
                 {
                     var emptyNamespaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
-                    var serializer = new XmlSerializer(statutList.GetType());
+                    var serializer = new XmlSerializer(typeof(List<StatusLog>));
                     var settings = new XmlWriterSettings();
                     settings.Indent = true;
                     settings.OmitXmlDeclaration = IsLogFileExiste();
@@ -199,7 +211,7 @@ namespace EasySave.utils
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                //MessageBox.Show(e.Message);
             }
         }
     }

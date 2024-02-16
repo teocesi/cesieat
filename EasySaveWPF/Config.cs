@@ -1,5 +1,5 @@
-﻿using System;
-using System.Configuration;
+﻿using System.Configuration;
+using System.Windows;
 using EasySave.utils;
 
 namespace EasySave
@@ -15,10 +15,11 @@ namespace EasySave
             {
                 AddUpdateAppSettings("Language", "en");
                 AddUpdateAppSettings("businessSoft", "calc.exe");
+                AddUpdateAppSettings("cryptExt", ".txt");
+                AddUpdateAppSettings("cryptExePath", @"C:\Users\selya\Desktop\CryptoSoft\CryptoSoft.exe");
                 AddUpdateAppSettings("JobList", "");
                 AddUpdateAppSettings("LogType", "json");
-                Console.WriteLine("Choose a log path:");
-                AddUpdateAppSettings("LogPath", Console.ReadLine());
+                AddUpdateAppSettings("LogPath", "");
             }
             Language.SetLangue(ReadSetting("Language"));
         }
@@ -33,30 +34,6 @@ namespace EasySave
             return config;
         }
 
-        public static void ReadAllSettings()
-        {
-            try
-            {
-                var appSettings = ConfigurationManager.AppSettings;
-
-                if (appSettings.Count == 0)
-                {
-                    Console.WriteLine("AppSettings is empty.");
-                }
-                else
-                {
-                    foreach (var key in appSettings.AllKeys)
-                    {
-                        Console.WriteLine("Key: {0}   |   Value: {1}", key, appSettings[key]);
-                    }
-                }
-            }
-            catch (ConfigurationErrorsException)
-            {
-                Console.WriteLine("Error reading app settings");
-            }
-        }
-
         public static string ReadSetting(string key)
         {
             try
@@ -67,7 +44,7 @@ namespace EasySave
             }
             catch (ConfigurationErrorsException)
             {
-                Console.WriteLine("Error reading app settings");
+                MessageBox.Show("Error reading app settings");
             }
             return string.Empty;
         }
@@ -92,7 +69,7 @@ namespace EasySave
             }
             catch (ConfigurationErrorsException)
             {
-                Console.WriteLine("Error writing app settings");
+                MessageBox.Show("Error writing app settings");
             }
         }
     }

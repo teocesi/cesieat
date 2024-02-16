@@ -1,8 +1,6 @@
-﻿using EasySave.model;
-using EasySave.utils;
+﻿using EasySave.utils;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+using System.Windows;
 
 namespace EasySave.model
 {
@@ -21,7 +19,7 @@ namespace EasySave.model
         {
             return JsonConvert.SerializeObject(jobList).ToString();
         }
-        public static List<Job> LoadJobList(string jobListStr)
+        private static List<Job> LoadJobList(string jobListStr)
         {
             try
             {
@@ -30,7 +28,7 @@ namespace EasySave.model
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                MessageBox.Show(e.Message);
                 return new List<Job>();
             }
         }
@@ -46,21 +44,23 @@ namespace EasySave.model
             jobList.Remove(job);
             UpdateJobListConfig();
         }
-        public static List<Job> GetJobList()
+        public static void RemoveJob(string jobName)
         {
-            return jobList;
+            RemoveJob(getJobByName(jobName));
         }
-        public static void ShowJobList()
+        public static IEnumerable<string> GetJobNames()
         {
-            Console.WriteLine(Language.GetText("job_list"));
-            if (jobList.Count == 0)
-            {
-                Console.WriteLine(Language.GetText("no_job"));
-            }
-            for (int i = 0; i < jobList.Count; i++)
-            {
-                Console.WriteLine(i + ") " + jobList[i].Name);
-            }
+            return JobList.jobList.Select(job => job.Name);
+        }
+        public static Job getJobByName(string jobName)
+        {
+            return jobList.Find(job => job.Name == jobName);
+        }
+        public static void UpdateJobState(string jobName, byte state)
+        {
+            Job job = getJobByName(jobName);
+            job.State = job.State = state;
+            UpdateJobListConfig();
         }
     }
 }

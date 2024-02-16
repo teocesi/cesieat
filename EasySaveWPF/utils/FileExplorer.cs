@@ -1,10 +1,12 @@
 ﻿using EasySave.model;
+using EasySave.utils;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace EasySave.utils
 {
@@ -39,13 +41,7 @@ namespace EasySave.utils
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                return Enumerable.Empty<String>();
-            }
-
-            if (files.Count() == 0)
-            {
-                Console.WriteLine(Language.GetText("no_file"));
+                MessageBox.Show(e.Message);
                 return Enumerable.Empty<String>();
             }
 
@@ -73,7 +69,6 @@ namespace EasySave.utils
             foreach (string file in files ?? Enumerable.Empty<String>())
             {
                 string desFile = job.DestinationPath + file.Substring(Directory.GetParent(sourcePath).FullName.Length);
-                Console.WriteLine("Copying " + file);
                 CopyFile(file, desFile);
             }
         }
@@ -81,6 +76,14 @@ namespace EasySave.utils
         // Copy a file from the source path to the target path
         private void CopyFile(string srcPath, string desPath)
         {
+            // Security check
+            while (SecurityStopSoftware.BusinessSoftLunched())
+            {
+                JobList.UpdateJobState(job.Name, 2);
+                Thread.Sleep(1000);
+            }
+            JobList.UpdateJobState(job.Name, 1);
+
             TimeWatcher timeWatcher = new TimeWatcher();
             try
             {
@@ -88,9 +91,65 @@ namespace EasySave.utils
             }
             catch (Exception e)
             {
-                Console.WriteLine("Unreachable path: " + e.Message);
+                MessageBox.Show("Unreachable path: " + e.Message);
             }
 
+            // Check if the file needs to be encrypted
+            string ext = Path.GetExtension(srcPath);
+            string crypTime = "0";
+            if (Config.ReadSetting("cryptExt").Split(',').Contains(ext))
+            {
+                crypTime = EncryptionXORCopy(srcPath, desPath);
+            }
+            else
+            {
+                NoEncryptionCopy(srcPath, desPath);
+            }
+
+            // Get size of file
+            FileInfo fileInfo = new FileInfo(desPath);
+            string size = fileInfo.Length.ToString() + " bytes";
+
+            LogBuilder.UpdateHistoryLog(this.job.Name, srcPath, desPath, size, timeWatcher.Stop(), crypTime);
+        }
+
+        // Clear target directory
+        public static void EmptyDirectory(string directoryPath)
+        {
+            try
+            {
+                DirectoryInfo directory = new DirectoryInfo(directoryPath);
+                foreach (FileInfo file in directory.GetFiles()) file.Delete();
+                foreach (DirectoryInfo subDirectory in directory.GetDirectories()) subDirectory.Delete(true);
+            }
+            catch { }
+        }
+
+        // Copy type
+        private string EncryptionXORCopy(string srcPath, string desPath)
+        {
+            try
+            {
+                TimeWatcher timeWatcherCryp = new TimeWatcher();
+                string key = "123456";
+                string exePath = Config.ReadSetting("cryptExePath");
+                var proc = Process.Start(exePath, $"\"{srcPath}\" \"{desPath}\" \"{key}\"");
+
+                proc.WaitForExit();
+                proc.CloseMainWindow();
+                proc.Close();
+
+                LogBuilder.UpdateStatusLog(job, 1, srcPath, desPath);
+
+                return timeWatcherCryp.Stop();
+            }
+            catch
+            {
+                return "-1";
+            }
+        }
+        private void NoEncryptionCopy(string srcPath, string desPath)
+        {
             byte[] buffer = new byte[2048 * 2048];
             int bytesRead = 0;
 
@@ -113,32 +172,8 @@ namespace EasySave.utils
             }
             catch (Exception e)
             {
-                Console.WriteLine("Unreachable File path: " + e.Message);
+                MessageBox.Show("Unreachable File path: " + e.Message);
             }
-
-            // Get size of file
-            FileInfo fileInfo = new FileInfo(desPath);
-            string size = fileInfo.Length.ToString() + " bytes";
-
-            LogBuilder.UpdateHistoryLog(this.job.Name, srcPath, desPath, size, timeWatcher.Stop());
-        }
-
-        public static void EmptyDirectory(string directoryPath)
-        {
-            try
-            {
-                DirectoryInfo directory = new DirectoryInfo(directoryPath);
-                foreach (System.IO.FileInfo file in directory.GetFiles()) file.Delete();
-                foreach (System.IO.DirectoryInfo subDirectory in directory.GetDirectories()) subDirectory.Delete(true);
-            }
-            catch { }
-        }
-
-        private static bool BusinessSoftLunched()
-        {
-            string softList = Config.ReadSetting("businessSoft");
-            bool v = Process.GetProcesses().Any(p => p.ProcessName.Contains(softList));
-            return true;
         }
     }
 }
