@@ -15,19 +15,17 @@ using System.Windows.Shapes;
 
 namespace EasySave.View
 {
-    /// <summary>
-    /// Logique d'interaction pour JobRunningView.xaml
-    /// </summary>
     public partial class JobCreationView : UserControl
     {
+        MainWindow.DUpdateViewJobList updateViewJobListDelegate;
         public JobCreationView()
         {
             InitializeComponent();
         }
-
-        private void jobManager_delete_button_Click(object sender, RoutedEventArgs e)
+        public JobCreationView(MainWindow.DUpdateViewJobList updateViewJobListDelegate)
         {
-
+            InitializeComponent();
+            this.updateViewJobListDelegate = updateViewJobListDelegate;
         }
     }
 }

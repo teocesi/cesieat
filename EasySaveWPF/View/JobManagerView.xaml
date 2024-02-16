@@ -7,8 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Button x:Name="jobManager_start_button" Content="Button" HorizontalAlignment="Left" Margin="500,148,0,0" VerticalAlignment="Top" Click="jobManager_start_button_Click"/>
-        <TextBlock x:Name="jobManager_jobName_textblock" HorizontalAlignment="Left" Margin="495,101,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-        <Button x:Name="jobManager_delete_button" Content="delete" HorizontalAlignment="Left" Margin="500,173,0,0" VerticalAlignment="Top" Click="jobManager_delete_button_Click"/>
+        <Button x:Name="jobManager_start_button" Content="Button" HorizontalAlignment="Left" Margin="382,200,0,0" VerticalAlignment="Top" Click="jobManager_start_button_Click"/>
+        <TextBlock x:Name="jobManager_jobName_textblock" HorizontalAlignment="Left" Margin="377,153,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <Button x:Name="jobManager_delete_button" Content="delete" HorizontalAlignment="Center" Margin="0,225,0,0" VerticalAlignment="Top" Click="jobManager_delete_button_Click"/>
     </Grid>
 </UserControl>

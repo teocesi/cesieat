@@ -27,9 +27,11 @@ namespace EasySave
             var item = (sender as ListView).SelectedItem;
             if (item != null)
             {
-                DataContext = new JobManagerView(item.ToString());
+                DataContext = new JobManagerView(new DUpdateViewJobList(UpdateViewJobList), item.ToString());
             }
         }
+
+        public delegate void DUpdateViewJobList();
 
         public void UpdateViewJobList()
         {

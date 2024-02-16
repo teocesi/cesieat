@@ -28,7 +28,7 @@ namespace EasySave.View
         private void jobManager_delete_button_Click(object sender, RoutedEventArgs e)
         {
             JobList.RemoveJob(jobManager_jobName_textblock.Text);
-            //UpdateViewJobList();
+            this.updateViewJobListDelegate();
         }
     }
 }

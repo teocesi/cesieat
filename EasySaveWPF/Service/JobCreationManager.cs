@@ -37,7 +37,7 @@ namespace EasySave.View
 
             // Add job to the list
             JobList.AddJob(new Job(jobName, source, destination, IsDifferential, priority, state));
-            //UpdateViewJobList();
+            this.updateViewJobListDelegate();
 
             jobCreation_message_textBlock.Text = FindResource("jobCreated").ToString();
             jobCreation_message_textBlock.Foreground = Brushes.Green;

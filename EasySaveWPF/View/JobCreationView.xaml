@@ -7,12 +7,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Button x:Name="jobCreation_create_button" Content="Valider" HorizontalAlignment="Left" Margin="272,275,0,0" VerticalAlignment="Top" Click="jobCreation_create_button_Click" Grid.Column="1"/>
-        <TextBox x:Name="jobCreation_sourcePath_textBox" HorizontalAlignment="Left" Margin="232,154,0,0" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Text="TextBox" VerticalAlignment="Top" Width="120" Height="42" Grid.Column="1"/>
-        <TextBox x:Name="jobCreation_targetPath_textBox" HorizontalAlignment="Left" Margin="232,201,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
-        <TextBox x:Name="jobCreation_jobName_textBox" HorizontalAlignment="Left" Margin="232,119,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
-        <CheckBox x:Name="jobCreation_diff_checkBox" Content="CheckBox" HorizontalAlignment="Left" Margin="256,224,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <CheckBox x:Name="jobCreation_priority_checkBox" Content="CheckBox" HorizontalAlignment="Left" Margin="256,244,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <TextBlock x:Name="jobCreation_message_textBlock" HorizontalAlignment="Left" Margin="267,300,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Grid.Column="1"/>
+        <Button x:Name="jobCreation_create_button" Content="Valider" HorizontalAlignment="Center" Margin="0,274,0,0" VerticalAlignment="Top" Click="jobCreation_create_button_Click"/>
+        <TextBox x:Name="jobCreation_sourcePath_textBox" HorizontalAlignment="Center" Margin="0,153,0,0" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Text="TextBox" VerticalAlignment="Top" Width="120" Height="42"/>
+        <TextBox x:Name="jobCreation_targetPath_textBox" HorizontalAlignment="Center" Margin="0,200,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="jobCreation_jobName_textBox" HorizontalAlignment="Center" Margin="0,118,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <CheckBox x:Name="jobCreation_diff_checkBox" Content="CheckBox" HorizontalAlignment="Center" Margin="0,223,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="jobCreation_priority_checkBox" Content="CheckBox" HorizontalAlignment="Center" Margin="0,243,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="jobCreation_message_textBlock" HorizontalAlignment="Center" Margin="0,299,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>

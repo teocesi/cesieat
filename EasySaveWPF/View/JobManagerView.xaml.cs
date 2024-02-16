@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,16 +16,16 @@ using System.Windows.Shapes;
 
 namespace EasySave.View
 {
-    /// <summary>
-    /// Logique d'interaction pour JobManagerView.xaml
-    /// </summary>
     public partial class JobManagerView : UserControl
     {
+        MainWindow.DUpdateViewJobList updateViewJobListDelegate;
+
         public JobManagerView() { InitializeComponent(); }
 
-        public JobManagerView(string jobName)
+        public JobManagerView(MainWindow.DUpdateViewJobList updateViewJobListDelegate, string jobName)
         {
             InitializeComponent();
+            this.updateViewJobListDelegate = updateViewJobListDelegate;
             jobManager_jobName_textblock.Text = jobName;
         }
     }
