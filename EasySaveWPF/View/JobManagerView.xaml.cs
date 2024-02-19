@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EasySave.model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -18,14 +19,14 @@ namespace EasySave.View
 {
     public partial class JobManagerView : UserControl
     {
+        private Job CurrentJob;
         MainWindow.DUpdateViewJobList updateViewJobListDelegate;
-
         public JobManagerView() { InitializeComponent(); }
-
         public JobManagerView(MainWindow.DUpdateViewJobList updateViewJobListDelegate, string jobName)
         {
             InitializeComponent();
             this.updateViewJobListDelegate = updateViewJobListDelegate;
+            this.CurrentJob = JobList.getJobByName(jobName);
             jobManager_jobName_textblock.Text = jobName;
         }
     }

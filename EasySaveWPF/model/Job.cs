@@ -18,10 +18,10 @@ namespace EasySave.model
         public List<string> SourcePaths;
         public string DestinationPath;
         public bool IsDifferential;
-        public byte Priority;
+        public bool Priority;
         public byte State; // 0 = stopped, 1 = running, 2 = paused
         Job() { }
-        public Job(String name, List<String> sourcePaths, String destinationPath, bool IsDifferential, byte priority, byte state)
+        public Job(String name, List<String> sourcePaths, String destinationPath, bool IsDifferential, bool priority, byte state)
         {
             this.Name = name;
             this.SourcePaths = sourcePaths;
@@ -34,6 +34,7 @@ namespace EasySave.model
         // Running
         public void Run()
         {
+            this.State = 1;
             foreach (String sourcePath in this.SourcePaths)
             {
                 FileExplorer fileExplorer = new FileExplorer(sourcePath, this);
@@ -50,8 +51,8 @@ namespace EasySave.model
             }
 
             // Job finished
-            LogBuilder.UpdateStatusLog(this, 0, "null", "null");
             JobList.UpdateJobState(this.Name, 0);
+            LogBuilder.UpdateStatusLog(this, "null", "null");
         }
     }
 }

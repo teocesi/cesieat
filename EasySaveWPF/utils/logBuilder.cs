@@ -103,7 +103,7 @@ namespace EasySave.utils
         }
 
         // Update the real time status of the job in the status log file
-        public static void UpdateStatusLog(Job job, int state, string currentSourcePath, string currentTargetPath)
+        public static void UpdateStatusLog(Job job, string currentSourcePath, string currentTargetPath)
         {
             try
             {
@@ -130,7 +130,7 @@ namespace EasySave.utils
                 }
 
                 // Set other var
-                string stateStr = state == 0 ? "Inactive" : state == 1 ? "Active" : "Stopped";
+                string stateStr = job.State == 0 ? "Inactive" : job.State == 1 ? "Active" : "Stopped";
                 long totalFileSize = totalFileSource.Sum(file => file.Length);
                 long totalFilesSizeCopied = totalFileTarget.Sum(file => file.Length);
                 long totalFilesSizeRemains = totalFileSize - totalFilesSizeCopied;

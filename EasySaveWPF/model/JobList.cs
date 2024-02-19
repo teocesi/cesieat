@@ -59,7 +59,7 @@ namespace EasySave.model
         public static void UpdateJobState(string jobName, byte state)
         {
             Job job = getJobByName(jobName);
-            job.State = job.State = state;
+            job.State = state;
             UpdateJobListConfig();
         }
     }

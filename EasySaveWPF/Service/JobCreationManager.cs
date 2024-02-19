@@ -18,7 +18,7 @@ namespace EasySave.View
             List<string> source = jobCreation_sourcePath_textBox.Text.Split("\r\n").ToList();
             string destination = jobCreation_targetPath_textBox.Text;
             bool IsDifferential = jobCreation_diff_checkBox.IsChecked.Value;
-            byte priority = jobCreation_priority_checkBox.IsChecked.Value ? (byte)1 : (byte)0;
+            bool priority = jobCreation_priority_checkBox.IsChecked.Value;
             byte state = 0;
 
             var names = JobList.GetJobNames();

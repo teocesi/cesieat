@@ -1,4 +1,5 @@
 ﻿using EasySave;
+using EasySave.model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,7 +10,7 @@ using System.Windows;
 
 namespace EasySave.utils
 {
-    internal class SecurityStopSoftware
+    internal class StopCopySystem
     {
         public static bool BusinessSoftLunched()
         {

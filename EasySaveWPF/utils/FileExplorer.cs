@@ -68,6 +68,7 @@ namespace EasySave.utils
         {
             foreach (string file in files ?? Enumerable.Empty<String>())
             {
+                if (job.State == 0) { Thread.CurrentThread.Interrupt(); return; }
                 string desFile = job.DestinationPath + file.Substring(Directory.GetParent(sourcePath).FullName.Length);
                 CopyFile(file, desFile);
             }
@@ -76,13 +77,14 @@ namespace EasySave.utils
         // Copy a file from the source path to the target path
         private void CopyFile(string srcPath, string desPath)
         {
-            // Security check
-            while (SecurityStopSoftware.BusinessSoftLunched())
+            LogBuilder.UpdateStatusLog(job, srcPath, desPath);
+
+            // Stop the copy if the user wants to stop the job
+            while (job.State == 2 || StopCopySystem.BusinessSoftLunched())
             {
-                JobList.UpdateJobState(job.Name, 2);
                 Thread.Sleep(1000);
             }
-            JobList.UpdateJobState(job.Name, 1);
+            LogBuilder.UpdateStatusLog(job, srcPath, desPath);
 
             TimeWatcher timeWatcher = new TimeWatcher();
             try
@@ -92,10 +94,23 @@ namespace EasySave.utils
             catch (Exception e)
             {
                 MessageBox.Show("Unreachable path: " + e.Message);
+                return;
+            }
+
+            // Set priority of the process and thread
+            string ext = Path.GetExtension(srcPath);
+            if (Config.ReadSetting("priority").Split(',').Contains(ext) || job.Priority)
+            {
+                Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.High;
+                Thread.CurrentThread.Priority = ThreadPriority.Highest;
+            }
+            else
+            {
+                Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.BelowNormal;
+                Thread.CurrentThread.Priority = ThreadPriority.BelowNormal;
             }
 
             // Check if the file needs to be encrypted
-            string ext = Path.GetExtension(srcPath);
             string crypTime = "0";
             if (Config.ReadSetting("cryptExt").Split(',').Contains(ext))
             {
@@ -139,8 +154,6 @@ namespace EasySave.utils
                 proc.CloseMainWindow();
                 proc.Close();
 
-                LogBuilder.UpdateStatusLog(job, 1, srcPath, desPath);
-
                 return timeWatcherCryp.Stop();
             }
             catch
@@ -167,7 +180,6 @@ namespace EasySave.utils
                         swb.Write(buffer, 0, bytesRead);
                     }
                     swb.Flush();
-                    LogBuilder.UpdateStatusLog(job, 1, srcPath, desPath);
                 }
             }
             catch (Exception e)

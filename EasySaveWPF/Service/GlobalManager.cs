@@ -19,7 +19,7 @@ namespace EasySave
 
         private void home_create_button_Click(object sender, RoutedEventArgs e)
         {
-            DataContext = new JobCreationView();
+            DataContext = new JobCreationView(new DUpdateViewJobList(UpdateViewJobList));
         }
 
         private void home_jobList_listViewChanged(object sender, SelectionChangedEventArgs e)

@@ -18,10 +18,7 @@ namespace EasySave.View
     public partial class JobCreationView : UserControl
     {
         MainWindow.DUpdateViewJobList updateViewJobListDelegate;
-        public JobCreationView()
-        {
-            InitializeComponent();
-        }
+        public JobCreationView() { InitializeComponent(); }
         public JobCreationView(MainWindow.DUpdateViewJobList updateViewJobListDelegate)
         {
             InitializeComponent();

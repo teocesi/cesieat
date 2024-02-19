@@ -12,6 +12,7 @@ using System.Windows.Shapes;
 using System;
 using EasySave.model;
 using EasySave.View;
+using System.ComponentModel;
 
 namespace EasySave
 {
@@ -25,6 +26,15 @@ namespace EasySave
 
             //tkt.Text = FindResource("Two").ToString();
             //tkt.SetResourceReference(TextBlock.TextProperty, "Two");
+        }
+
+        void ClosingWin(object sender, CancelEventArgs e)
+        {
+            foreach (Job job in JobList.jobList)
+            {
+                job.State = 0;
+            }
+            JobList.UpdateJobListConfig();
         }
     }
 }

@@ -34,6 +34,7 @@ namespace EasySave.View
             option_crypExt_textBox.Text = Config.ReadSetting("cryptExt");
             option_businessSoft_textBox.Text = Config.ReadSetting("businessSoft");
             option_cryptoPath_textBox.Text = Config.ReadSetting("cryptExePath");
+            option_prioExt_textBox.Text = Config.ReadSetting("priority");
 
             option_saveConfirm_textBlock.Text = "";
         }
@@ -62,6 +63,7 @@ namespace EasySave.View
             Config.AddUpdateAppSettings("cryptExt", option_crypExt_textBox.Text);
             Config.AddUpdateAppSettings("businessSoft", option_businessSoft_textBox.Text);
             Config.AddUpdateAppSettings("cryptExePath", option_cryptoPath_textBox.Text);
+            Config.AddUpdateAppSettings("priority", option_prioExt_textBox.Text);
 
             option_saveConfirm_textBlock.Text = "Options saved";
         }
