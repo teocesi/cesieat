@@ -122,8 +122,13 @@ namespace EasySave.utils
             }
 
             // Get size of file
-            FileInfo fileInfo = new FileInfo(desPath);
-            string size = fileInfo.Length.ToString() + " bytes";
+            string size = "NaN";
+            try
+            {
+                FileInfo fileInfo = new FileInfo(desPath);
+                size = fileInfo.Length.ToString() + " bytes";
+            }
+            catch { }
 
             LogBuilder.UpdateHistoryLog(this.job.Name, srcPath, desPath, size, timeWatcher.Stop(), crypTime);
         }
@@ -146,7 +151,7 @@ namespace EasySave.utils
             try
             {
                 TimeWatcher timeWatcherCryp = new TimeWatcher();
-                string key = "123456";
+                string key = Config.ReadSetting("cryptKey");
                 string exePath = Config.ReadSetting("cryptExePath");
                 var proc = Process.Start(exePath, $"\"{srcPath}\" \"{desPath}\" \"{key}\"");
 
@@ -158,6 +163,7 @@ namespace EasySave.utils
             }
             catch
             {
+                MessageBox.Show("Unreachable Cryptography path.");
                 return "-1";
             }
         }

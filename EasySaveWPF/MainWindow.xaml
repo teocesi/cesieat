@@ -13,8 +13,6 @@
         FontSize="12"
         FontWeight="Bold"
         Foreground="White">
-    
-    
 
     <Window.Resources>
         <DataTemplate x:Name="configViewTemplate" DataType="{x:Type view:ConfigView}">
@@ -31,8 +29,8 @@
     <Window.Background>
         <RadialGradientBrush GradientOrigin="0.4,0.4" Center="0.2,0.2" RadiusX="1" RadiusY="1">
             <RadialGradientBrush.GradientStops>
-                <GradientStop Color="#414c59" Offset="0" />
-                <GradientStop Color="#1b2127" Offset="1" />
+                <GradientStop Color="#FF6670B8" Offset="0" />
+                <GradientStop Color="#395B5B80" Offset="1" />
             </RadialGradientBrush.GradientStops>
         </RadialGradientBrush>
     </Window.Background>
@@ -109,7 +107,7 @@
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     <GradientStop Color="#4a5665" Offset="0" />
-                    <GradientStop Color="#29303b" Offset="1" />
+                    <GradientStop Color="#2C394F" Offset="1" />
                 </LinearGradientBrush>
             </Border.Background>
         </Border>

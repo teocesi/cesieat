@@ -15,9 +15,10 @@ namespace EasySave
             {
                 AddUpdateAppSettings("Language", "en");
                 AddUpdateAppSettings("businessSoft", "calc.exe");
-                AddUpdateAppSettings("cryptExt", ".txt");
                 AddUpdateAppSettings("priority", "");
-                AddUpdateAppSettings("cryptExePath", @"C:\Users\selya\Desktop\CryptoSoft\CryptoSoft.exe");
+                AddUpdateAppSettings("cryptExt", ".txt");
+                AddUpdateAppSettings("cryptKey", "123456789");
+                AddUpdateAppSettings("cryptExePath", "");
                 AddUpdateAppSettings("JobList", "");
                 AddUpdateAppSettings("LogType", "json");
                 AddUpdateAppSettings("LogPath", "");
