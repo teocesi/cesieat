@@ -34,7 +34,6 @@ namespace EasySave.model
         // Running
         public void Run()
         {
-            this.State = 1;
             foreach (String sourcePath in this.SourcePaths)
             {
                 FileExplorer fileExplorer = new FileExplorer(sourcePath, this);

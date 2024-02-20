@@ -7,11 +7,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Button x:Name="jobManager_start_button" Content="Start" HorizontalAlignment="Left" Margin="379,235,0,0" VerticalAlignment="Top" Click="jobManager_start_button_Click"/>
-        <TextBlock x:Name="jobManager_jobName_textblock" HorizontalAlignment="Left" Margin="315,126,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="37" Width="157"/>
+        <Button x:Name="jobManager_start_button" Content="Start" HorizontalAlignment="Center" Margin="0,235,0,0" VerticalAlignment="Top" Click="jobManager_start_button_Click"/>
+        <TextBlock x:Name="jobManager_jobName_textblock" HorizontalAlignment="Center" Margin="0,126,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="37" Width="157"/>
         <Button x:Name="jobManager_delete_button" Content="delete" HorizontalAlignment="Left" Margin="506,315,0,0" VerticalAlignment="Top" Click="jobManager_delete_button_Click"/>
-        <ProgressBar x:Name="jobManager_progressbar" HorizontalAlignment="Left" Height="10" Margin="310,200,0,0" VerticalAlignment="Top" Width="167" Value="50"/>
-        <Button x:Name="jobManager_pause_button" Content="Pause" HorizontalAlignment="Left" Margin="325,235,0,0" VerticalAlignment="Top" Click="jobManager_pause_button_Click"/>
-        <Button x:Name="jobManager_stop_button" Content="Stop" HorizontalAlignment="Left" Margin="426,235,0,0" VerticalAlignment="Top" Click="jobManager_stop_button_Click"/>
+        <ProgressBar x:Name="jobManager_progressbar" HorizontalAlignment="Center" Height="10" Margin="0,186,0,0" VerticalAlignment="Top" Width="168"/>
+        <Button x:Name="jobManager_pause_button" Content="Pause" HorizontalAlignment="center" Margin="-100,235,0,0" VerticalAlignment="Top" Click="jobManager_pause_button_Click"/>
+        <Button x:Name="jobManager_stop_button" Content="Stop" HorizontalAlignment="center" Margin="100,235,0,0" VerticalAlignment="Top" Click="jobManager_stop_button_Click"/>
+        <TextBlock x:Name="jobManager_jobState_textblock" HorizontalAlignment="center" Margin="0,0,0,0" TextWrapping="Wrap" Text="job state" VerticalAlignment="Center"/>
     </Grid>
 </UserControl>

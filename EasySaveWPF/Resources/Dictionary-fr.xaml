@@ -5,4 +5,7 @@
     <System:String x:Key="nameUsed">Nom déjà utilisé</System:String>
     <System:String x:Key="fillAll">Veillez remplir tous les champs</System:String>
     <System:String x:Key="jobCreated">Routine créé</System:String>
+    <System:String x:Key="stateRunning">En cours...</System:String>
+    <System:String x:Key="statePaused">En pause</System:String>
+    <System:String x:Key="stateInactive">Inactif</System:String>
 </ResourceDictionary>

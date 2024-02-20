@@ -35,6 +35,8 @@ namespace EasySave
                 job.State = 0;
             }
             JobList.UpdateJobListConfig();
+
+            Thread.Sleep(1000);
         }
     }
 }

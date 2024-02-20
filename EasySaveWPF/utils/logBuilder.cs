@@ -8,11 +8,17 @@ using System.Xml.Serialization;
 using System.Xml;
 using Newtonsoft.Json.Linq;
 using System.Windows;
+using EasySave.View;
 
 namespace EasySave.utils
 {
     internal class LogBuilder
     {
+        public static Job ProgressBarJob;
+        public static JobManagerView.DUpdateProgressBar UpdateProgressBarDelegate;
+        private static readonly object _lockStatusLog = new object();
+        private static readonly object _lockHistoryLog = new object();
+
         // Build the path of the log file with the current date
         private static string BuildPathLog()
         {
@@ -49,13 +55,16 @@ namespace EasySave.utils
                 Horodatage = DateTime.Now.ToString("dd/mm/yyyy HH:mm:ss")
             };
 
-            if (Config.ReadSetting("LogType") == "json")
+            lock (_lockHistoryLog)
             {
-                logJson(executeLog);
-            }
-            else
-            {
-                logXML(executeLog);
+                if (Config.ReadSetting("LogType") == "json")
+                {
+                    logJson(executeLog);
+                }
+                else
+                {
+                    logXML(executeLog);
+                }
             }
         }
 
@@ -105,113 +114,118 @@ namespace EasySave.utils
         // Update the real time status of the job in the status log file
         public static void UpdateStatusLog(Job job, string currentSourcePath, string currentTargetPath)
         {
-            try
+            lock (_lockStatusLog)
             {
-                // Set log path file
-                string logPath = Config.ReadSetting("LogPath") + "/logs/status." + Config.ReadSetting("LogType");
-                if (!File.Exists(logPath))
+                try
                 {
-                    Directory.CreateDirectory(Config.ReadSetting("LogPath") + "/logs");
-                    File.Create(logPath);
-                }
-
-
-                // Get directories size
-                IEnumerable<FileInfo> totalFileSource = new List<FileInfo>();
-                IEnumerable<FileInfo> totalFileTarget = new List<FileInfo>();
-                foreach (var sourcePathTemp in job.SourcePaths)
-                {
-                    DirectoryInfo sourceDirInfo = new DirectoryInfo(sourcePathTemp);
-                    totalFileSource = totalFileSource.Concat(sourceDirInfo.EnumerateFiles("*", SearchOption.AllDirectories));
-
-                    var targetPath = job.DestinationPath + "\\" + new DirectoryInfo(sourcePathTemp).Name;
-                    DirectoryInfo targetDirInfo = new DirectoryInfo(targetPath);
-                    totalFileTarget = totalFileTarget.Concat(targetDirInfo.EnumerateFiles("*", SearchOption.AllDirectories));
-                }
-
-                // Set other var
-                string stateStr = job.State == 0 ? "Inactive" : job.State == 1 ? "Active" : "Stopped";
-                long totalFileSize = totalFileSource.Sum(file => file.Length);
-                long totalFilesSizeCopied = totalFileTarget.Sum(file => file.Length);
-                long totalFilesSizeRemains = totalFileSize - totalFilesSizeCopied;
-
-                long totalFilesToCopy = totalFileSource.Count();
-                long FilesCopied = totalFileTarget.Count();
-                long FilesRemains = totalFilesToCopy - FilesCopied;
-                int percentDone = (int)((totalFilesSizeCopied * 100) / totalFileSize);
-
-
-                StatusLog statusLogModel = new StatusLog
-                {
-                    JobName = job.Name,
-                    Horodatage = DateTime.Now.ToString("dd/mm/yyyy HH:mm:ss"),
-                    State = stateStr,
-                    TotalFilesToCopy = totalFilesToCopy,
-                    TotalSizeToCopy = totalFileSize,
-                    Progression = new Progression(percentDone, totalFilesSizeRemains, FilesRemains, currentSourcePath, currentTargetPath)
-                };
-
-
-                //// Add or update the status of the job
-
-                // Get the status log list
-                List<StatusLog> statutList = new List<StatusLog>();
-                if (Config.ReadSetting("LogType") == "json")
-                {
-                    statutList = JsonConvert.DeserializeObject<List<StatusLog>>(File.ReadAllText(logPath))
-                    ?? new List<StatusLog>();
-                }
-                else
-                {
-                    if(File.ReadAllText(logPath) == "")
+                    // Set log path file
+                    string logPath = Config.ReadSetting("LogPath") + "/logs/status." + Config.ReadSetting("LogType");
+                    if (!File.Exists(logPath))
                     {
-                        statutList = new List<StatusLog>();
+                        Directory.CreateDirectory(Config.ReadSetting("LogPath") + "/logs");
+                        File.Create(logPath);
+                    }
+
+
+                    // Get directories size
+                    IEnumerable<FileInfo> totalFileSource = new List<FileInfo>();
+                    IEnumerable<FileInfo> totalFileTarget = new List<FileInfo>();
+                    foreach (var sourcePathTemp in job.SourcePaths)
+                    {
+                        DirectoryInfo sourceDirInfo = new DirectoryInfo(sourcePathTemp);
+                        totalFileSource = totalFileSource.Concat(sourceDirInfo.EnumerateFiles("*", SearchOption.AllDirectories));
+
+                        var targetPath = job.DestinationPath + "\\" + new DirectoryInfo(sourcePathTemp).Name;
+                        DirectoryInfo targetDirInfo = new DirectoryInfo(targetPath);
+                        totalFileTarget = totalFileTarget.Concat(targetDirInfo.EnumerateFiles("*", SearchOption.AllDirectories));
+                    }
+
+                    // Set other var
+                    string stateStr = job.State == 0 ? "Inactive" : job.State == 1 ? "Active" : "Stopped";
+                    long totalFileSize = totalFileSource.Sum(file => file.Length);
+                    long totalFilesSizeCopied = totalFileTarget.Sum(file => file.Length);
+                    long totalFilesSizeRemains = totalFileSize - totalFilesSizeCopied;
+
+                    long totalFilesToCopy = totalFileSource.Count();
+                    long FilesCopied = totalFileTarget.Count();
+                    long FilesRemains = totalFilesToCopy - FilesCopied;
+                    int percentDone = (int)((totalFilesSizeCopied * 100) / totalFileSize);
+
+                    // Update progressbar if selected job
+                    if (ProgressBarJob.Name == job.Name) { UpdateProgressBarDelegate(percentDone); }
+
+                    StatusLog statusLogModel = new StatusLog
+                    {
+                        JobName = job.Name,
+                        Horodatage = DateTime.Now.ToString("dd/mm/yyyy HH:mm:ss"),
+                        State = stateStr,
+                        TotalFilesToCopy = totalFilesToCopy,
+                        TotalSizeToCopy = totalFileSize,
+                        Progression = new Progression(percentDone, totalFilesSizeRemains, FilesRemains, currentSourcePath, currentTargetPath)
+                    };
+
+
+                    //// Add or update the status of the job
+
+                    // Get the status log list
+                    List<StatusLog> statutList = new List<StatusLog>();
+                    if (Config.ReadSetting("LogType") == "json")
+                    {
+                        statutList = JsonConvert.DeserializeObject<List<StatusLog>>(File.ReadAllText(logPath))
+                        ?? new List<StatusLog>();
                     }
                     else
                     {
-                        XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<StatusLog>));
-                        StringReader stringReader = new StringReader(File.ReadAllText(logPath));
-                        statutList = (List<StatusLog>)xmlSerializer.Deserialize(stringReader);
+                        if (File.ReadAllText(logPath) == "")
+                        {
+                            statutList = new List<StatusLog>();
+                        }
+                        else
+                        {
+                            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<StatusLog>));
+                            StringReader stringReader = new StringReader(File.ReadAllText(logPath));
+                            statutList = (List<StatusLog>)xmlSerializer.Deserialize(stringReader);
+                        }
                     }
-                }
 
 
-                // Add or update the status of the job
-                if (statutList.Exists(x => x.JobName == job.Name))
-                {
-                    int index = statutList.FindIndex(x => x.JobName == job.Name);
-                    statutList[index] = statusLogModel;
-                }
-                else
-                {
-                    statutList.Add(statusLogModel);
-                }
-
-
-                // Write the status log list in the file
-                if (Config.ReadSetting("LogType") == "json")
-                {
-                    File.WriteAllText(logPath, JsonConvert.SerializeObject(statutList, Newtonsoft.Json.Formatting.Indented));
-                }
-                else
-                {
-                    var emptyNamespaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
-                    var serializer = new XmlSerializer(typeof(List<StatusLog>));
-                    var settings = new XmlWriterSettings();
-                    settings.Indent = true;
-                    settings.OmitXmlDeclaration = IsLogFileExiste();
-
-                    using (var stream = new StringWriter())
-                    using (var writer = XmlWriter.Create(stream, settings))
+                    // Add or update the status of the job
+                    if (statutList.Exists(x => x.JobName == job.Name))
                     {
-                        serializer.Serialize(writer, statutList, emptyNamespaces);
-                        File.WriteAllText(logPath, stream.ToString().ToString());
+                        int index = statutList.FindIndex(x => x.JobName == job.Name);
+                        statutList[index] = statusLogModel;
+                    }
+                    else
+                    {
+                        statutList.Add(statusLogModel);
+                    }
+
+
+                    // Write the status log list in the file
+                    if (Config.ReadSetting("LogType") == "json")
+                    {
+                        File.WriteAllText(logPath, JsonConvert.SerializeObject(statutList, Newtonsoft.Json.Formatting.Indented));
+                    }
+                    else
+                    {
+                        var emptyNamespaces = new XmlSerializerNamespaces(new[] { XmlQualifiedName.Empty });
+                        var serializer = new XmlSerializer(typeof(List<StatusLog>));
+                        var settings = new XmlWriterSettings();
+                        settings.Indent = true;
+                        settings.OmitXmlDeclaration = IsLogFileExiste();
+
+                        using (var stream = new StringWriter())
+                        using (var writer = XmlWriter.Create(stream, settings))
+                        {
+                            serializer.Serialize(writer, statutList, emptyNamespaces);
+                            File.WriteAllText(logPath, stream.ToString().ToString());
+                        }
                     }
                 }
-            }
-            catch (Exception e)
-            {
-                //MessageBox.Show(e.Message);
+                catch (Exception e)
+                {
+                    //MessageBox.Show(e.Message);
+                }
             }
         }
     }
