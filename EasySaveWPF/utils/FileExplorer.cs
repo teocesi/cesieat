@@ -12,6 +12,7 @@ namespace EasySave.utils
 {
     internal class FileExplorer
     {
+        public static readonly object PriorityStick = new object();
         private IEnumerable<String> files;
         private string sourcePath;
         private Job job;
@@ -86,51 +87,70 @@ namespace EasySave.utils
             }
             LogBuilder.UpdateStatusLog(job, srcPath, desPath);
 
-            TimeWatcher timeWatcher = new TimeWatcher();
+            // Priority system for file > N Ko
+            bool _lockTaken = false;
+            if (new FileInfo(srcPath).Length > (long.Parse(Config.ReadSetting("koLimit")) * 1000))
+            {
+                Monitor.Enter(PriorityStick);
+                _lockTaken = true;
+            }
+
             try
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(desPath));
+                TimeWatcher timeWatcher = new TimeWatcher();
+                try
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(desPath));
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Unreachable directory path: " + e.Message);
+                    return;
+                }
+
+                // Set priority of the process and thread
+                string ext = Path.GetExtension(srcPath);
+                if (Config.ReadSetting("priority").Split(',').Contains(ext) || job.Priority)
+                {
+                    Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.High;
+                    Thread.CurrentThread.Priority = ThreadPriority.Highest;
+                }
+                else
+                {
+                    Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.BelowNormal;
+                    Thread.CurrentThread.Priority = ThreadPriority.BelowNormal;
+                }
+
+                // Check if the file needs to be encrypted
+                string crypTime = "0";
+                if (Config.ReadSetting("cryptExt").Split(',').Contains(ext))
+                {
+                    crypTime = EncryptionXORCopy(srcPath, desPath);
+                }
+                else
+                {
+                    NoEncryptionCopy(srcPath, desPath);
+                }
+
+                // Get size of file
+                string size = "NaN";
+                try
+                {
+                    FileInfo fileInfo = new FileInfo(desPath);
+                    size = fileInfo.Length.ToString() + " bytes";
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("File not copied: " + e.Message);
+                }
+
+                LogBuilder.UpdateHistoryLog(this.job.Name, srcPath, desPath, size, timeWatcher.Stop(), crypTime);
             }
-            catch (Exception e)
+            finally
             {
-                MessageBox.Show("Unreachable path: " + e.Message);
-                return;
+                if (_lockTaken) { Monitor.Exit(PriorityStick); }
             }
 
-            // Set priority of the process and thread
-            string ext = Path.GetExtension(srcPath);
-            if (Config.ReadSetting("priority").Split(',').Contains(ext) || job.Priority)
-            {
-                Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.High;
-                Thread.CurrentThread.Priority = ThreadPriority.Highest;
-            }
-            else
-            {
-                Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.BelowNormal;
-                Thread.CurrentThread.Priority = ThreadPriority.BelowNormal;
-            }
-
-            // Check if the file needs to be encrypted
-            string crypTime = "0";
-            if (Config.ReadSetting("cryptExt").Split(',').Contains(ext))
-            {
-                crypTime = EncryptionXORCopy(srcPath, desPath);
-            }
-            else
-            {
-                NoEncryptionCopy(srcPath, desPath);
-            }
-
-            // Get size of file
-            string size = "NaN";
-            try
-            {
-                FileInfo fileInfo = new FileInfo(desPath);
-                size = fileInfo.Length.ToString() + " bytes";
-            }
-            catch { }
-
-            LogBuilder.UpdateHistoryLog(this.job.Name, srcPath, desPath, size, timeWatcher.Stop(), crypTime);
         }
 
         // Clear target directory

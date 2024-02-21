@@ -19,6 +19,8 @@
         <TextBox x:Name="option_cryptoPath_textBox" HorizontalAlignment="Left" Margin="71,75,0,0" TextWrapping="Wrap" Text="cryptopath" VerticalAlignment="Top" Width="562"/>
         <TextBox x:Name="option_prioExt_textBox" HorizontalAlignment="Left" Margin="174,244,0,0" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" Text="ext prio" VerticalAlignment="Top" Width="84" Height="103"/>
         <TextBox x:Name="option_cryptKey_textBox" HorizontalAlignment="Left" Margin="478,244,0,0" TextWrapping="Wrap" Text="Cryptkey" VerticalAlignment="Top" Width="234"/>
+        <TextBox x:Name="option_koLimit_textBox" HorizontalAlignment="Left" Margin="478,0,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="53"/>
+        <TextBlock x:Name="option_koLimit_textBlock" HorizontalAlignment="Left" Margin="536,0,0,0" TextWrapping="Wrap" Text="Ko" VerticalAlignment="Center"/>
 
     </Grid>
 </UserControl>

@@ -15,6 +15,7 @@ namespace EasySave
             {
                 AddUpdateAppSettings("Language", "en");
                 AddUpdateAppSettings("businessSoft", "calc.exe");
+                AddUpdateAppSettings("koLimit", "2500000");
                 AddUpdateAppSettings("priority", "");
                 AddUpdateAppSettings("cryptExt", ".txt");
                 AddUpdateAppSettings("cryptKey", "123456789");
