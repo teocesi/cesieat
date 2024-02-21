@@ -14,8 +14,18 @@ namespace EasySave.utils
     {
         public static bool BusinessSoftLunched()
         {
-            string softname = Config.ReadSetting("businessSoft");
-            return Process.GetProcesses().Any(p => p.ProcessName.Contains(softname));
+            List<string> softnames = Config.ReadSetting("businessSoft").Split("\r\n").ToList();
+            var process = Process.GetProcesses();
+
+            foreach (string softname in softnames)
+            {
+                if (process.Any(p => p.ProcessName.Contains(softname)))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

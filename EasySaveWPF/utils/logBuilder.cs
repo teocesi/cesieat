@@ -165,7 +165,7 @@ namespace EasySave.utils
                     };
 
 
-                    //// Add or update the status of the job
+                    // Add or update the status of the job
 
                     // Get the status log list
                     List<StatusLog> statutList = new List<StatusLog>();
