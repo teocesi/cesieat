@@ -80,7 +80,7 @@ namespace EasySave.View
             JobList.UpdateJobState(CurrentJob.Name, 0);
             LogBuilder.UpdateStatusLog(CurrentJob, "", "");
             jobManager_jobState_textblock.SetResourceReference(TextBlock.TextProperty, "stateInactive");
-            jobManager_progressbar.Foreground = System.Windows.Media.Brushes.Red;
+            jobManager_progressbar.Foreground = System.Windows.Media.Brushes.Gray;
             UpDateButtonState();
         }
 

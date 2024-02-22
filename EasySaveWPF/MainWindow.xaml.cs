@@ -13,6 +13,8 @@ using System;
 using EasySave.model;
 using EasySave.View;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Threading;
 
 namespace EasySave
 {
@@ -37,6 +39,7 @@ namespace EasySave
             JobList.UpdateJobListConfig();
 
             Thread.Sleep(1000);
+            Process.GetCurrentProcess().Kill();
         }
     }
 }
