@@ -152,7 +152,11 @@ namespace EasySave.utils
                     int percentDone = (int)((totalFilesSizeCopied * 100) / totalFileSize);
 
                     // Update progressbar if selected job
-                    if (ProgressBarJob.Name == job.Name) { UpdateProgressBarDelegate(percentDone); }
+                    try
+                    {
+                        if (ProgressBarJob.Name == job.Name) { UpdateProgressBarDelegate(percentDone); }
+                    }
+                    catch (Exception e) { }
 
                     StatusLog statusLogModel = new StatusLog
                     {

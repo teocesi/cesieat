@@ -7,6 +7,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using EasySave.model;
 
 namespace EasySaveWPF.Utils
 {
@@ -32,11 +33,9 @@ namespace EasySaveWPF.Utils
 
             localEndPoint = new IPEndPoint(ipAddr, 11000);
             listener = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-
-            StartServer();
         }
 
-        private void StartServer()
+        public void StartServer()
         {
             IPHostEntry ipHost = Dns.GetHostEntry("localhost");
             IPAddress ipAddr = ipHost.AddressList[0];
@@ -51,7 +50,7 @@ namespace EasySaveWPF.Utils
                 {
                     Socket clientSocket = listener.Accept();
                     byte[] bytes = new Byte[1024];
-                    string data = null;
+                    string? data = null;
                     while (true)
                     {
                         int numByte = clientSocket.Receive(bytes);
@@ -60,8 +59,10 @@ namespace EasySaveWPF.Utils
                             break;
                     }
 
-                    byte[] message = Encoding.ASCII.GetBytes(" %"); // To be replaced by the command result
+                    //Remove <EOF> from the string
+                    data = data[..^5];
 
+                    byte[] message = Encoding.ASCII.GetBytes(CommandInterpreter(data));
                     clientSocket.Send(message);
 
                     // Close socket
@@ -78,7 +79,6 @@ namespace EasySaveWPF.Utils
                 listener.Close();
             }
         }
-
 
 
         // -------------------- Command interpreter --------------------
@@ -143,20 +143,32 @@ namespace EasySaveWPF.Utils
             }
             else
             {
-                //switch (parsedCommand[1])
-                //{
-                //case "run":
-                //    return "Job run";
-                //case "stop":
-                //    return "Job stop";
-                //case "pause":
-                //    return "Job pause";
-                //case "status":
-                //    return "Job status";
-                //default:
-                //    return "Unknown command";
-                //}
-                return "";
+                Job currentJob = JobList.getJobByName(parsedCommand[2]);
+                if (currentJob == null)
+                {
+                    return "Job not found";
+                }
+                else
+                {
+                    switch (parsedCommand[1])
+                    {
+                        case "run":
+                            Thread thread = new Thread(() => currentJob.Run());
+                            thread.Start();
+                            currentJob.State = 1;
+                            return currentJob.Name + " running...";
+                        case "stop":
+                            currentJob.State = 0;
+                            return "Job stopped.";
+                        case "pause":
+                            currentJob.State = 2;
+                            return "Job paused.";
+                        case "status":
+                            return currentJob.Name + " status: " + (currentJob.State == 0 ? "Inactive" : currentJob.State == 1 ? "Active" : "Paused");
+                        default:
+                            return "Unknown command";
+                    }
+                }
             }
         }
 
@@ -168,16 +180,16 @@ namespace EasySaveWPF.Utils
             }
             else
             {
-                //switch (parsedCommand[1])
-                //{
-                //case "jobs":
-                //    return "Get jobs";
-                //case "options":
-                //    return "Get options";
-                //default:
-                //    return "Unknown command";
-                //}
-                return "";
+                switch (parsedCommand[1])
+                {
+                    case "jobs":
+                        IEnumerable<string> jobNames = JobList.GetJobNames();
+                        return jobNames.Aggregate((i, j) => i + "\n" + j);
+                    case "options":
+                        return Config.ReadAllSettings();
+                    default:
+                        return "Unknown command";
+                }
             }
         }
 
@@ -189,16 +201,32 @@ namespace EasySaveWPF.Utils
             }
             else
             {
-                //switch (parsedCommand[1])
-                //{
-                //case "set":
-                //    return "Option set";
-                //case "get":
-                //    return "Option get";
-                //default:
-                //    return "Unknown command";
-                //}
-                return "";
+                IEnumerable<string> optionList = Config.GetOptionNames();
+                switch (parsedCommand[1])
+                {
+                    case "set":
+                        if (parsedCommand.Length < 4)
+                        {
+                            return "Missing argument";
+                        }
+                        else
+                        {
+                            if (!optionList.Contains(parsedCommand[2]))
+                            {
+                                return $"Option {parsedCommand[2]} not found";
+                            }
+                            Config.AddUpdateAppSettings(parsedCommand[2], parsedCommand[3]);
+                            return "Option set";
+                        }
+                    case "get":
+                        if (!optionList.Contains(parsedCommand[2]))
+                        {
+                            return $"Option {parsedCommand[2]} not found";
+                        }
+                        return Config.ReadSetting(parsedCommand[2]);
+                    default:
+                        return "Unknown command";
+                }
             }
         }
     }

@@ -51,7 +51,31 @@ namespace EasySave
             }
             return string.Empty;
         }
+        public static string ReadAllSettings()
+        {
+            string result = "";
+            try
+            {
+                var appSettings = ConfigurationManager.AppSettings;
 
+                foreach (var key in appSettings.AllKeys)
+                {
+                    string tab = key.Length <= 9 ? "\t\t" : "\t";
+                    result += string.Format("Key: {0}{1}|\tValue: {2}\n", key, tab, appSettings[key]);
+                }
+            }
+            catch (ConfigurationErrorsException)
+            {
+                result = "Error reading app settings";
+            }
+
+            return result;
+        }
+        public static IEnumerable<string> GetOptionNames()
+        {
+            var appSettings = ConfigurationManager.AppSettings;
+            return appSettings.AllKeys;
+        }
         // Allow to add or update a setting by key
         public static void AddUpdateAppSettings(string key, string value)
         {

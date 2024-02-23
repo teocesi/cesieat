@@ -14,17 +14,23 @@ using EasySave.model;
 using EasySave.View;
 using System.ComponentModel;
 using System.Diagnostics;
+using EasySaveWPF.Utils;
 using System.Threading;
 
 namespace EasySave
 {
     public partial class MainWindow : Window
     {
+        Thread serverThread;
         public MainWindow()
         {
             Config config = Config.GetInstance();
             InitializeComponent();
             UpdateViewJobList();
+
+            Server server = Server.GetInstance();
+            serverThread = new Thread(server.StartServer);
+            serverThread.Start();
 
             //tkt.Text = FindResource("Two").ToString();
             //tkt.SetResourceReference(TextBlock.TextProperty, "Two");
@@ -38,7 +44,8 @@ namespace EasySave
             }
             JobList.UpdateJobListConfig();
 
-            Thread.Sleep(1000);
+            Thread.Sleep(300);
+            serverThread.Interrupt();
             Process.GetCurrentProcess().Kill();
         }
     }
