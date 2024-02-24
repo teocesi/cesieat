@@ -39,12 +39,24 @@ namespace EasySave.utils
             try
             {
                 files = Directory.EnumerateFiles(this.sourcePath, "*", SearchOption.AllDirectories);
+                files = sortFiles(files);
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
                 return Enumerable.Empty<String>();
             }
+
+            return files;
+        }
+        private IEnumerable<String> sortFiles(IEnumerable<String> files)
+        {
+            IEnumerable<string> priorityExtension = Config.ReadSetting("priority").Split("\r\n");
+            IEnumerable<string> priorityFiles = files.Where(f => priorityExtension.Contains(Path.GetExtension(f)));
+            files = files.Except(priorityFiles);
+            files = priorityFiles.Concat(files);
+
+            MessageBox.Show(string.Join("\n", files)); // Afficher liste des fichers en un string
 
             return files;
         }
@@ -110,7 +122,7 @@ namespace EasySave.utils
 
                 // Set priority of the process and thread
                 string ext = Path.GetExtension(srcPath);
-                if (Config.ReadSetting("priority").Split(',').Contains(ext) || job.Priority)
+                if (Config.ReadSetting("priority").Split("\r\n").Contains(ext) || job.Priority)
                 {
                     Process.GetCurrentProcess().PriorityClass = ProcessPriorityClass.High;
                     Thread.CurrentThread.Priority = ThreadPriority.Highest;
@@ -123,7 +135,7 @@ namespace EasySave.utils
 
                 // Check if the file needs to be encrypted
                 string crypTime = "0";
-                if (Config.ReadSetting("cryptExt").Split(',').Contains(ext))
+                if (Config.ReadSetting("cryptExt").Split("\r\n").Contains(ext))
                 {
                     crypTime = EncryptionXORCopy(srcPath, desPath);
                 }
