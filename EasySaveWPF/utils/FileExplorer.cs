@@ -39,7 +39,7 @@ namespace EasySave.utils
             try
             {
                 files = Directory.EnumerateFiles(this.sourcePath, "*", SearchOption.AllDirectories);
-                files = sortFiles(files);
+                files = SortFiles(files);
             }
             catch (Exception e)
             {
@@ -49,14 +49,14 @@ namespace EasySave.utils
 
             return files;
         }
-        private IEnumerable<String> sortFiles(IEnumerable<String> files)
+        private IEnumerable<String> SortFiles(IEnumerable<String> files)
         {
             IEnumerable<string> priorityExtension = Config.ReadSetting("priority").Split("\r\n");
             IEnumerable<string> priorityFiles = files.Where(f => priorityExtension.Contains(Path.GetExtension(f)));
             files = files.Except(priorityFiles);
             files = priorityFiles.Concat(files);
 
-            MessageBox.Show(string.Join("\n", files)); // Afficher liste des fichers en un string
+            //MessageBox.Show(string.Join("\n", files)); // Afficher liste des fichers en un string
 
             return files;
         }

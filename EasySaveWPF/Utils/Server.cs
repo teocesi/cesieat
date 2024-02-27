@@ -13,17 +13,17 @@ namespace EasySaveWPF.Utils
 {
     internal class Server // Singleton
     {
-        private static Server instance;
-        private IPEndPoint localEndPoint;
-        private Socket listener;
+        private static Server Instance;
+        private IPEndPoint LocalEndPoint;
+        private Socket Listener;
 
         public static Server GetInstance()
         {
-            if (instance == null)
+            if (Instance == null)
             {
-                instance = new Server();
+                Instance = new Server();
             }
-            return instance;
+            return Instance;
         }
 
         private Server()
@@ -31,8 +31,8 @@ namespace EasySaveWPF.Utils
             IPHostEntry ipHost = Dns.GetHostEntry("localhost");
             IPAddress ipAddr = ipHost.AddressList[0];
 
-            localEndPoint = new IPEndPoint(ipAddr, 11000);
-            listener = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            LocalEndPoint = new IPEndPoint(ipAddr, 11000);
+            Listener = new Socket(ipAddr.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
         }
 
         public void StartServer()
