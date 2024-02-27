@@ -7,20 +7,43 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <RadioButton x:Name="option_fr_radio" Content="fr" HorizontalAlignment="Left" Margin="486,288,0,0" VerticalAlignment="Top" GroupName="lang" />
-        <RadioButton x:Name="option_en_radio" Content="en" HorizontalAlignment="Left" Margin="553,288,0,0" VerticalAlignment="Top" GroupName="lang" />
-        <TextBox x:Name="option_logPath_textBox" HorizontalAlignment="Left" Margin="71,40,0,0" TextWrapping="Wrap" Text="logpath" VerticalAlignment="Top" Width="562" Height="20" />
-        <RadioButton x:Name="option_formatXML_radio" Content="XML" HorizontalAlignment="Left" Margin="299,251,0,0" VerticalAlignment="Top" GroupName="logFormat" />
-        <RadioButton x:Name="option_formatJson_radio" Content="Json" HorizontalAlignment="Left" Margin="299,276,0,0" VerticalAlignment="Top" GroupName="logFormat" />
-        <TextBox x:Name="option_crypExt_textBox" HorizontalAlignment="Left" Margin="71,244,0,0" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" Text="ext" VerticalAlignment="Top" Width="85" Height="103" />
-        <TextBox x:Name="option_businessSoft_textBox" HorizontalAlignment="Left" Margin="71,114,0,0" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" Text="path logiciel metier" VerticalAlignment="Top" Width="562" Height="71" />
-        <Button x:Name="option_save_button" Content="save" HorizontalAlignment="Left" Margin="394,327,0,0" VerticalAlignment="Top" Click="option_save_button_Click" />
-        <TextBlock x:Name="option_saveConfirm_textBlock" HorizontalAlignment="Left" Margin="383,352,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
-        <TextBox x:Name="option_cryptoPath_textBox" HorizontalAlignment="Left" Margin="71,75,0,0" TextWrapping="Wrap" Text="cryptopath" VerticalAlignment="Top" Width="562"/>
-        <TextBox x:Name="option_prioExt_textBox" HorizontalAlignment="Left" Margin="174,244,0,0" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" Text="ext prio" VerticalAlignment="Top" Width="84" Height="103"/>
-        <TextBox x:Name="option_cryptKey_textBox" HorizontalAlignment="Left" Margin="478,244,0,0" TextWrapping="Wrap" Text="Cryptkey" VerticalAlignment="Top" Width="234"/>
-        <TextBox x:Name="option_koLimit_textBox" HorizontalAlignment="Left" Margin="478,0,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="53"/>
-        <TextBlock x:Name="option_koLimit_textBlock" HorizontalAlignment="Left" Margin="536,0,0,0" TextWrapping="Wrap" Text="Ko" VerticalAlignment="Center"/>
+        <RadioButton x:Name="option_fr_radio" Content="fr" HorizontalAlignment="Left" Margin="418,288,0,0" VerticalAlignment="Top" GroupName="lang" />
+        <RadioButton x:Name="option_en_radio" Content="en" HorizontalAlignment="Left" Margin="484,288,0,0" VerticalAlignment="Top" GroupName="lang" />
+        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5">
+    <TextBox x:Name="option_logPath_textBox" 
+             HorizontalAlignment="Left" 
+             Margin="39,29,0,0" 
+             TextWrapping="Wrap" 
+             Text="logpath" 
+             VerticalAlignment="Top" 
+             Width="562" 
+             Height="20" />
+</Border>
+
+        <RadioButton x:Name="option_formatXML_radio" Content="XML" HorizontalAlignment="Left" Margin="281,248,0,0" VerticalAlignment="Top" GroupName="logFormat" />
+        <RadioButton x:Name="option_formatJson_radio" Content="Json" HorizontalAlignment="Left" Margin="281,276,0,0" VerticalAlignment="Top" GroupName="logFormat" />
+        <TextBox x:Name="option_crypExt_textBox" HorizontalAlignment="Left" Margin="39,239,0,0" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" Text="ext" VerticalAlignment="Top" Width="85" Height="103" />
+        <TextBox x:Name="option_businessSoft_textBox" HorizontalAlignment="Left" Margin="39,116,0,0" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" Text="path logiciel metier" VerticalAlignment="Top" Width="562" Height="71" />
+        <Button x:Name="option_save_button" Content="save" HorizontalAlignment="Left" Margin="394,327,0,0" VerticalAlignment="Top" Click="option_save_button_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="4"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <TextBlock x:Name="option_saveConfirm_textBlock" HorizontalAlignment="Left" Margin="394,367,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"
+            Foreground="White"
+            FontFamily="Fonts/#Orbitron Medium"
+            FontSize="16"
+        />
+
+        <TextBox x:Name="option_cryptoPath_textBox" HorizontalAlignment="Left" Margin="39,73,0,0" TextWrapping="Wrap" Text="cryptopath" VerticalAlignment="Top" Width="562"/>
+        <Border BorderThickness="1,1,1,1">
+            <TextBox x:Name="option_prioExt_textBox" HorizontalAlignment="Left" Margin="161,239,0,0" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" Text="ext prio" VerticalAlignment="Top" Width="84" Height="103" />
+        </Border>
+        <TextBox x:Name="option_cryptKey_textBox" HorizontalAlignment="Left" Margin="367,239,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="234" BorderThickness="1,1,1,1" BorderBrush="#FFC9CED4" />
+        <TextBox x:Name="option_koLimit_textBox" HorizontalAlignment="Left" Margin="367,0,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="53" TextChanged="option_koLimit_textBox_TextChanged"/>
+        <TextBlock x:Name="option_koLimit_textBlock" HorizontalAlignment="Left" Margin="425,0,0,0" TextWrapping="Wrap" Text="Ko" VerticalAlignment="Center"/>
 
     </Grid>
 </UserControl>

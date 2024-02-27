@@ -7,7 +7,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Button x:Name="jobCreation_create_button" Content="Valider" HorizontalAlignment="Center" Margin="0,274,0,0" VerticalAlignment="Top" Click="jobCreation_create_button_Click"/>
+        <Button x:Name="jobCreation_create_button" Content="Valider" HorizontalAlignment="Center" Margin="0,274,0,0" VerticalAlignment="Top" Click="jobCreation_create_button_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="4"/>
+                </Style>
+            </Button.Resources>
+
+        </Button>
         <TextBox x:Name="jobCreation_sourcePath_textBox" HorizontalAlignment="Center" Margin="0,153,0,0" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Text="TextBox" VerticalAlignment="Top" Width="120" Height="42"/>
         <TextBox x:Name="jobCreation_targetPath_textBox" HorizontalAlignment="Center" Margin="0,200,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="jobCreation_jobName_textBox" HorizontalAlignment="Center" Margin="0,118,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>

@@ -15,11 +15,13 @@ namespace EasySave
         private void home_option_button_Click(object sender, RoutedEventArgs e)
         {
             DataContext = new ConfigView();
+            HideLogo();
         }
 
         private void home_create_button_Click(object sender, RoutedEventArgs e)
         {
             DataContext = new JobCreationView(new DUpdateViewJobList(UpdateViewJobList));
+            HideLogo();
         }
 
         private void home_jobList_listViewChanged(object sender, SelectionChangedEventArgs e)
@@ -28,6 +30,7 @@ namespace EasySave
             if (item != null)
             {
                 DataContext = new JobManagerView(new DUpdateViewJobList(UpdateViewJobList), item.ToString());
+                HideLogo();
             }
         }
 
@@ -36,6 +39,11 @@ namespace EasySave
         public void UpdateViewJobList()
         {
             home_jobList_listView.ItemsSource = JobList.GetJobNames();
+        }
+
+        private void HideLogo()
+        {
+            home_logo_image.Visibility = Visibility.Collapsed;
         }
     }
 }

@@ -25,5 +25,10 @@ namespace EasySave.View
             InitializeComponent();
             ShowOptionValue();
         }
+
+        private void option_koLimit_textBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

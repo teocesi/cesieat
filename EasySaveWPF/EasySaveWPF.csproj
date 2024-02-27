@@ -10,8 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="easysave_logo.png" />
     <None Remove="gear.png" />
     <None Remove="plus.png" />
+    <None Remove="View\C0024T01.JPG" />
+    <None Remove="View\play.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +24,7 @@
   <ItemGroup>
     <Resource Include="data\img\gear.png" />
     <Resource Include="data\img\plus.png" />
+    <Resource Include="data\img\easysave_logo.png" />
   </ItemGroup>
 
 </Project>

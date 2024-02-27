@@ -12,7 +12,9 @@
         FontFamily="Arial"
         FontSize="12"
         FontWeight="Bold"
-        Foreground="White">
+        Foreground="White"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None">
 
     <Window.Resources>
         <DataTemplate x:Name="configViewTemplate" DataType="{x:Type view:ConfigView}">
@@ -113,5 +115,7 @@
         </Border>
 
         <ContentControl Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="5" Content="{Binding}"/>
+        <Image x:Name="home_logo_image" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="276" Margin="128,74,0,0" Grid.RowSpan="4" VerticalAlignment="Top" Width="284" Source="/data/img/easysave_logo.png" IsEnabled="False"/>
+
     </Grid>
 </Window>
