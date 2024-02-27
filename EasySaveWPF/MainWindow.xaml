@@ -11,10 +11,7 @@
         Title="EasySave" Height="450" Width="800"
         FontFamily="Arial"
         FontSize="12"
-        FontWeight="Bold"
-        Foreground="White"
-        WindowStartupLocation="CenterScreen"
-        WindowStyle="None">
+        FontWeight="Bold">
 
     <Window.Resources>
         <DataTemplate x:Name="configViewTemplate" DataType="{x:Type view:ConfigView}">
@@ -22,9 +19,6 @@
         </DataTemplate>
         <DataTemplate x:Name="jobViewTemplate" DataType="{x:Type view:JobManagerView}">
             <view:JobManagerView DataContext="{Binding}"/>
-        </DataTemplate>
-        <DataTemplate x:Name="jobCreationViewTemplate" DataType="{x:Type view:JobCreationView}">
-            <view:JobCreationView DataContext="{Binding}"/>
         </DataTemplate>
     </Window.Resources>
 
