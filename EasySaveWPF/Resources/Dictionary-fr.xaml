@@ -28,7 +28,10 @@
     <System:String x:Key="FormatLog">Format Log</System:String>
     <System:String x:Key="CryptoKey">Clé Cryptosoft</System:String>
     <System:String x:Key="Save">Sauvegarder</System:String>
-
+    <System:String x:Key="Set">Limite des Ko</System:String>
+    <System:String x:Key="Prioext">Priorité d'extension</System:String>
+    <System:String x:Key="Extcrypt">D'extension à Crypt</System:String>
+    <System:String x:Key="Business">liste de logiciels d'entreprise</System:String>
 
 
 

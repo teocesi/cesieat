@@ -28,4 +28,8 @@
     <System:String x:Key="FormatLog">Log format</System:String>
     <System:String x:Key="CryptoKey">Cryptosoft Key</System:String>
     <System:String x:Key="Save">save</System:String>
+    <System:String x:Key="Set">Set Ko limit</System:String>
+    <System:String x:Key="Prioext">Priority extension</System:String>
+    <System:String x:Key="Extcrypt">Extension to Crypt</System:String>
+    <System:String x:Key="Business">Business Sofware list</System:String>
 </ResourceDictionary>

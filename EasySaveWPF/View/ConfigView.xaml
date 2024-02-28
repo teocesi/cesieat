@@ -35,7 +35,7 @@
         <TextBox x:Name="option_logPath_textBox" Margin="35,100,255,0" TextWrapping="Wrap" Text="logpath" VerticalAlignment="Top" Height="17" />
         <TextBlock x:Name="option_title_cryptopath" HorizontalAlignment="Left" Margin="40,128,0,0" TextWrapping="Wrap" Text="{DynamicResource CryptoPath}" VerticalAlignment="Top"/>
         <TextBox x:Name="option_cryptoPath_textBox" Margin="35,145,255,0" TextWrapping="Wrap" Text="cryptopath" VerticalAlignment="Top" Height="17"/>
-        <TextBlock x:Name="option_title_businesssoft" HorizontalAlignment="Right" Margin="0,81,100,0" TextWrapping="Wrap" Text="Business Sofware list" VerticalAlignment="Top"/>
+        <TextBlock x:Name="option_title_businesssoft" HorizontalAlignment="Right" Margin="0,81,100,0" TextWrapping="Wrap" Text="{DynamicResource Business}" VerticalAlignment="Top"/>
         <TextBox x:Name="option_businessSoft_textBox" HorizontalAlignment="Right" Margin="0,100,35,0" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" Text="path logiciel metier" VerticalAlignment="Top" Height="62" Width="196" />
 
         <Rectangle Margin="45,197,45,0" Fill="White" Height="2" VerticalAlignment="Top"/>
@@ -51,7 +51,7 @@
         <TextBlock x:Name="option_title_crypkey" HorizontalAlignment="Left" Margin="55,310,0,0" TextWrapping="Wrap" Text="{DynamicResource CryptoKey}" VerticalAlignment="Top"/>
         <TextBox x:Name="option_cryptKey_textBox" HorizontalAlignment="Left" Margin="150,310,0,0" TextWrapping="Wrap" Text="Cryptkey" VerticalAlignment="Top" Width="140"/>
 
-        <TextBlock x:Name="option_title_kolimit" HorizontalAlignment="Left" Margin="55,350,0,0" TextWrapping="Wrap" Text="Set Ko limit" VerticalAlignment="Top"/>
+        <TextBlock x:Name="option_title_kolimit" HorizontalAlignment="Left" Margin="55,350,0,0" TextWrapping="Wrap" Text="{DynamicResource Set}" VerticalAlignment="Top"/>
         <TextBox x:Name="option_koLimit_textBox" HorizontalAlignment="Left" Margin="150,350,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="53"/>
         <TextBlock x:Name="option_koLimit_textBlock" HorizontalAlignment="Left" Margin="210,350,0,0" TextWrapping="Wrap" Text="Ko" VerticalAlignment="Top"/>
 
@@ -60,8 +60,8 @@
         <Button x:Name="option_save_button" Content="{DynamicResource Save}" HorizontalAlignment="Left" Margin="429,370,0,0" VerticalAlignment="Top" Click="option_save_button_Click" Height="17" Width="66" Background="#FFA0AD98" BorderBrush="#FFB4B6B4" RenderTransformOrigin="0.547,3.141" />
         <TextBlock x:Name="option_saveConfirm_textBlock" HorizontalAlignment="Left" Margin="517,370,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
 
-        <TextBlock x:Name="prio_title_textBlock" HorizontalAlignment="Right" Margin="5,226,45,0" TextWrapping="Wrap" Text="Priority extension" VerticalAlignment="Top" Height="10" FontSize="11"/>
-        <TextBlock x:Name="ext_title_textBlock" HorizontalAlignment="Right" Margin="0,225,189,0" TextWrapping="Wrap" Text="Extension to Cypt" VerticalAlignment="Top" FontSize="11"/>
+        <TextBlock x:Name="ext_title_textBlock" HorizontalAlignment="Right" Margin="5,226,45,0" TextWrapping="Wrap" Text="{DynamicResource Extcrypt}" VerticalAlignment="Top" Height="10" FontSize="11"/>
+        <TextBlock x:Name="prio_title_textBlock" HorizontalAlignment="Right" Margin="0,225,189,0" TextWrapping="Wrap" Text="{DynamicResource Prioext}" VerticalAlignment="Top" FontSize="11"/>
         <TextBox x:Name="option_crypExt_textBox" HorizontalAlignment="Right" Margin="0,244,48,0" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" Text="ext" VerticalAlignment="Top" Width="85" Height="103" />
         <TextBox x:Name="option_prioExt_textBox" HorizontalAlignment="Right" Margin="0,244,199,0" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" AcceptsReturn="True" Text="ext prio" VerticalAlignment="Top" Width="84" Height="103"/>
     </Grid>
