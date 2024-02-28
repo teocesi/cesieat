@@ -12,6 +12,19 @@
     <System:String x:Key="Stop">Arrêter</System:String>
     <System:String x:Key="Pause">Pause</System:String>
     <System:String x:Key="Start">Lancer</System:String>
+    <System:String x:Key="state">Etat des routines</System:String>
+    <System:String x:Key="JobManager">Gestion des routines</System:String>
+    <System:String x:Key="JobCreation">Création d'une routine</System:String>
+    <System:String x:Key="JobName">Nom de la routine</System:String>
+    <System:String x:Key="SourceP">Chemins de la source</System:String>
+    <System:String x:Key="TargetP">Chemin de la cible</System:String>
+    <System:String x:Key="diff">Différentiel</System:String>
+    <System:String x:Key="Prio">Priorité</System:String>
+    <System:String x:Key="Creation">Créer</System:String>
+
+
+
+
 
 
 </ResourceDictionary>

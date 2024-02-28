@@ -12,4 +12,13 @@
     <System:String x:Key="Stop">Stop</System:String>
     <System:String x:Key="Pause">Pause</System:String>
     <System:String x:Key="Start">Start</System:String>
+    <System:String x:Key="state">job state</System:String>
+    <System:String x:Key="JobManager">Job Manager</System:String>
+    <System:String x:Key="JobCreation">Job Creation</System:String>
+    <System:String x:Key="JobName">Job Name</System:String>
+    <System:String x:Key="SourceP">Source Paths</System:String>
+    <System:String x:Key="TargetP">Target Path</System:String>
+    <System:String x:Key="diff">Differential</System:String>
+    <System:String x:Key="Prio">Priority</System:String>
+    <System:String x:Key="Creation">Create</System:String>
 </ResourceDictionary>

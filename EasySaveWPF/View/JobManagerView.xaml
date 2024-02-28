@@ -32,11 +32,11 @@
     </UserControl.Resources>
 
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="37,29,0,0" TextWrapping="Wrap" Text="{DynamicResource TextBlockText2}" VerticalAlignment="Top" Height="32" Width="203" FontFamily="Arial Black" FontSize="24"/>
+        <TextBlock HorizontalAlignment="Left" Margin="37,29,0,0" TextWrapping="Wrap" Text="{DynamicResource JobManager}" VerticalAlignment="Top" Height="32" Width="203" FontFamily="Arial Black" FontSize="24"/>
         <Rectangle Margin="37,66,523,0" Fill="White" Height="2" VerticalAlignment="Top"/>
 
 
-        <Button x:Name="jobManager_start_button" BorderThickness="0" Content="Start" HorizontalAlignment="Center" Margin="0,240,0,0" VerticalAlignment="Top" Click="jobManager_start_button_Click" Width="60" Height="34" FontFamily="Arial" FontSize="16" FontWeight="Bold" Foreground="#FF030303">
+        <Button x:Name="jobManager_start_button" BorderThickness="0" Content="{DynamicResource Start}" HorizontalAlignment="Center" Margin="0,240,0,0" VerticalAlignment="Top" Click="jobManager_start_button_Click" Width="60" Height="34" FontFamily="Arial" FontSize="16" FontWeight="Bold" Foreground="#FF030303">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -53,21 +53,21 @@
             </Button.Resources>
         </Button>
         <ProgressBar x:Name="jobManager_progressbar" HorizontalAlignment="Center" Height="22" Margin="0,168,0,0" VerticalAlignment="Top" Width="490"/>
-        <Button x:Name="jobManager_pause_button" Content="Pause" HorizontalAlignment="Center" Margin="-150,240,0,0" VerticalAlignment="Top" Click="jobManager_pause_button_Click" RenderTransformOrigin="-0.064,0.731" Height="34" Width="60" FontFamily="Arial" FontSize="16" FontWeight="Bold" Foreground="Black">
+        <Button x:Name="jobManager_pause_button" Content="{DynamicResource Pause}" HorizontalAlignment="Center" Margin="-200,240,0,0" VerticalAlignment="Top" Click="jobManager_pause_button_Click" RenderTransformOrigin="-0.064,0.731" Height="34" Width="60" FontFamily="Arial" FontSize="16" FontWeight="Bold" Foreground="Black">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="4"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="jobManager_stop_button" Content="{DynamicResource stop}" HorizontalAlignment="Center" Margin="150,240,0,0" VerticalAlignment="Top" Click="jobManager_stop_button_Click" Width="60" RenderTransformOrigin="0.805,0.481" Height="34" FontFamily="Arial" FontSize="16" FontWeight="Bold" Foreground="Black">
+        <Button x:Name="jobManager_stop_button" Content="{DynamicResource Stop}" HorizontalAlignment="Center" Margin="200,240,0,0" VerticalAlignment="Top" Click="jobManager_stop_button_Click" Width="60" RenderTransformOrigin="0.805,0.481" Height="34" FontFamily="Arial" FontSize="16" FontWeight="Bold" Foreground="Black">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="4"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <TextBlock x:Name="jobManager_jobState_textblock" HorizontalAlignment="Center" Margin="0,209,0,0" TextWrapping="Wrap" Text="job state" VerticalAlignment="Top"/>
+        <TextBlock x:Name="jobManager_jobState_textblock" HorizontalAlignment="Center" Margin="0,209,0,0" TextWrapping="Wrap" Text="{DynamicResource state}" VerticalAlignment="Top"/>
 
     </Grid>
 </UserControl>
