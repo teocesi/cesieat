@@ -20,7 +20,14 @@
     <System:String x:Key="TargetP">Chemin de la cible</System:String>
     <System:String x:Key="diff">Différentiel</System:String>
     <System:String x:Key="Prio">Priorité</System:String>
+    <System:String x:Key="Options">Options</System:String>
     <System:String x:Key="Creation">Créer</System:String>
+    <System:String x:Key="LogP">Chemin des Logs</System:String>
+    <System:String x:Key="CryptoPath">Chemin Crypto</System:String>
+    <System:String x:Key="Language">Langues</System:String>
+    <System:String x:Key="FormatLog">Format Log</System:String>
+    <System:String x:Key="CryptoKey">Clé Cryptosoft</System:String>
+    <System:String x:Key="Save">Sauvegarder</System:String>
 
 
 

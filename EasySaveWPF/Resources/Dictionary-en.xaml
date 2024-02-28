@@ -20,5 +20,12 @@
     <System:String x:Key="TargetP">Target Path</System:String>
     <System:String x:Key="diff">Differential</System:String>
     <System:String x:Key="Prio">Priority</System:String>
+    <System:String x:Key="Options">Options</System:String>
     <System:String x:Key="Creation">Create</System:String>
+    <System:String x:Key="LogP">Log path</System:String>
+    <System:String x:Key="CryptoPath">Crypto path</System:String>
+    <System:String x:Key="Language">Language</System:String>
+    <System:String x:Key="FormatLog">Log format</System:String>
+    <System:String x:Key="CryptoKey">Cryptosoft Key</System:String>
+    <System:String x:Key="Save">save</System:String>
 </ResourceDictionary>
