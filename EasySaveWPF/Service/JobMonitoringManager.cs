@@ -106,6 +106,11 @@ namespace EasySave.View
                     jobManager_delete_button.IsEnabled = true;
                     jobManager_pause_button.IsEnabled = false;
                     jobManager_stop_button.IsEnabled = false;
+
+                    jobManager_start_button.Opacity = 1;
+                    jobManager_delete_button.Opacity = 1;
+                    jobManager_pause_button.Opacity = 0.5;
+                    jobManager_stop_button.Opacity = 0.5;
                     break;
                 case 1:
                 case 2:
@@ -113,6 +118,11 @@ namespace EasySave.View
                     jobManager_delete_button.IsEnabled = false;
                     jobManager_pause_button.IsEnabled = true;
                     jobManager_stop_button.IsEnabled = true;
+
+                    jobManager_start_button.Opacity = 0.5;
+                    jobManager_delete_button.Opacity = 0.5;
+                    jobManager_pause_button.Opacity = 1;
+                    jobManager_stop_button.Opacity = 1;
                     break;
             }
         }
