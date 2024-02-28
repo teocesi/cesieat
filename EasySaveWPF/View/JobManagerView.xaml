@@ -6,47 +6,66 @@
              xmlns:local="clr-namespace:EasySave.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="FontFamily" Value="Arial"/>
+            <!-- <Setter Property="Background" Value="#6EA0C3"/>
+         <Setter Property="Foreground" Value="#414962"/> -->
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3" />
+                </Style>
+            </Style.Resources>
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Arial" />
+        </Style>
+        <Style TargetType="{x:Type RadioButton}">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Arial" />
+        </Style>
+    </UserControl.Resources>
 
     <Grid>
-        <Button x:Name="jobManager_start_button" BorderThickness="0" Background="#6d7a8d" Content="Start" HorizontalAlignment="Center" Margin="0,237,0,0" VerticalAlignment="Top" Click="jobManager_start_button_Click" Width="44">
+        <TextBlock HorizontalAlignment="Left" Margin="37,29,0,0" TextWrapping="Wrap" Text="Job Manager" VerticalAlignment="Top" Height="32" Width="203" FontFamily="Arial Black" FontSize="24"/>
+        <Rectangle Margin="37,66,523,0" Fill="White" Height="2" VerticalAlignment="Top"/>
+
+
+        <Button x:Name="jobManager_start_button" BorderThickness="0" Background="#6d7a8d" Content="Start" HorizontalAlignment="Center" Margin="0,240,0,0" VerticalAlignment="Top" Click="jobManager_start_button_Click" Width="45" Height="34" FontFamily="Arial" FontSize="16" FontWeight="Bold" Foreground="#FF030303">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="4"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <TextBlock x:Name="jobManager_jobName_textblock" HorizontalAlignment="Center" Margin="0,126,0,0" TextWrapping="Wrap" Text="ProgressionBar" VerticalAlignment="Top" Height="37" Width="157"
-                   Foreground="Black"
-                   FontSize="15"
-                   FontFamily="/Fonts/#Rubik Medium"
-        />
-        <Button x:Name="jobManager_delete_button" Content="delete" Background="#6d7a8d" HorizontalAlignment="Left" Margin="538,340,0,0" VerticalAlignment="Top" Click="jobManager_delete_button_Click" RenderTransformOrigin="-1.115,0.341">
+        <TextBlock x:Name="jobManager_jobName_textblock" HorizontalAlignment="Center" Margin="0,126,0,0" TextWrapping="Wrap" Text="ProgressionBar" VerticalAlignment="Top" Height="37" Width="157" FontSize="16" Foreground="white" TextAlignment="Center"/>
+        <Button x:Name="jobManager_delete_button" BorderThickness="0" Background="#6d7a8d" HorizontalAlignment="Right" Click="jobManager_delete_button_Click" Width="30" Height="30" Margin="0,260,100,0" RenderTransformOrigin="8.447,5.993">
+            <Image Height="30" Width="25" Margin="0,0,0,0" Source="/data/img/delete.png"/>
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <ProgressBar x:Name="jobManager_progressbar" HorizontalAlignment="Center" Height="22" Margin="0,168,0,0" VerticalAlignment="Top" Width="490"/>
+        <Button x:Name="jobManager_pause_button" Content="Pause" Background="#6d7a8d" HorizontalAlignment="Left" Margin="227,240,0,0" VerticalAlignment="Top" Click="jobManager_pause_button_Click" RenderTransformOrigin="-0.064,0.731" Height="34" Width="50" FontFamily="Arial" FontSize="16" FontWeight="Bold" Foreground="Black">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="4"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <ProgressBar x:Name="jobManager_progressbar" HorizontalAlignment="Center" Height="10" Margin="0,168,0,0" VerticalAlignment="Top" Width="168"/>
-        <Button x:Name="jobManager_pause_button" Content="Pause" Background="#6d7a8d" HorizontalAlignment="Left" Margin="316,235,0,0" VerticalAlignment="Top" Click="jobManager_pause_button_Click">
+        <Button x:Name="jobManager_stop_button" Content="Stop" Background="#6d7a8d" HorizontalAlignment="Left" Margin="356,240,0,0" VerticalAlignment="Top" Click="jobManager_stop_button_Click" Width="44" RenderTransformOrigin="0.805,0.481" Height="34" FontFamily="Arial" FontSize="16" FontWeight="Bold" Foreground="Black">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="4"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button x:Name="jobManager_stop_button" Content="Stop" Background="#6d7a8d" HorizontalAlignment="Left" Margin="445,233,0,0" VerticalAlignment="Top" Click="jobManager_stop_button_Click" Width="39" RenderTransformOrigin="0.805,0.481">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="4"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-        <TextBlock x:Name="jobManager_jobState_textblock" HorizontalAlignment="Center" Margin="0,209,0,0" TextWrapping="Wrap" Text="job state" VerticalAlignment="Top"
-            Foreground="White"
-            FontSize="15"
-            FontFamily="Arial"
-        />
+        <TextBlock x:Name="jobManager_jobState_textblock" HorizontalAlignment="Center" Margin="0,209,0,0" TextWrapping="Wrap" Text="job state" VerticalAlignment="Top"/>
+
     </Grid>
 </UserControl>
     

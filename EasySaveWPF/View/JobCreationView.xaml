@@ -6,8 +6,31 @@
              xmlns:local="clr-namespace:EasySave.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Button x:Name="jobCreation_create_button" Content="Valider" HorizontalAlignment="Center" Margin="0,274,0,0" VerticalAlignment="Top" Click="jobCreation_create_button_Click">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="FontFamily" Value="Arial"/>
+            <!-- <Setter Property="Background" Value="#6EA0C3"/>
+            <Setter Property="Foreground" Value="#414962"/> -->
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3" />
+                </Style>
+            </Style.Resources>
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Arial" />
+        </Style>
+        <Style TargetType="{x:Type RadioButton}">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Arial" />
+        </Style>
+    </UserControl.Resources>
+    <Grid RenderTransformOrigin="0.753,0.424">
+        <TextBlock HorizontalAlignment="Left" Margin="37,29,0,0" TextWrapping="Wrap" Text="Job Creation" VerticalAlignment="Top" Height="32" Width="169" FontFamily="Arial Black" FontSize="24"/>
+        <Rectangle Margin="37,66,523,0" Fill="White" Height="2" VerticalAlignment="Top"/>
+        <Button x:Name="jobCreation_create_button" Content="Create" HorizontalAlignment="Left" Margin="500,360,0,0" VerticalAlignment="Top" Click="jobCreation_create_button_Click" RenderTransformOrigin="0.593,2.065" Width="40" Height="23">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -15,11 +38,17 @@
             </Button.Resources>
 
         </Button>
-        <TextBox x:Name="jobCreation_sourcePath_textBox" HorizontalAlignment="Center" Margin="0,153,0,0" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Text="TextBox" VerticalAlignment="Top" Width="120" Height="42"/>
-        <TextBox x:Name="jobCreation_targetPath_textBox" HorizontalAlignment="Center" Margin="0,200,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="jobCreation_jobName_textBox" HorizontalAlignment="Center" Margin="0,118,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <CheckBox x:Name="jobCreation_diff_checkBox" Content="CheckBox" HorizontalAlignment="Center" Margin="0,223,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="jobCreation_priority_checkBox" Content="CheckBox" HorizontalAlignment="Center" Margin="0,243,0,0" VerticalAlignment="Top"/>
-        <TextBlock x:Name="jobCreation_message_textBlock" HorizontalAlignment="Center" Margin="0,299,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>
+        <TextBox x:Name="jobCreation_sourcePath_textBox" HorizontalAlignment="Left" Margin="72,174,0,0" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Text="" VerticalAlignment="Top" Width="439" Height="42"/>
+        <TextBox x:Name="jobCreation_targetPath_textBox" HorizontalAlignment="Left" Margin="72,249,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="439" Height="36"/>
+        <TextBox x:Name="jobCreation_jobName_textBox" HorizontalAlignment="Left" Margin="72,122,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="234" Height="16"/>
+        <CheckBox x:Name="jobCreation_diff_checkBox" Content="Differential" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="jobCreation_priority_checkBox" Content="Priority" HorizontalAlignment="Center" Margin="-19,340,0,0" VerticalAlignment="Top" Checked="jobCreation_priority_checkBox_Checked"/>
+        <TextBlock x:Name="jobCreation_message_textBlock" HorizontalAlignment="Center" Margin="0,343,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="sourcepaths_title_textBlock" HorizontalAlignment="Left" Margin="72,155,0,0" TextWrapping="Wrap" Text="Source Paths" VerticalAlignment="Top"/>
+        <TextBlock x:Name="jobname_title_textBlock" HorizontalAlignment="Left" Margin="72,103,0,0" TextWrapping="Wrap" Text="Job Name" VerticalAlignment="Top"/>
+        <TextBlock x:Name="targetpath_title_textBlock" HorizontalAlignment="Left" Margin="72,230,0,0" TextWrapping="Wrap" Text="Target Path" VerticalAlignment="Top"/>
+
+
+
     </Grid>
 </UserControl>

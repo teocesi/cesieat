@@ -24,5 +24,10 @@ namespace EasySave.View
             InitializeComponent();
             this.updateViewJobListDelegate = updateViewJobListDelegate;
         }
+
+        private void jobCreation_priority_checkBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

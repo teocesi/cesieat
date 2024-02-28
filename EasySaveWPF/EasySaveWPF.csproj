@@ -14,7 +14,10 @@
     <None Remove="gear.png" />
     <None Remove="plus.png" />
     <None Remove="View\C0024T01.JPG" />
+    <None Remove="View\delete.jpg" />
+    <None Remove="View\delete.png" />
     <None Remove="View\play.jpg" />
+    <None Remove="View\trash-2-32.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +28,7 @@
     <Resource Include="data\img\gear.png" />
     <Resource Include="data\img\plus.png" />
     <Resource Include="data\img\easysave_logo.png" />
+    <Resource Include="data\img\delete.png" />
   </ItemGroup>
 
 </Project>

@@ -109,7 +109,7 @@
         </Border>
 
         <ContentControl Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="5" Content="{Binding}"/>
-        <Image x:Name="home_logo_image" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="276" Margin="128,74,0,0" Grid.RowSpan="4" VerticalAlignment="Top" Width="284" Source="/data/img/easysave_logo.png" IsEnabled="False"/>
+        <Image x:Name="home_logo_image" Grid.Column="1" Grid.ColumnSpan="4" HorizontalAlignment="Left" Height="391" Grid.RowSpan="5" VerticalAlignment="Top" Width="457" Source="/data/img/easysave_logo.png" IsEnabled="False" RenderTransformOrigin="0.61,0.303" Margin="115,0,0,0"/>
 
     </Grid>
 </Window>

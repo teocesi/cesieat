@@ -30,5 +30,15 @@ namespace EasySave.View
         {
 
         }
+
+        private void option_fr_radio_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void option_koLimit_textBox_TextChanged_1(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
