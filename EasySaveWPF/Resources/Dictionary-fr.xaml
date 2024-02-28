@@ -8,4 +8,5 @@
     <System:String x:Key="stateRunning">En cours...</System:String>
     <System:String x:Key="statePaused">En pause</System:String>
     <System:String x:Key="stateInactive">Inactif</System:String>
+    <System:String x:Key="stop">Arrêté</System:String>
 </ResourceDictionary>

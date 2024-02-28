@@ -66,10 +66,12 @@ namespace EasySave.View
             if (option_fr_radio.IsChecked == true)
             {
                 Config.AddUpdateAppSettings("Language", "fr");
+                utils.Language.SetLangue("fr");
             }
             else
             {
                 Config.AddUpdateAppSettings("Language", "en");
+                utils.Language.SetLangue("en");
             }
 
             if (option_formatJson_radio.IsChecked == true)
