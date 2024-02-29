@@ -32,7 +32,7 @@
     </UserControl.Resources>
 
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="37,29,0,0" TextWrapping="Wrap" Text="{DynamicResource JobManager}" VerticalAlignment="Top" Height="32" Width="203" FontFamily="Arial Black" FontSize="24"/>
+        <TextBlock HorizontalAlignment="Left" Margin="37,29,0,0" TextWrapping="Wrap" Text="{DynamicResource JobManager}" VerticalAlignment="Top" Height="32" Width="363" FontFamily="Arial Black" FontSize="24"/>
         <Rectangle Margin="37,66,523,0" Fill="White" Height="2" VerticalAlignment="Top"/>
 
 

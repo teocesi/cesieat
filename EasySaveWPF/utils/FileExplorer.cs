@@ -90,14 +90,13 @@ namespace EasySave.utils
         // Copy a file from the source path to the target path
         private void CopyFile(string srcPath, string desPath)
         {
-            LogBuilder.UpdateStatusLog(job, srcPath, desPath);
-
             // Stop the copy if the user wants to stop the job
-            while (job.State == 2 || StopCopySystem.BusinessSoftLunched())
+            do
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(10);
+                LogBuilder.UpdateStatusLog(job, srcPath, desPath);
             }
-            LogBuilder.UpdateStatusLog(job, srcPath, desPath);
+            while (job.State == 2 || StopCopySystem.BusinessSoftLunched());
 
             // Priority system for file > N Ko
             bool _lockTaken = false;
@@ -185,7 +184,13 @@ namespace EasySave.utils
                 TimeWatcher timeWatcherCryp = new TimeWatcher();
                 string key = Config.ReadSetting("cryptKey");
                 string exePath = Config.ReadSetting("cryptExePath");
-                var proc = Process.Start(exePath, $"\"{srcPath}\" \"{desPath}\" \"{key}\"");
+
+                ProcessStartInfo procInfo = new ProcessStartInfo();
+                procInfo.FileName = exePath;
+                procInfo.CreateNoWindow = true; //Hides console
+                procInfo.Arguments = $"\"{srcPath}\" \"{desPath}\" \"{key}\"";
+
+                var proc = Process.Start(procInfo);
 
                 proc.WaitForExit();
                 proc.CloseMainWindow();
@@ -195,7 +200,7 @@ namespace EasySave.utils
             }
             catch
             {
-                MessageBox.Show("Unreachable Cryptography path.");
+                MessageBox.Show("Unreachable Cryptosoft path.");
                 return "-1";
             }
         }

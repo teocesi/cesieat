@@ -52,6 +52,7 @@ namespace EasySave.model
             // Job finished
             JobList.UpdateJobState(this.Name, 0);
             LogBuilder.UpdateStatusLog(this, "null", "null");
+            MessageBox.Show("Job " + this.Name + " finished");
         }
     }
 }

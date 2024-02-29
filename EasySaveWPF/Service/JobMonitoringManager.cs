@@ -91,11 +91,16 @@ namespace EasySave.View
                 return;
 
             // Marshall to Main Thread
-            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, ()=> jobManager_progressbar.Value = progress);
-            if (progress == 100)
-            {
-                UpDateButtonState();
-            }
+            Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Background, () => { 
+                jobManager_progressbar.Value = progress;
+                if (progress == 100)
+                {
+                    UpDateButtonState();
+                    jobManager_jobState_textblock.SetResourceReference(TextBlock.TextProperty, "stateInactive");
+                    jobManager_progressbar.Foreground = System.Windows.Media.Brushes.Gray;
+                }
+            });
+            
         }
         private void UpDateButtonState()
         {

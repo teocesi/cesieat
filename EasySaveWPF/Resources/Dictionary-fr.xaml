@@ -4,7 +4,7 @@
 
     <System:String x:Key="nameUsed">Nom déjà utilisé</System:String>
     <System:String x:Key="fillAll">Veillez remplir tous les champs</System:String>
-    <System:String x:Key="jobCreated">Routine créé</System:String>
+    <System:String x:Key="jobCreated">Routine créée</System:String>
     <System:String x:Key="stateRunning">En cours...</System:String>
     <System:String x:Key="statePaused">En pause</System:String>
     <System:String x:Key="stateInactive">Inactif</System:String>
@@ -23,18 +23,13 @@
     <System:String x:Key="Options">Options</System:String>
     <System:String x:Key="Creation">Créer</System:String>
     <System:String x:Key="LogP">Chemin des Logs</System:String>
-    <System:String x:Key="CryptoPath">Chemin Crypto</System:String>
-    <System:String x:Key="Language">Langues</System:String>
+    <System:String x:Key="CryptoPath">Chemin de CryptoSoft</System:String>
+    <System:String x:Key="Language">Langue</System:String>
     <System:String x:Key="FormatLog">Format Log</System:String>
     <System:String x:Key="CryptoKey">Clé Cryptosoft</System:String>
     <System:String x:Key="Save">Sauvegarder</System:String>
     <System:String x:Key="Set">Limite des Ko</System:String>
-    <System:String x:Key="Prioext">Priorité d'extension</System:String>
-    <System:String x:Key="Extcrypt">D'extension à Crypt</System:String>
-    <System:String x:Key="Business">liste de logiciels d'entreprise</System:String>
-
-
-
-
-
+    <System:String x:Key="Prioext">Extensions prioritaires</System:String>
+    <System:String x:Key="Extcrypt">Extension à Crypter</System:String>
+    <System:String x:Key="Business">Logiciels metiers</System:String>
 </ResourceDictionary>
