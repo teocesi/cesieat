@@ -1,0 +1,115 @@
+﻿<Window x:Class="EasySave.MainWindow"
+        Closing="ClosingWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EasySave"
+        xmlns:viewmodels="clr-namespace:EasySave"
+        xmlns:view="clr-namespace:EasySave.View"
+        mc:Ignorable="d"
+        Title="EasySave" Height="450" Width="800"
+        FontFamily="Arial"
+        FontSize="12"
+        FontWeight="Bold">
+
+    <Window.Resources>
+        <DataTemplate x:Name="configViewTemplate" DataType="{x:Type view:ConfigView}">
+            <view:ConfigView DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="jobViewTemplate" DataType="{x:Type view:JobManagerView}">
+            <view:JobManagerView DataContext="{Binding}"/>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Window.Background>
+        <RadialGradientBrush GradientOrigin="0.4,0.4" Center="0.2,0.2" RadiusX="1" RadiusY="1">
+            <RadialGradientBrush.GradientStops>
+                <GradientStop Color="#FF6670B8" Offset="0" />
+                <GradientStop Color="#395B5B80" Offset="1" />
+            </RadialGradientBrush.GradientStops>
+        </RadialGradientBrush>
+    </Window.Background>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Border BorderThickness="1" CornerRadius="10" Grid.Row="0" Grid.Column="0" Grid.RowSpan="5" Margin="15">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#4b576a" Offset="0" />
+                    <GradientStop Color="#3e4957" Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid Margin="10,10,10,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <ListView x:Name="home_jobList_listView" SelectionChanged="home_jobList_listViewChanged"
+                          Width="149" Height="381" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="1"
+                          Background="#00000000" BorderThickness="0" Foreground="White">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn/>
+                        </GridView>
+                    </ListView.View>
+                    <ListView.Resources>
+                        <Style TargetType="GridViewColumnHeader">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </Style>
+                    </ListView.Resources>
+                </ListView>
+
+                <Button x:Name="home_option_button" BorderThickness="0" Background="#6d7a8d" HorizontalAlignment="Center" Height="30" VerticalAlignment="Center" Click="home_option_button_Click" Width="30" Margin="0,10,0,0" Grid.Column="0" Grid.Row="1">
+                    <Image Source="/data/img/gear.png"></Image>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <Button x:Name="home_createJob_button" BorderThickness="0" Background="#6d7a8d" HorizontalAlignment="Center" Height="30" VerticalAlignment="Center" Click="home_create_button_Click" Width="30" Margin="0,10,0,0" Grid.Column="1" Grid.Row="1">
+                    <Image Source="/data/img/plus.png" Stretch="Fill"></Image>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
+        </Border>
+
+        <Border BorderThickness="1" CornerRadius="10" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="5" Margin="15" >
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#4a5665" Offset="0" />
+                    <GradientStop Color="#2C394F" Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <ContentControl Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" Grid.RowSpan="5" Content="{Binding}"/>
+        <Image x:Name="home_logo_image" Grid.Column="1" Grid.ColumnSpan="4" HorizontalAlignment="Left" Height="391" Grid.RowSpan="5" VerticalAlignment="Top" Width="457" Source="/data/img/easysave_logo.png" IsEnabled="False" RenderTransformOrigin="0.61,0.303" Margin="115,0,0,0"/>
+
+    </Grid>
+</Window>

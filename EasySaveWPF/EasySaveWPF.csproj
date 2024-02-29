@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="easysave_logo.png" />
+    <None Remove="gear.png" />
+    <None Remove="plus.png" />
+    <None Remove="View\C0024T01.JPG" />
+    <None Remove="View\delete.jpg" />
+    <None Remove="View\delete.png" />
+    <None Remove="View\play.jpg" />
+    <None Remove="View\trash-2-32.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="data\img\gear.png" />
+    <Resource Include="data\img\plus.png" />
+    <Resource Include="data\img\easysave_logo.png" />
+    <Resource Include="data\img\delete.png" />
+  </ItemGroup>
+
+</Project>

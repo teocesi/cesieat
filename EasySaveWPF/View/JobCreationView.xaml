@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="EasySave.View.JobCreationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EasySave.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="FontFamily" Value="Arial"/>
+            <!-- <Setter Property="Background" Value="#6EA0C3"/>
+            <Setter Property="Foreground" Value="#414962"/> -->
+            <Style.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3" />
+                </Style>
+            </Style.Resources>
+        </Style>
+
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Arial" />
+        </Style>
+        <Style TargetType="{x:Type RadioButton}">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Arial" />
+        </Style>
+    </UserControl.Resources>
+    <Grid RenderTransformOrigin="0.753,0.424">
+        <TextBlock HorizontalAlignment="Left" Margin="37,29,0,0" TextWrapping="Wrap" Text="{DynamicResource JobCreation}" VerticalAlignment="Top" Height="32" Width="336" FontFamily="Arial Black" FontSize="24"/>
+        <Rectangle Margin="37,66,523,0" Fill="White" Height="2" VerticalAlignment="Top"/>
+        <Button x:Name="jobCreation_create_button" Content="{DynamicResource Creation}" HorizontalAlignment="Left" Margin="500,360,0,0" VerticalAlignment="Top" Click="jobCreation_create_button_Click" RenderTransformOrigin="0.593,2.065" Width="40" Height="23">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="4"/>
+                </Style>
+            </Button.Resources>
+
+        </Button>
+        <TextBox x:Name="jobCreation_sourcePath_textBox" HorizontalAlignment="Left" Margin="72,174,0,0" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Text="" VerticalAlignment="Top" Width="439" Height="42"/>
+        <TextBox x:Name="jobCreation_targetPath_textBox" HorizontalAlignment="Left" Margin="72,249,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="439" Height="36"/>
+        <TextBox x:Name="jobCreation_jobName_textBox" HorizontalAlignment="Left" Margin="72,122,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="234" Height="16"/>
+        <CheckBox x:Name="jobCreation_diff_checkBox" Content="{DynamicResource diff}" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <CheckBox x:Name="jobCreation_priority_checkBox" Content="{DynamicResource Prio}" HorizontalAlignment="Center" Margin="-19,330,0,0" VerticalAlignment="Top" Checked="jobCreation_priority_checkBox_Checked" Foreground="White"/>
+        <TextBlock x:Name="jobCreation_message_textBlock" HorizontalAlignment="Center" Margin="0,350,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <TextBlock x:Name="sourcepaths_title_textBlock" HorizontalAlignment="Left" Margin="72,155,0,0" TextWrapping="Wrap" Text="{DynamicResource SourceP}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="jobname_title_textBlock" HorizontalAlignment="Left" Margin="72,103,0,0" TextWrapping="Wrap" Text="{DynamicResource JobName}" VerticalAlignment="Top"/>
+        <TextBlock x:Name="targetpath_title_textBlock" HorizontalAlignment="Left" Margin="72,230,0,0" TextWrapping="Wrap" Text="{DynamicResource TargetP}" VerticalAlignment="Top"/>
+
+
+
+    </Grid>
+</UserControl>
